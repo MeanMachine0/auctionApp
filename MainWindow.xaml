@@ -9,23 +9,76 @@
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="auto"/>
         </Grid.RowDefinitions>
 
-        <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="5">
-            
-            <TextBlock Text="Current Item:" Margin="5"/>
-            <TextBlock x:Name="currentItemNameTB" Margin="5"/>
-            <TextBox x:Name="input" Margin="5"/>
+        <StackPanel Grid.Row="1" Orientation="Horizontal">
+            <TextBlock Text="Item:" Margin="5"/>
+            <TextBlock x:Name="itemName" Margin="5"/>
         </StackPanel>
 
-        <StackPanel Grid.Row="3" Orientation="Horizontal" Margin="5">
+        <StackPanel Grid.Row="2" Orientation="Horizontal">
+            <TextBlock Text="sold:" Margin="5"/>
+            <TextBlock x:Name="sold" Margin="5"/>
+        </StackPanel>
+
+        <StackPanel Grid.Row="3" Orientation="Horizontal">
+            <TextBlock Text="Current Price:" Margin="5"/>
+            <TextBlock x:Name="currentPrice" Margin="5"/>
+        </StackPanel>
+
+        <StackPanel Grid.Row="4" Orientation="Horizontal">
+            <TextBlock Text="P+P:" Margin="5"/>
+            <TextBlock x:Name="postageCost" Margin="5"/>
+        </StackPanel>
+
+        <StackPanel Grid.Row="5" Orientation="Horizontal">
+            <TextBlock Text="Bid Increment:" Margin="5"/>
+            <TextBlock x:Name="bidIncrement" Margin="5"/>
+        </StackPanel>
+
+        <StackPanel Grid.Row="6" Orientation="Horizontal">
+            <TextBlock Text="Condition:" Margin="5"/>
+            <TextBlock x:Name="state" Margin="5"/>
+        </StackPanel>
+
+        <StackPanel Grid.Row="7" Orientation="Horizontal">
+            <TextBlock Text="Time Remaining:" Margin="5"/>
+            <TextBlock x:Name="timeRemaining" Margin="5"/>
+        </StackPanel>
+
+        <StackPanel Grid.Row="8" Orientation="Horizontal">
+            <TextBlock Text="Time of Listing:" Margin="5"/>
+            <TextBlock x:Name="timeOfListing" Margin="5"/>
+        </StackPanel>
+
+        <StackPanel Grid.Row="9" Orientation="Horizontal">
+            <TextBlock Text="Returns:" Margin="5"/>
+            <TextBlock x:Name="returnsAccepted" Margin="5"/>
+        </StackPanel>
+
+        <StackPanel Grid.Row="10" Orientation="Horizontal">
+            <TextBlock Text="Description:" Margin="5"/>
+            <TextBlock x:Name="information" Margin="5"/>
+        </StackPanel>
+
+        <StackPanel Grid.Row="12" Orientation="Horizontal" Margin="5">
             <Button x:Name="pagePrevious" Content="&lt;" 
                     Click="pagePrevious_Click" Margin="5"/>
             <Button x:Name="pageNext" Content=">" Click="pageNext_Click" Margin="5"/>
             <TextBlock Text="Page:" Margin="5"/>
-            <TextBox x:Name="pageNumber" Text="0" Margin="5" Width="100"/>
+            <TextBox x:Name="pageNumber" Text="0" Margin="5" Width="50"/>
             <Button x:Name="pageRefresh" Content="Refresh"
                     Click="pageRefresh_Click" Margin="5"/>
             <Button x:Name="submit" Content="Submit Bid" Click="submit_Click"
