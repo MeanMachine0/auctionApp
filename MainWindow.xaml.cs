@@ -83,13 +83,21 @@ namespace auctionApp
 
         private void submit_Click(object sender, RoutedEventArgs e)
         {
-            openConnection();
-            using (MySqlCommand command = new MySqlCommand("", connection))
+            if (float.Parse(bid.Text) >= float.Parse(currentPrice.Text.Remove(0, 1)) + float.Parse(bidIncrement.Text.Remove(0, 1)))
             {
-                command.ExecuteReader();
+                MessageBox.Show("Bid submitted.");
+                openConnection();
+                using (MySqlCommand command = new MySqlCommand($"UPDATE items SET currentPrice = {bid.Text} WHERE itemId = {pageNumber.Text}", connection))
+                {
+                    command.ExecuteReader();
+                }
+                connection.Close();
+                refresh(int.Parse(pageNumber.Text));
             }
-            connection.Close();
-
+            else
+            {
+                MessageBox.Show("Cannot submit bid: bid is less than the current price plus the bid increment.");
+            }
         }
 
         private void pageNext_Click(object sender, RoutedEventArgs e)
