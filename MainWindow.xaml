@@ -33,8 +33,9 @@
             <RowDefinition Height="20"/>
         </Grid.RowDefinitions>
         
-        <TextBlock x:Name="input" Text="(input)" Grid.Column="1" Grid.Row="1"/>
-        <TextBlock x:Name="output" Text="(output)" Grid.Column="1" Grid.Row="3"/>
+        <TextBlock x:Name="input" Grid.Column="1" Grid.Row="1"/>
+        <TextBlock x:Name="output" Grid.Column="1" Grid.Row="3"
+                   Grid.ColumnSpan="3"/>
         <Button x:Name="submit" Content="Submit Bid" Grid.Column="1" Grid.Row="2"
                 Click="submit_Click"/>
 

@@ -34,23 +34,25 @@ namespace auctionApp
         private void submit_Click(object sender, RoutedEventArgs e)
         {
             string connectionString = "server=localhost;port=3306;database=auctiondb;uid=root;password=pTHhHFGxB^U5!1UY^22#x0&n;";
-            using (MySqlConnection connection = new MySqlConnection(connectionString))
-        {
+            using MySqlConnection connection = new MySqlConnection(connectionString);
             connection.Open();
-            using (MySqlCommand command = new MySqlCommand("SELECT firstName FROM buyers", connection))
+            using (MySqlCommand command = new MySqlCommand("SELECT firstName FROM buyers WHERE buyerId < 3", connection))
             {
                 using (MySqlDataReader reader = command.ExecuteReader())
                 {
                     while (reader.Read())
                     {
-                            string firstNames = reader.GetString("firstName");
-                            Debug.Print(firstNames);
+                        string firstNamesString = reader.GetString("firstName");
+                        string[] firstNames = firstNamesString.Split(" ");
+                        foreach(string firstName in firstNames)
+                        {
+                            output.Text += firstName + " ";
+                        }
                     }
                 }
             }
             connection.Close();
-        }
 
-    }
+        }
     }
 }
