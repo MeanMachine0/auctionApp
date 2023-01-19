@@ -5,39 +5,34 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:auctionApp"
         mc:Ignorable="d"
-        Title="MainWindow" Height="1080" Width="1920" FontSize="36"> 
+        Title="MainWindow" Height="1080" Width="1920" FontSize="36">
     <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="20"/>
-            <ColumnDefinition Width="auto"/>
-            <ColumnDefinition Width="auto"/>
-            <ColumnDefinition Width="auto"/>
-            <ColumnDefinition Width="auto"/>
-            <ColumnDefinition Width="auto"/>
-            <ColumnDefinition Width="auto"/>
-            <ColumnDefinition Width="auto"/>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="20"/>
-        </Grid.ColumnDefinitions>
-
         <Grid.RowDefinitions>
-            <RowDefinition Height="20"/>
-            <RowDefinition Height="auto"/>
-            <RowDefinition Height="auto"/>
-            <RowDefinition Height="auto"/>
-            <RowDefinition Height="auto"/>
-            <RowDefinition Height="auto"/>
-            <RowDefinition Height="auto"/>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="*"/>
-            <RowDefinition Height="20"/>
+            <RowDefinition Height="auto"/>
         </Grid.RowDefinitions>
-        
-        <TextBlock x:Name="input" Grid.Column="1" Grid.Row="1"/>
-        <TextBlock x:Name="output" Grid.Column="1" Grid.Row="3"
-                   Grid.ColumnSpan="3"/>
-        <Button x:Name="submit" Content="Submit Bid" Grid.Column="1" Grid.Row="2"
-                Click="submit_Click"/>
 
+        <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="5">
+            
+            <TextBlock Text="Current Item:" Margin="5"/>
+            <TextBlock x:Name="currentItemNameTB" Margin="5"/>
+            <TextBox x:Name="input" Margin="5"/>
+        </StackPanel>
+
+        <StackPanel Grid.Row="3" Orientation="Horizontal" Margin="5">
+            <Button x:Name="pagePrevious" Content="&lt;" 
+                    Click="pagePrevious_Click" Margin="5"/>
+            <Button x:Name="pageNext" Content=">" Click="pageNext_Click" Margin="5"/>
+            <TextBlock Text="Page:" Margin="5"/>
+            <TextBox x:Name="pageNumber" Text="0" Margin="5" Width="100"/>
+            <Button x:Name="pageRefresh" Content="Page Refresh"
+                    Click="pageRefresh_Click" Margin="5"/>
+            <Button x:Name="submit" Content="Submit Bid" Click="submit_Click"
+                    Margin="5"/>
+            <Button x:Name="queryButton" Content="Execute Query" 
+                    Click="queryButton_Click" Margin="5"/>
+        </StackPanel>
+        
     </Grid>
 </Window>
