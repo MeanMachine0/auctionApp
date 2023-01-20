@@ -33,6 +33,17 @@ namespace auctionApp
             connection = new MySqlConnection(connectionString);
             connection.Open();
         }
+        private string getYesNo(string value)
+        {
+            if (value == "False")
+            {
+                return "No";
+            }
+            else
+            {
+                return "Yes";
+            }
+        }
 
         private void refresh(int pageNumber)
         {
@@ -44,41 +55,27 @@ namespace auctionApp
                     while (reader.Read())
                     {
                         itemName.Text = reader.GetString("itemName");
-                        sold.Text = reader.GetString("sold");
+                        string soldTest = reader.GetString("sold");
+                        sold.Text = getYesNo(soldTest);
                         currentPrice.Text = "£" + reader.GetString("currentPrice");
                         postageCost.Text = "£" + reader.GetString("postageCost");
                         state.Text = reader.GetString("state");
                         bidIncrement.Text = "£" + reader.GetString("bidIncrement");
                         timeRemaining.Text = reader.GetString("timeremaining");
                         timeOfListing.Text = reader.GetString("timeOfListing");
-                        returnsAccepted.Text = reader.GetString("returnsAccepted");
+                        string returnsAcceptedTest = reader.GetString("returnsAccepted");
+                        returnsAccepted.Text = getYesNo(returnsAcceptedTest);
                         information.Text = reader.GetString("information");                 
                     }
                 }
             }
             connection.Close();
         }
-    
+
         public MainWindow()
         {
             InitializeComponent();
             refresh(int.Parse(pageNumber.Text));
-        }
-
-        private void queryButton_Click(object sender, RoutedEventArgs e)
-        {
-            openConnection();
-            using (MySqlCommand command = new MySqlCommand("UPDATE items SET information = 'A Ryzen 2700x CPU with four years of light use. BOX AND FAN NOT INCLUDED!' WHERE itemId = 1", connection))
-            {
-                using (MySqlDataReader reader = command.ExecuteReader())
-                {
-                    while (reader.Read())
-                    {
-
-                    }
-                }
-            }
-            connection.Close();
         }
 
         private void submit_Click(object sender, RoutedEventArgs e)
