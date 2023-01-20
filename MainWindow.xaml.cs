@@ -99,21 +99,37 @@ namespace auctionApp
 
         private void pageNext_Click(object sender, RoutedEventArgs e)
         {
-            int pageNumberInt = int.Parse(pageNumber.Text) + 1;
-            pageNumber.Text = pageNumberInt.ToString();
-            refresh(pageNumberInt);
+            try
+            {
+                int pageNumberInt = int.Parse(pageNumber.Text) + 1;
+                pageNumber.Text = pageNumberInt.ToString();
+                refresh(pageNumberInt);
+            }
+            catch{}
         }
 
         private void pagePrevious_Click(object sender, RoutedEventArgs e)
         {
-            int pageNumberInt = int.Parse(pageNumber.Text) - 1;
-            pageNumber.Text = pageNumberInt.ToString();
-            refresh(pageNumberInt);
+            try
+            {
+                int pageNumberInt = int.Parse(pageNumber.Text) - 1;
+                pageNumber.Text = pageNumberInt.ToString();
+                refresh(pageNumberInt);
+            }
+            catch { }
         }
 
         private void pageRefresh_Click(object sender, RoutedEventArgs e)
         {
-            refresh(int.Parse(pageNumber.Text));
+            try
+            {
+
+                refresh(int.Parse(pageNumber.Text));
+            }
+            catch 
+            {
+                MessageBox.Show("Invalid page number!");
+            }
         }
     }
 }
