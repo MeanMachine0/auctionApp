@@ -48,7 +48,8 @@ namespace auctionApp
         private void refresh(int pageNumber)
         {
             openConnection();
-            using (MySqlCommand command = new MySqlCommand($"SELECT * FROM items WHERE itemId = {pageNumber}", connection))
+            string query = $"SELECT * FROM items WHERE itemId = {pageNumber}";
+            using (MySqlCommand command = new MySqlCommand(query, connection))
             {
                 using (MySqlDataReader reader = command.ExecuteReader())
                 {
@@ -84,7 +85,8 @@ namespace auctionApp
             {
                 MessageBox.Show("Bid submitted.");
                 openConnection();
-                using (MySqlCommand command = new MySqlCommand($"UPDATE items SET currentPrice = {bid.Text} WHERE itemId = {pageNumber.Text}", connection))
+                string query = $"UPDATE items SET currentPrice = {bid.Text} WHERE itemId = {pageNumber.Text}";
+                using (MySqlCommand command = new MySqlCommand(query, connection))
                 {
                     command.ExecuteReader();
                 }
@@ -116,7 +118,7 @@ namespace auctionApp
                 pageNumber.Text = pageNumberInt.ToString();
                 refresh(pageNumberInt);
             }
-            catch { }
+            catch{}
         }
 
         private void pageRefresh_Click(object sender, RoutedEventArgs e)
