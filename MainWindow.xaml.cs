@@ -5,6 +5,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Timers;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -27,15 +28,16 @@ namespace auctionApp
     public partial class MainWindow : Window
     {
         private string connectionString = "server=localhost;port=3306;database=auctiondb;uid=root;password=pTHhHFGxB^U5!1UY^22#x0&n;";
+        private Timer _timer;
         private MySqlConnection connection;
         private void openConnection()
         {
             connection = new MySqlConnection(connectionString);
             connection.Open();
         }
-        private string getYesNo(string value)
+        private string getYesNo(int value)
         {
-            if (value == "False")
+            if (value == 0)
             {
                 return "No";
             }
@@ -56,7 +58,7 @@ namespace auctionApp
                     while (reader.Read())
                     {
                         itemName.Text = reader.GetString("itemName");
-                        string soldTest = reader.GetString("sold");
+                        int soldTest = reader.GetInt16("sold");
                         sold.Text = getYesNo(soldTest);
                         currentPrice.Text = "£" + reader.GetString("currentPrice");
                         postageCost.Text = "£" + reader.GetString("postageCost");
@@ -64,7 +66,7 @@ namespace auctionApp
                         bidIncrement.Text = "£" + reader.GetString("bidIncrement");
                         timeRemaining.Text = reader.GetString("timeremaining");
                         timeOfListing.Text = reader.GetString("timeOfListing");
-                        string returnsAcceptedTest = reader.GetString("returnsAccepted");
+                        int returnsAcceptedTest = reader.GetInt16("returnsAccepted");
                         returnsAccepted.Text = getYesNo(returnsAcceptedTest);
                         information.Text = reader.GetString("information");                 
                     }
@@ -77,6 +79,21 @@ namespace auctionApp
         {
             InitializeComponent();
             refresh(int.Parse(pageNumber.Text));
+            _timer = new Timer(1000);
+            _timer.Elapsed += OnTimedEvent;
+            _timer.AutoReset = false;
+            _timer.Enabled = true;
+        }
+
+        private void OnTimedEvent(object? sender, ElapsedEventArgs e)
+        {
+            Debug.Print("Refreshed at {0:HH:mm:ss.fff}", e.SignalTime);
+            Application.Current.Dispatcher.Invoke(new Action(() => 
+            { 
+                refresh(int.Parse(pageNumber.Text));
+                _timer.Enabled = true;
+            }));
+
         }
 
         private void submit_Click(object sender, RoutedEventArgs e)
