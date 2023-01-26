@@ -35,17 +35,6 @@ namespace auctionApp
             connection = new MySqlConnection(connectionString);
             connection.Open();
         }
-        private string getYesNo(int value)
-        {
-            if (value == 0)
-            {
-                return "No";
-            }
-            else
-            {
-                return "Yes";
-            }
-        }
 
         private void refresh(int pageNumber)
         {

@@ -5,7 +5,35 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:auctionApp"
         mc:Ignorable="d"
-        Title="MainWindow" Height="700" Width="600" FontSize="36">
+        Title="MainWindow" Height="700" Width="600" FontSize="36" 
+        Background="DimGray">
+
+    <Window.Resources>
+        <SolidColorBrush x:Key="TitleBarColor" Color="Red"/>
+    </Window.Resources>
+    <Window.Style>
+        <Style TargetType="{x:Type Window}">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Window}">
+                        <Grid>
+                            <Border Background="{StaticResource TitleBarColor}" BorderBrush="Black" BorderThickness="1" x:Name="WindowTitleBar">
+                                <AdornerDecorator>
+                                    <ContentPresenter/>
+                                </AdornerDecorator>
+                            </Border>
+                            <Border BorderBrush="Black" BorderThickness="1">
+                                <AdornerDecorator>
+                                    <ContentPresenter/>
+                                </AdornerDecorator>
+                            </Border>
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Style>
+    
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
@@ -75,13 +103,15 @@
 
         <StackPanel Grid.Row="12" Orientation="Horizontal" Margin="5">
             <Button x:Name="pagePrevious" Content="&lt;" 
-                    Click="pagePrevious_Click" Margin="5"/>
-            <Button x:Name="pageNext" Content=">" Click="pageNext_Click" Margin="5"/>
+                    Click="pagePrevious_Click" Margin="5" Background="DarkGray"/>
+            <Button x:Name="pageNext" Content=">" Click="pageNext_Click" Margin="5"
+                    Background="DarkGray"/>
             <TextBlock Text="Page:" Margin="5"/>
-            <TextBox x:Name="pageNumber" Text="1" Margin="5" Width="50"/>
-            <TextBox x:Name="bid" Width="150" Margin="5"/>
+            <TextBox x:Name="pageNumber" Text="1" Margin="5" Width="50" 
+                     Background="DarkGray"/>
+            <TextBox x:Name="bid" Width="150" Margin="5" Background="DarkGray"/>
             <Button x:Name="submit" Content="Submit Bid" Click="submit_Click"
-                    Margin="5"/>
+                    Margin="5" Background="DarkGray"/>
         </StackPanel>
         
     </Grid>
