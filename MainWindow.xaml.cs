@@ -58,16 +58,14 @@ namespace auctionApp
                     while (reader.Read())
                     {
                         itemName.Text = reader.GetString("itemName");
-                        int soldTest = reader.GetInt16("sold");
-                        sold.Text = getYesNo(soldTest);
+                        sold.Text = reader.GetBoolean("sold") ? "Yes" : "No";
                         currentPrice.Text = "£" + reader.GetString("currentPrice");
                         postageCost.Text = "£" + reader.GetString("postageCost");
                         state.Text = reader.GetString("state");
                         bidIncrement.Text = "£" + reader.GetString("bidIncrement");
                         timeRemaining.Text = reader.GetString("timeremaining");
                         timeOfListing.Text = reader.GetString("timeOfListing");
-                        int returnsAcceptedTest = reader.GetInt16("returnsAccepted");
-                        returnsAccepted.Text = getYesNo(returnsAcceptedTest);
+                        returnsAccepted.Text = reader.GetBoolean("returnsAccepted") ? "Yes" : "No";
                         information.Text = reader.GetString("information");                 
                     }
                 }
@@ -108,7 +106,6 @@ namespace auctionApp
                     command.ExecuteReader();
                 }
                 connection.Close();
-                refresh(int.Parse(pageNumber.Text));
             }
             else
             {
@@ -136,19 +133,6 @@ namespace auctionApp
                 refresh(pageNumberInt);
             }
             catch{}
-        }
-
-        private void pageRefresh_Click(object sender, RoutedEventArgs e)
-        {
-            try
-            {
-
-                refresh(int.Parse(pageNumber.Text));
-            }
-            catch 
-            {
-                MessageBox.Show("Invalid page number!");
-            }
         }
     }
 }
