@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Data;
 using System.Diagnostics;
 using System.Linq;
@@ -28,41 +29,21 @@ namespace auctionApp
     public partial class MainWindow : Window
     {
         private ItemModel _model;
-        private string connectionString = "server=localhost;port=3306;database=auctiondb;uid=root;password=pTHhHFGxB^U5!1UY^22#x0&n;";
         private Timer _timer;
-        private MySqlConnection connection;
-        private void openConnection()
-        {
-            connection = new MySqlConnection(connectionString);
-            connection.Open();
-        }
+       
 
         private void refresh(int pageNumber)
         {
-            openConnection();
-            string query = $"SELECT * FROM items WHERE itemId = {pageNumber}";
-            using (MySqlCommand command = new MySqlCommand(query, connection))
+            if(DesignerProperties.GetIsInDesignMode(new DependencyObject()))
             {
-                using (MySqlDataReader reader = command.ExecuteReader())
-                {
-                    while (reader.Read())
-                    { 
-                        _model.ItemId = reader.GetInt32("itemId");
-                        _model.ItemName = reader.GetString("itemName");
-                        _model.IsSold = reader.GetBoolean("sold");
-                        _model.CurrentPrice = reader.GetFloat("currentPrice");
-                        _model.PostageCost = reader.GetFloat("postageCost");
-                        _model.ItemCondition = reader.GetString("state");
-                        _model.BidIncrement = reader.GetFloat("bidIncrement");
-                        DateTime timeRemaining = DateTime.Parse(reader.GetString("timeremaining"));
-                        _model.TimeRemaining = new TimeOnly (timeRemaining.Hour, timeRemaining.Minute, timeRemaining.Second);
-                        _model.TimeOfListing = reader.GetDateTime("timeOfListing");
-                        _model.ReturnsAccepted = reader.GetBoolean("returnsAccepted");
-                        _model.Description = reader.GetString("information");
-                    }
-                }
+                _model.ItemId = 1;
+                _model.ItemName = "Testing Item";
             }
-            connection.Close();
+            else
+            {
+                DataLayer dataLayer = new DataLayer();
+                dataLayer.PopulateItemModel(_model, pageNumber);
+            }
         }
 
         public MainWindow()
@@ -95,13 +76,8 @@ namespace auctionApp
             if (float.Parse(bid.Text) >= float.Parse(currentPrice.Text.Remove(0, 1)) + float.Parse(bidIncrement.Text.Remove(0, 1)))
             {
                 MessageBox.Show("Bid submitted.");
-                openConnection();
-                string query = $"UPDATE items SET currentPrice = {bid.Text} WHERE itemId = {pageNumber.Text}";
-                using (MySqlCommand command = new MySqlCommand(query, connection))
-                {
-                    command.ExecuteReader();
-                }
-                connection.Close();
+                DataLayer dataLayer = new DataLayer();
+                dataLayer.SubmitBid(bid.Text, pageNumber.Text);
             }
             else
             {
