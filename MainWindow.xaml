@@ -5,34 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:auctionApp"
         mc:Ignorable="d"
-        Title="MainWindow" Height="700" Width="600" FontSize="36" 
+        Title="Auction App" Height="700" Width="600" FontSize="36" 
         Background="DimGray">
-
-    <Window.Resources>
-        <SolidColorBrush x:Key="TitleBarColor" Color="Red"/>
-    </Window.Resources>
-    <Window.Style>
-        <Style TargetType="{x:Type Window}">
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="{x:Type Window}">
-                        <Grid>
-                            <Border Background="{StaticResource TitleBarColor}" BorderBrush="Black" BorderThickness="1" x:Name="WindowTitleBar">
-                                <AdornerDecorator>
-                                    <ContentPresenter/>
-                                </AdornerDecorator>
-                            </Border>
-                            <Border BorderBrush="Black" BorderThickness="1">
-                                <AdornerDecorator>
-                                    <ContentPresenter/>
-                                </AdornerDecorator>
-                            </Border>
-                        </Grid>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-        </Style>
-    </Window.Style>
     
     <Grid>
         <Grid.RowDefinitions>
@@ -53,52 +27,60 @@
 
         <StackPanel Grid.Row="1" Orientation="Horizontal">
             <TextBlock Text="Item:" Margin="5"/>
-            <TextBlock x:Name="itemName" Margin="5"/>
+            <TextBlock x:Name="itemName" Margin="5" Text="{Binding Path=ItemName}"/>
         </StackPanel>
 
         <StackPanel Grid.Row="2" Orientation="Horizontal">
             <TextBlock Text="Sold:" Margin="5"/>
-            <TextBlock x:Name="sold" Margin="5"/>
+            <TextBlock x:Name="sold" Margin="5" Text="{Binding Path=IsSold}"/>
         </StackPanel>
 
         <StackPanel Grid.Row="3" Orientation="Horizontal">
             <TextBlock Text="Current Price:" Margin="5"/>
-            <TextBlock x:Name="currentPrice" Margin="5"/>
+            <TextBlock x:Name="currentPrice" Margin="5" 
+                       Text="{Binding Path=CurrentPrice}"/>
         </StackPanel>
 
         <StackPanel Grid.Row="4" Orientation="Horizontal">
             <TextBlock Text="P&amp;P:" Margin="5"/>
-            <TextBlock x:Name="postageCost" Margin="5"/>
+            <TextBlock x:Name="postageCost" Margin="5"
+                       Text="{Binding Path=PostageCost}"/>
         </StackPanel>
 
         <StackPanel Grid.Row="5" Orientation="Horizontal">
             <TextBlock Text="Bid Increment:" Margin="5"/>
-            <TextBlock x:Name="bidIncrement" Margin="5"/>
+            <TextBlock x:Name="bidIncrement" Margin="5"
+                       Text="{Binding Path=BidIncrement}"/>
         </StackPanel>
 
         <StackPanel Grid.Row="6" Orientation="Horizontal">
             <TextBlock Text="Condition:" Margin="5"/>
-            <TextBlock x:Name="state" Margin="5"/>
+            <TextBlock x:Name="state" Margin="5"
+                       Text="{Binding Path=ItemCondition}"/>
         </StackPanel>
 
         <StackPanel Grid.Row="7" Orientation="Horizontal">
             <TextBlock Text="Time Remaining:" Margin="5"/>
-            <TextBlock x:Name="timeRemaining" Margin="5"/>
+            <TextBlock x:Name="timeRemaining" Margin="5"
+                       Text="{Binding Path=TimerRemaining}"/>
         </StackPanel>
 
         <StackPanel Grid.Row="8" Orientation="Horizontal">
             <TextBlock Text="Time of Listing:" Margin="5"/>
-            <TextBlock x:Name="timeOfListing" Margin="5"/>
+            <TextBlock x:Name="timeOfListing" Margin="5"
+                       Text="{Binding Path=TimeOfListing}"/>
         </StackPanel>
 
         <StackPanel Grid.Row="9" Orientation="Horizontal">
             <TextBlock Text="Returns:" Margin="5"/>
-            <TextBlock x:Name="returnsAccepted" Margin="5"/>
+            <TextBlock x:Name="returnsAccepted" Margin="5"
+                       Text="{Binding Path=ReturnsAccepted}"/>
         </StackPanel>
 
         <StackPanel Grid.Row="10" Orientation="Horizontal">
             <TextBlock Text="Description:" Margin="5"/>
-            <TextBlock x:Name="information" Margin="5"/>
+            <TextBlock x:Name="information" Margin="5"
+                       Text="{Binding Path=Description}"/>
         </StackPanel>
 
         <StackPanel Grid.Row="12" Orientation="Horizontal" Margin="5">

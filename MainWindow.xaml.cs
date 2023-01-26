@@ -27,6 +27,7 @@ namespace auctionApp
 
     public partial class MainWindow : Window
     {
+        private ItemModel _model;
         private string connectionString = "server=localhost;port=3306;database=auctiondb;uid=root;password=pTHhHFGxB^U5!1UY^22#x0&n;";
         private Timer _timer;
         private MySqlConnection connection;
@@ -45,17 +46,19 @@ namespace auctionApp
                 using (MySqlDataReader reader = command.ExecuteReader())
                 {
                     while (reader.Read())
-                    {
-                        itemName.Text = reader.GetString("itemName");
-                        sold.Text = reader.GetBoolean("sold") ? "Yes" : "No";
-                        currentPrice.Text = "£" + reader.GetString("currentPrice");
-                        postageCost.Text = "£" + reader.GetString("postageCost");
-                        state.Text = reader.GetString("state");
-                        bidIncrement.Text = "£" + reader.GetString("bidIncrement");
-                        timeRemaining.Text = reader.GetString("timeremaining");
-                        timeOfListing.Text = reader.GetString("timeOfListing");
-                        returnsAccepted.Text = reader.GetBoolean("returnsAccepted") ? "Yes" : "No";
-                        information.Text = reader.GetString("information");                 
+                    { 
+                        _model.ItemId = reader.GetInt32("itemId");
+                        _model.ItemName = reader.GetString("itemName");
+                        _model.IsSold = reader.GetBoolean("sold");
+                        _model.CurrentPrice = reader.GetFloat("currentPrice");
+                        _model.PostageCost = reader.GetFloat("postageCost");
+                        _model.ItemCondition = reader.GetString("state");
+                        _model.BidIncrement = reader.GetFloat("bidIncrement");
+                        DateTime timeRemaining = DateTime.Parse(reader.GetString("timeremaining"));
+                        _model.TimeRemaining = new TimeOnly (timeRemaining.Hour, timeRemaining.Minute, timeRemaining.Second);
+                        _model.TimeOfListing = reader.GetDateTime("timeOfListing");
+                        _model.ReturnsAccepted = reader.GetBoolean("returnsAccepted");
+                        _model.Description = reader.GetString("information");
                     }
                 }
             }
@@ -65,11 +68,15 @@ namespace auctionApp
         public MainWindow()
         {
             InitializeComponent();
+
+            _model = new ItemModel();
+            DataContext = _model;
+
             refresh(int.Parse(pageNumber.Text));
             _timer = new Timer(1000);
             _timer.Elapsed += OnTimedEvent;
             _timer.AutoReset = false;
-            _timer.Enabled = true;
+            _timer.Enabled = false;
         }
 
         private void OnTimedEvent(object? sender, ElapsedEventArgs e)
