@@ -1,6 +1,7 @@
 ﻿using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
@@ -13,7 +14,13 @@ namespace auctionApp
         private string connectionString = "server=localhost;port=3306;database=auctiondb;uid=root;password=pTHhHFGxB^U5!1UY^22#x0&n;";
         private MySqlConnection connection;
 
-        private void openConnection()
+        private TimeOnly GetTimeRemaining(DateTime timeNow, DateTime endTime)
+        {
+            TimeOnly endsIn = new TimeOnly((endTime-timeNow).Hours, (endTime-timeNow).Minutes, (endTime-timeNow).Seconds);
+            return endsIn;
+        } 
+
+        private void OpenConnection()
         {
             connection = new MySqlConnection(connectionString);
             connection.Open();
@@ -21,7 +28,7 @@ namespace auctionApp
 
         public void PopulateItemModel(ItemModel model, int pageNumber)
         {
-            openConnection();
+            OpenConnection();
             string query = $"SELECT * FROM items WHERE itemId = {pageNumber}";
             using (MySqlCommand command = new MySqlCommand(query, connection))
             {
@@ -36,9 +43,12 @@ namespace auctionApp
                         model.PostageCost = reader.GetFloat("postageCost");
                         model.ItemCondition = reader.GetString("state");
                         model.BidIncrement = reader.GetFloat("bidIncrement");
-                        DateTime timeRemaining = DateTime.Parse(reader.GetString("timeremaining"));
-                        model.TimeRemaining = new TimeOnly(timeRemaining.Hour, timeRemaining.Minute, timeRemaining.Second);
-                        model.TimeOfListing = reader.GetDateTime("timeOfListing");
+                        DateTime timeOfListing = reader.GetDateTime("timeOfListing");
+                        model.TimeOfListing = timeOfListing;
+                        DateTime endTime = reader.GetDateTime("endTime");
+                        DateTime timeNow = DateTime.Now;
+                        if (timeNow < endTime) { model.TimeRemaining = GetTimeRemaining(timeNow, endTime); }
+                        else { model.TimeRemaining = new TimeOnly(0, 0, 0); }
                         model.ReturnsAccepted = reader.GetBoolean("returnsAccepted");
                         model.Description = reader.GetString("information");
                     }
@@ -49,7 +59,7 @@ namespace auctionApp
 
         internal void SubmitBid(string bidPrice, string itemId)
         {
-            openConnection();
+            OpenConnection();
             string query = $"UPDATE items SET currentPrice = {bidPrice} WHERE itemId = {itemId}";
             using (MySqlCommand command = new MySqlCommand(query, connection))
             {

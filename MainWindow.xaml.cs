@@ -41,7 +41,8 @@ namespace auctionApp
             Debug.Print("Refreshed at {0:HH:mm:ss.fff}", e.SignalTime);
             Application.Current.Dispatcher.Invoke(new Action(() =>
             {
-                refresh(int.Parse(pageNumber.Text));
+                try { refresh(int.Parse(pageNumber.Text)); }
+                catch { MessageBox.Show("Invalid Page Number!"); }
                 _timer.Enabled = true;
             }));
 
@@ -49,16 +50,20 @@ namespace auctionApp
 
         private void submit_Click(object sender, RoutedEventArgs e)
         {
-            if (float.Parse(bid.Text) >= float.Parse(currentPrice.Text.Remove(0, 1)) + float.Parse(bidIncrement.Text.Remove(0, 1)))
+            try
             {
-                MessageBox.Show("Bid submitted.");
-                DataLayer dataLayer = new DataLayer();
-                dataLayer.SubmitBid(bid.Text, pageNumber.Text);
+                if (float.Parse(bid.Text) >= float.Parse(currentPrice.Text.Remove(0, 1)) + float.Parse(bidIncrement.Text.Remove(0, 1)))
+                {
+                    MessageBox.Show("Bid submitted.");
+                    DataLayer dataLayer = new DataLayer();
+                    dataLayer.SubmitBid(bid.Text, pageNumber.Text);
+                }
+                else
+                {
+                    MessageBox.Show("Cannot submit bid: bid is less than the current price plus the bid increment.");
+                }
             }
-            else
-            {
-                MessageBox.Show("Cannot submit bid: bid is less than the current price plus the bid increment.");
-            }
+            catch { MessageBox.Show("Invalid Bid!"); }
         }
 
         private void pageNext_Click(object sender, RoutedEventArgs e)
@@ -88,11 +93,11 @@ namespace auctionApp
             switch (e.Key)
             {
                 case Key.Left:
-                    pageNext_Click(this, new RoutedEventArgs());
+                    pagePrevious_Click(this, new RoutedEventArgs());
                     break;
 
                 case Key.Right:
-                    pagePrevious_Click(this, new RoutedEventArgs());
+                    pageNext_Click(this, new RoutedEventArgs());
                     break;
 
                 case Key.Enter:
