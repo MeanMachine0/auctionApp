@@ -43,8 +43,7 @@ namespace auctionApp
                         model.PostageCost = reader.GetFloat("postageCost");
                         model.ItemCondition = reader.GetString("state");
                         model.BidIncrement = reader.GetFloat("bidIncrement");
-                        DateTime timeOfListing = reader.GetDateTime("timeOfListing");
-                        model.TimeOfListing = timeOfListing;
+                        model.TimeOfListing = reader.GetDateTime("timeOfListing");
                         DateTime endTime = reader.GetDateTime("endTime");
                         DateTime timeNow = DateTime.Now;
                         if (timeNow < endTime) { model.TimeRemaining = GetTimeRemaining(timeNow, endTime); }
