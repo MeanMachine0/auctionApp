@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:auctionApp"
         mc:Ignorable="d"
         Title="Auction App" Height="700" Width="600" FontSize="36" 
-        Background="DimGray">
+        Background="DimGray" KeyDown="Window_KeyDown">
     
     <Grid>
         <Grid.RowDefinitions>
@@ -27,60 +27,60 @@
 
         <StackPanel Grid.Row="1" Orientation="Horizontal">
             <TextBlock Text="Item:" Margin="5"/>
-            <TextBlock x:Name="itemName" Margin="5" Text="{Binding Path=ItemName}"/>
+            <TextBlock x:Name="itemName" Margin="5" Text="{Binding ItemName}"/>
         </StackPanel>
 
         <StackPanel Grid.Row="2" Orientation="Horizontal">
             <TextBlock Text="Sold:" Margin="5"/>
-            <TextBlock x:Name="sold" Margin="5" Text="{Binding Path=IsSold}"/>
+            <TextBlock x:Name="sold" Margin="5" Text="{Binding IsSold}"/>
         </StackPanel>
 
         <StackPanel Grid.Row="3" Orientation="Horizontal">
             <TextBlock Text="Current Price:" Margin="5"/>
             <TextBlock x:Name="currentPrice" Margin="5" 
-                       Text="{Binding Path=CurrentPrice}"/>
+                       Text="{Binding CurrentPrice}"/>
         </StackPanel>
 
         <StackPanel Grid.Row="4" Orientation="Horizontal">
             <TextBlock Text="P&amp;P:" Margin="5"/>
             <TextBlock x:Name="postageCost" Margin="5"
-                       Text="{Binding Path=PostageCost}"/>
+                       Text="{Binding PostageCost}"/>
         </StackPanel>
 
         <StackPanel Grid.Row="5" Orientation="Horizontal">
             <TextBlock Text="Bid Increment:" Margin="5"/>
             <TextBlock x:Name="bidIncrement" Margin="5"
-                       Text="{Binding Path=BidIncrement}"/>
+                       Text="{Binding BidIncrement}"/>
         </StackPanel>
 
         <StackPanel Grid.Row="6" Orientation="Horizontal">
             <TextBlock Text="Condition:" Margin="5"/>
             <TextBlock x:Name="state" Margin="5"
-                       Text="{Binding Path=ItemCondition}"/>
+                       Text="{Binding ItemCondition}"/>
         </StackPanel>
 
         <StackPanel Grid.Row="7" Orientation="Horizontal">
             <TextBlock Text="Time Remaining:" Margin="5"/>
             <TextBlock x:Name="timeRemaining" Margin="5"
-                       Text="{Binding Path=TimerRemaining}"/>
+                       Text="{Binding TimerRemaining}"/>
         </StackPanel>
 
         <StackPanel Grid.Row="8" Orientation="Horizontal">
             <TextBlock Text="Time of Listing:" Margin="5"/>
             <TextBlock x:Name="timeOfListing" Margin="5"
-                       Text="{Binding Path=TimeOfListing}"/>
+                       Text="{Binding TimeOfListing, StringFormat=dd MMM yyyy hh:mm:ss}"/>
         </StackPanel>
 
         <StackPanel Grid.Row="9" Orientation="Horizontal">
             <TextBlock Text="Returns:" Margin="5"/>
             <TextBlock x:Name="returnsAccepted" Margin="5"
-                       Text="{Binding Path=ReturnsAccepted}"/>
+                       Text="{Binding ReturnsAccepted}"/>
         </StackPanel>
 
         <StackPanel Grid.Row="10" Orientation="Horizontal">
             <TextBlock Text="Description:" Margin="5"/>
             <TextBlock x:Name="information" Margin="5"
-                       Text="{Binding Path=Description}"/>
+                       Text="{Binding Description}"/>
         </StackPanel>
 
         <StackPanel Grid.Row="12" Orientation="Horizontal" Margin="5">
@@ -95,6 +95,5 @@
             <Button x:Name="submit" Content="Submit Bid" Click="submit_Click"
                     Margin="5" Background="DarkGray"/>
         </StackPanel>
-        
     </Grid>
 </Window>

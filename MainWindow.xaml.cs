@@ -1,24 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Timers;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-using System.Xml.Serialization;
-using MySql.Data.MySqlClient;
-
 
 namespace auctionApp
 {
@@ -30,20 +14,12 @@ namespace auctionApp
     {
         private ItemModel _model;
         private Timer _timer;
-       
+
 
         private void refresh(int pageNumber)
         {
-            if(DesignerProperties.GetIsInDesignMode(new DependencyObject()))
-            {
-                _model.ItemId = 1;
-                _model.ItemName = "Testing Item";
-            }
-            else
-            {
-                DataLayer dataLayer = new DataLayer();
-                dataLayer.PopulateItemModel(_model, pageNumber);
-            }
+            DataLayer dataLayer = new DataLayer();
+            dataLayer.PopulateItemModel(_model, pageNumber);
         }
 
         public MainWindow()
@@ -57,14 +33,14 @@ namespace auctionApp
             _timer = new Timer(1000);
             _timer.Elapsed += OnTimedEvent;
             _timer.AutoReset = false;
-            _timer.Enabled = false;
+            _timer.Enabled = true;
         }
 
         private void OnTimedEvent(object? sender, ElapsedEventArgs e)
         {
             Debug.Print("Refreshed at {0:HH:mm:ss.fff}", e.SignalTime);
-            Application.Current.Dispatcher.Invoke(new Action(() => 
-            { 
+            Application.Current.Dispatcher.Invoke(new Action(() =>
+            {
                 refresh(int.Parse(pageNumber.Text));
                 _timer.Enabled = true;
             }));
@@ -93,7 +69,7 @@ namespace auctionApp
                 pageNumber.Text = pageNumberInt.ToString();
                 refresh(pageNumberInt);
             }
-            catch{}
+            catch { }
         }
 
         private void pagePrevious_Click(object sender, RoutedEventArgs e)
@@ -104,7 +80,25 @@ namespace auctionApp
                 pageNumber.Text = pageNumberInt.ToString();
                 refresh(pageNumberInt);
             }
-            catch{}
+            catch { }
+        }
+
+        private void Window_KeyDown(object sender, System.Windows.Input.KeyEventArgs e)
+        {
+            switch (e.Key)
+            {
+                case Key.Left:
+                    pageNext_Click(this, new RoutedEventArgs());
+                    break;
+
+                case Key.Right:
+                    pagePrevious_Click(this, new RoutedEventArgs());
+                    break;
+
+                case Key.Enter:
+                    submit_Click(this, new RoutedEventArgs());
+                    break;
+            }
         }
     }
 }
