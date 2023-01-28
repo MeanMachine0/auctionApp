@@ -53,15 +53,19 @@ namespace auctionApp
         {
             try
             {
-                if (float.Parse(bid.Text) >= float.Parse(currentPrice.Text.Remove(0, 1)) + float.Parse(bidIncrement.Text.Remove(0, 1)))
+                if (float.Parse(bid.Text) >= (_model.CurrentPrice + _model.BidIncrement) & _model.TimeRemaining > new TimeOnly(0, 0, 0))
                 {
-                    MessageBox.Show("Bid submitted.");
                     DataLayer dataLayer = new DataLayer();
                     dataLayer.SubmitBid(bid.Text, pageNumber.Text);
+                    MessageBox.Show("Bid submitted.");
+                }
+                else if (float.Parse(bid.Text) < (_model.CurrentPrice + _model.BidIncrement) & _model.TimeRemaining > new TimeOnly(0, 0, 0))
+                {
+                    MessageBox.Show("Cannot submit bid: bid is less than the current price plus the bid increment.");
                 }
                 else
                 {
-                    MessageBox.Show("Cannot submit bid: bid is less than the current price plus the bid increment.");
+                    MessageBox.Show("Listing has ended. Could not submit bid.");
                 }
             }
             catch { MessageBox.Show("Invalid Bid!"); }

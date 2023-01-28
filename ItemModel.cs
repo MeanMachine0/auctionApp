@@ -125,12 +125,23 @@ namespace auctionApp
             {
                 get { return description; }
                 set
-            {
+                {
                     description = value;
                     RaisePropertyChanged("Description");
                 }
             }
 
+        private int numBids;
+
+        public int NumBids
+        {
+            get { return numBids; }
+            set 
+            {
+                numBids = value;
+                RaisePropertyChanged("NumBids");
+            }
+        }
 
         public event PropertyChangedEventHandler? PropertyChanged;
 

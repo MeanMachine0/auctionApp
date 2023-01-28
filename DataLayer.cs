@@ -1,6 +1,7 @@
 ﻿using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Security.Cryptography;
@@ -45,12 +46,21 @@ namespace auctionApp
                         model.BidIncrement = reader.GetFloat("bidIncrement");
                         model.TimeOfListing = reader.GetDateTime("timeOfListing");
                         DateTime endTime = reader.GetDateTime("endTime");
-                        DateTime timeNow = DateTime.Now;
+                        DateTime timeNow = DateTime.Now; 
                         if (timeNow < endTime) { model.TimeRemaining = GetTimeRemaining(timeNow, endTime); }
                         else { model.TimeRemaining = new TimeOnly(0, 0, 0); }
                         model.ReturnsAccepted = reader.GetBoolean("returnsAccepted");
                         model.Description = reader.GetString("information");
+                        model.NumBids = reader.GetInt32("numBids");
                     }
+                }
+            }
+            if (model.TimeRemaining == new TimeOnly(0, 0, 0) & model.NumBids > 0 & model.IsSold == false)
+            {
+                query = $"UPDATE items SET sold = 1 WHERE itemId = {model.ItemId.ToString()}";
+                using (MySqlCommand command = new MySqlCommand(query, connection))
+                {
+                    command.ExecuteNonQuery();
                 }
             }
             connection.Close();
