@@ -109,24 +109,23 @@ namespace auctionApp
                     pageNext_Click(this, new RoutedEventArgs());
                     e.Handled = true;
                     break;
+            }
+        }
 
-                case Key.Enter:
-                    if (FocusManager.GetFocusedElement(this) is TextBox)
-                    {
-                        TextBox textBox = (TextBox) FocusManager.GetFocusedElement(this);
-                        if (textBox.Name == "pageNumber")
-                        {
-                            submit.Focus();
-                        }
-                        else if (textBox.Name == "bid")
-                        {
-                            submit_Click(this, new RoutedEventArgs());
-                            submit.Focus();
-                        }
-                    }
+        private void pageNumber_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter)
+            {
+                submit.Focus();
+            }
+        }
 
-                    
-                    break;
+        private void bid_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter)
+            {
+                submit_Click(this, new RoutedEventArgs());
+                submit.Focus();
             }
         }
     }

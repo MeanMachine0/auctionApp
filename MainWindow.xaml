@@ -90,8 +90,8 @@
                     Background="DarkGray"/>
             <TextBlock Text="Page:" Margin="5"/>
             <TextBox x:Name="pageNumber" Text="1" Margin="5" Width="50" 
-                     Background="DarkGray"/>
-            <TextBox x:Name="bid" Width="150" Margin="5" Background="DarkGray"/>
+                     Background="DarkGray" KeyDown="pageNumber_KeyDown"/>
+            <TextBox x:Name="bid" Width="150" Margin="5" Background="DarkGray" KeyDown="bid_KeyDown"/>
             <Button x:Name="submit" Content="Submit Bid" Click="submit_Click"
                     Margin="5" Background="DarkGray"/>
         </StackPanel>
