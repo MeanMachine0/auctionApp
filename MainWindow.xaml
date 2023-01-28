@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Title="Auction App" Height="720" Width="1280" FontSize="36" 
         Background="DimGray" KeyDown="Window_KeyDown">
-    
+
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
@@ -26,7 +26,7 @@
         </Grid.RowDefinitions>
 
         <StackPanel Grid.Row="1" Orientation="Horizontal">
-            <TextBlock Text="Item:" Margin="5"/>
+            <TextBlock Text="Item:" Margin="5, 5, 0, 5"/>
             <TextBlock x:Name="itemName" Margin="5" Text="{Binding ItemName}"/>
         </StackPanel>
 

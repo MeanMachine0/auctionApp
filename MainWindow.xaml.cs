@@ -3,6 +3,7 @@ using System.Diagnostics;
 using System.Threading.Tasks;
 using System.Timers;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Input;
 
 namespace auctionApp
@@ -98,15 +99,33 @@ namespace auctionApp
             switch (e.Key)
             {
                 case Key.Left:
+                    submit.Focus();
                     pagePrevious_Click(this, new RoutedEventArgs());
+                    e.Handled = true;
                     break;
 
                 case Key.Right:
+                    submit.Focus();
                     pageNext_Click(this, new RoutedEventArgs());
+                    e.Handled = true;
                     break;
 
                 case Key.Enter:
-                    submit_Click(this, new RoutedEventArgs());
+                    if (FocusManager.GetFocusedElement(this) is TextBox)
+                    {
+                        TextBox textBox = (TextBox) FocusManager.GetFocusedElement(this);
+                        if (textBox.Name == "pageNumber")
+                        {
+                            submit.Focus();
+                        }
+                        else if (textBox.Name == "bid")
+                        {
+                            submit_Click(this, new RoutedEventArgs());
+                            submit.Focus();
+                        }
+                    }
+
+                    
                     break;
             }
         }
