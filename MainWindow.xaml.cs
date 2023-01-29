@@ -128,5 +128,16 @@ namespace auctionApp
                 submit.Focus();
             }
         }
+
+        private void searchBar_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter)
+            {
+                Debug.Print($"Performing search for {searchBar.Text}.");
+                DataLayer dataLayer = new DataLayer();
+                dataLayer.Search(_model, searchBar.Text);
+                pageNumber.Text = _model.ItemId.ToString();
+            }
+        }
     }
 }

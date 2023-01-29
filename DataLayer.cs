@@ -17,9 +17,9 @@ namespace auctionApp
 
         private TimeOnly GetTimeRemaining(DateTime timeNow, DateTime endTime)
         {
-            TimeOnly endsIn = new TimeOnly((endTime-timeNow).Hours, (endTime-timeNow).Minutes, (endTime-timeNow).Seconds);
+            TimeOnly endsIn = new TimeOnly((endTime - timeNow).Hours, (endTime - timeNow).Minutes, (endTime - timeNow).Seconds);
             return endsIn;
-        } 
+        }
 
         private void OpenConnection()
         {
@@ -46,7 +46,7 @@ namespace auctionApp
                         model.BidIncrement = reader.GetFloat("bidIncrement");
                         model.TimeOfListing = reader.GetDateTime("timeOfListing");
                         DateTime endTime = reader.GetDateTime("endTime");
-                        DateTime timeNow = DateTime.Now; 
+                        DateTime timeNow = DateTime.Now;
                         if (timeNow < endTime) { model.TimeRemaining = GetTimeRemaining(timeNow, endTime); }
                         else { model.TimeRemaining = new TimeOnly(0, 0, 0); }
                         model.ReturnsAccepted = reader.GetBoolean("returnsAccepted");
@@ -73,6 +73,44 @@ namespace auctionApp
             using (MySqlCommand command = new MySqlCommand(query, connection))
             {
                 command.ExecuteReader();
+            }
+            connection.Close();
+        }
+        public void Search(ItemModel model, string searchText)
+        {
+            OpenConnection();
+            string query = $"SELECT * FROM items WHERE itemName like '%{searchText.Trim()}%' LIMIT 1";
+            using (MySqlCommand command = new MySqlCommand(query, connection))
+            {
+                using (MySqlDataReader reader = command.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        model.ItemId = reader.GetInt32("itemId");
+                        model.ItemName = reader.GetString("itemName");
+                        model.IsSold = reader.GetBoolean("sold");
+                        model.CurrentPrice = reader.GetFloat("currentPrice");
+                        model.PostageCost = reader.GetFloat("postageCost");
+                        model.ItemCondition = reader.GetString("state");
+                        model.BidIncrement = reader.GetFloat("bidIncrement");
+                        model.TimeOfListing = reader.GetDateTime("timeOfListing");
+                        DateTime endTime = reader.GetDateTime("endTime");
+                        DateTime timeNow = DateTime.Now;
+                        if (timeNow < endTime) { model.TimeRemaining = GetTimeRemaining(timeNow, endTime); }
+                        else { model.TimeRemaining = new TimeOnly(0, 0, 0); }
+                        model.ReturnsAccepted = reader.GetBoolean("returnsAccepted");
+                        model.Description = reader.GetString("information");
+                        model.NumBids = reader.GetInt32("numBids");
+                    }
+                }
+            }
+            if (model.TimeRemaining == new TimeOnly(0, 0, 0) & model.NumBids > 0 & model.IsSold == false)
+            {
+                query = $"UPDATE items SET sold = 1 WHERE itemId = {model.ItemId.ToString()}";
+                using (MySqlCommand command = new MySqlCommand(query, connection))
+                {
+                    command.ExecuteNonQuery();
+                }
             }
             connection.Close();
         }

@@ -94,6 +94,9 @@
             <TextBox x:Name="bid" Width="150" Margin="5" Background="DarkGray" KeyDown="bid_KeyDown"/>
             <Button x:Name="submit" Content="Submit Bid" Click="submit_Click"
                     Margin="5" Background="DarkGray"/>
+            <TextBlock Text="Search:" Margin="5" Width="auto"/>
+            <TextBox x:Name="searchBar" Width="550" Margin="5"
+                     Background="DarkGray" KeyDown="searchBar_KeyDown"/> 
         </StackPanel>
     </Grid>
 </Window>
