@@ -1,0 +1,33 @@
+﻿<Window x:Class="auctionApp.LoginWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:auctionApp"
+        mc:Ignorable="d"
+        Title="LoginWindow" Height="360" Width="640" FontSize="25" Background="DimGray">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0, 100, 0, 0">
+            <TextBlock Text="Username:" Margin="5, 5, 0, 5" Width="120"/>
+            <TextBox x:Name="username" Margin="0, 5, 5, 5" Width="400" Background="DarkGray"/>
+        </StackPanel>
+
+        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center">
+            <TextBlock Text="Password:" Margin="5, 5, 0, 5" Width="120"/>
+            <TextBox x:Name="password" Margin="0, 5, 5, 5" Width="400" Background="DarkGray"/>
+        </StackPanel>
+
+        <StackPanel Grid.Row="3" Orientation="Horizontal" HorizontalAlignment="Center">
+            <Button x:Name="buy" Content="Buy" Margin="5" Width="100" Click="buy_Click" Background="DarkGray"/>
+            <Button x:Name="sell" Content="Sell" Margin="5" Width="100" Click="sell_Click" Background="DarkGray"/>
+        </StackPanel>
+    </Grid>
+</Window>
