@@ -26,6 +26,7 @@ namespace auctionApp
 
         private void login_Click(object sender, RoutedEventArgs e)
         {
+           
            MenuWindow menuWindow = new MenuWindow();
            menuWindow.Show();
            this.Close();

@@ -42,7 +42,12 @@ namespace auctionApp
             Debug.Print("Refreshed at {0:HH:mm:ss.fff}", e.SignalTime);
             Application.Current.Dispatcher.Invoke(new Action(async () =>
             {
-                try { refresh(int.Parse(pageNumber.Text)); }
+                try 
+                { 
+                    returnsAccepted.IsEnabled = true; 
+                    refresh(int.Parse(pageNumber.Text)); 
+                    returnsAccepted.IsEnabled = false; 
+                }
                 catch { MessageBox.Show("Invalid Page Number!"); await Task.Delay(1000); }
                 _timer.Enabled = true;
             }));

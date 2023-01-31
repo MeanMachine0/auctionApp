@@ -52,7 +52,7 @@ namespace auctionApp
             _model.BidIncrement = float.Parse(bidIncrementS.Text);
             _model.ItemCondition = conditionS.Text;
             _model.EndTime = DateTime.Parse(endTimeS.Text);
-            _model.ReturnsAccepted = bool.Parse(returnsAcceptedS.Text);
+            _model.ReturnsAccepted = returnsAcceptedS.IsChecked.Value;
             _model.Description = descriptionS.Text;
             DataLayer dataLayer = new DataLayer();
             dataLayer.ListItem(_model);
