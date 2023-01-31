@@ -44,9 +44,11 @@ namespace auctionApp
             {
                 try 
                 { 
-                    returnsAccepted.IsEnabled = true; 
+                    returnsAccepted.IsEnabled = true;
+                    sold.IsEnabled = true;
                     refresh(int.Parse(pageNumber.Text)); 
-                    returnsAccepted.IsEnabled = false; 
+                    returnsAccepted.IsEnabled = false;
+                    sold.IsEnabled = false;
                 }
                 catch { MessageBox.Show("Invalid Page Number!"); await Task.Delay(1000); }
                 _timer.Enabled = true;

@@ -108,7 +108,7 @@ namespace auctionApp
         internal void SubmitBid(string bidPrice, string itemId, int accountId)
         {
             OpenConnection();
-            string query = $"UPDATE items SET currentPrice = {bidPrice}, buyerId = {accountId.ToString()} WHERE itemId = {itemId}";
+            string query = $"UPDATE items SET currentPrice = {bidPrice}, buyerId = {accountId.ToString()}, numBids = numBids + 1 WHERE itemId = {itemId}";
             Debug.Print(query);
             using (MySqlCommand command = new MySqlCommand(query, connection))
             {

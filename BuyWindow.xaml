@@ -39,7 +39,8 @@
 
         <StackPanel Grid.Row="2" Orientation="Horizontal">
             <TextBlock Text="Sold:" Margin="5"/>
-            <TextBlock x:Name="sold" Margin="5" Text="{Binding IsSold}"/>
+            <CheckBox x:Name="sold" Margin="0, 25, 0, 0" 
+                      Background="DarkGray" IsChecked="{Binding IsSold}"/>
         </StackPanel>
 
         <StackPanel Grid.Row="3" Orientation="Horizontal">
@@ -81,7 +82,7 @@
         <StackPanel Grid.Row="9" Orientation="Horizontal">
             <TextBlock Text="Returns Accepted:" Margin="5"/>
             <CheckBox x:Name="returnsAccepted" Margin="0, 25, 0, 0" 
-                      Background="DarkGray"  IsChecked="{Binding ReturnsAccepted}"/>
+                      Background="DarkGray" IsChecked="{Binding ReturnsAccepted}"/>
         </StackPanel>
 
         <StackPanel Grid.Row="10" Orientation="Horizontal">
