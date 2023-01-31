@@ -15,19 +15,16 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0, 100, 0, 0">
+        <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0, 100, 0, 0">
             <TextBlock Text="Username:" Margin="5, 5, 0, 5" Width="120"/>
             <TextBox x:Name="username" Margin="0, 5, 5, 5" Width="400" Background="DarkGray"/>
         </StackPanel>
 
-        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center">
+        <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center">
             <TextBlock Text="Password:" Margin="5, 5, 0, 5" Width="120"/>
             <TextBox x:Name="password" Margin="0, 5, 5, 5" Width="400" Background="DarkGray"/>
         </StackPanel>
 
-        <StackPanel Grid.Row="3" Orientation="Horizontal" HorizontalAlignment="Center">
-            <Button x:Name="buy" Content="Buy" Margin="5" Width="100" Click="buy_Click" Background="DarkGray"/>
-            <Button x:Name="sell" Content="Sell" Margin="5" Width="100" Click="sell_Click" Background="DarkGray"/>
-        </StackPanel>
+        <Button x:Name="login" Content="Login" Grid.Row="2" HorizontalAlignment="Center" Background="DarkGray" Click="login_Click"/>
     </Grid>
 </Window>

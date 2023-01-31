@@ -9,10 +9,10 @@ using System.Windows.Input;
 namespace auctionApp
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for BuyWindow.xaml
     /// </summary>
 
-    public partial class MainWindow : Window
+    public partial class BuyWindow : Window
     {
         private ItemModel _model;
         private Timer _timer;
@@ -24,7 +24,7 @@ namespace auctionApp
             dataLayer.PopulateItemModel(_model, pageNumber);
         }
 
-        public MainWindow()
+        public BuyWindow()
         {
             InitializeComponent();
 
@@ -138,6 +138,20 @@ namespace auctionApp
                 dataLayer.Search(_model, searchBar.Text);
                 pageNumber.Text = _model.ItemId.ToString();
             }
+        }
+
+        private void menu_Click(object sender, RoutedEventArgs e)
+        {
+            MenuWindow menuWindow = new MenuWindow();
+            menuWindow.Show();
+            this.Close();
+        }
+
+        private void logout_Click(object sender, RoutedEventArgs e)
+        {
+            LoginWindow loginWindow = new LoginWindow();
+            loginWindow.Show();
+            this.Close();
         }
     }
 }

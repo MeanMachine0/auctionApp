@@ -15,20 +15,27 @@ using System.Windows.Shapes;
 namespace auctionApp
 {
     /// <summary>
-    /// Interaction logic for LoginWindow.xaml
+    /// Interaction logic for SellWindow.xaml
     /// </summary>
-    public partial class LoginWindow : Window
+    public partial class SellWindow : Window
     {
-        public LoginWindow()
+        public SellWindow()
         {
             InitializeComponent();
         }
 
-        private void login_Click(object sender, RoutedEventArgs e)
+        private void menu_Click(object sender, RoutedEventArgs e)
         {
-           MenuWindow menuWindow = new MenuWindow();
-           menuWindow.Show();
-           this.Close();
+            MenuWindow menuWindow = new MenuWindow();
+            menuWindow.Show();
+            this.Close();
+        }
+
+        private void logout_Click(object sender, RoutedEventArgs e)
+        {
+            LoginWindow loginWindow = new LoginWindow();
+            loginWindow.Show();
+            this.Close();
         }
     }
 }

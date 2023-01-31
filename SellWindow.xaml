@@ -1,0 +1,74 @@
+﻿<Window x:Class="auctionApp.SellWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:auctionApp"
+        mc:Ignorable="d"
+        Title="SellWindow" Height="720" Width="1280" FontSize="36" 
+        Background="DimGray">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="auto"/>
+        </Grid.RowDefinitions>
+
+        <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Center">
+            <Button x:Name="menu" Content="Menu" Background="DarkGray" 
+                    Click="menu_Click" Margin="5" FontSize="20"/>
+            <Button x:Name="logout" Content="Logout" Background="DarkGray"
+                    Click="logout_Click" Margin="5" FontSize="20"/>
+        </StackPanel>
+
+        <StackPanel Grid.Row="1" Orientation="Horizontal">
+            <TextBlock Text="Item Name:" Margin="5"/>
+            <TextBox x:Name="itemNameS" Width="398" Margin="5" Background="DarkGray"/>
+        </StackPanel>
+
+        <StackPanel Grid.Row="2" Orientation="Horizontal">
+            <TextBlock Text="Starting Price:" Margin="5"/>
+            <TextBox x:Name="startingPrice" Width="365" Margin="5" Background="DarkGray"/>
+        </StackPanel>
+
+        <StackPanel Grid.Row="3" Orientation="Horizontal">
+            <TextBlock Text="P&amp;P:" Margin="5"/>
+            <TextBox x:Name="postageCostS" Width="507" Margin="5" Background="DarkGray"/>
+        </StackPanel>
+
+        <StackPanel Grid.Row="4" Orientation="Horizontal">
+            <TextBlock Text="Bid Increment (%):" Margin="5"/>
+            <TextBox x:Name="bidIncrementS" Width="294" Margin="5" Background="DarkGray"/>
+        </StackPanel>
+
+        <StackPanel Grid.Row="5" Orientation="Horizontal">
+            <TextBlock Text="Condition:" Margin="5"/>
+            <TextBox x:Name="conditionS" Width="420" Margin="5" Background="DarkGray"/>
+        </StackPanel>
+
+        <StackPanel Grid.Row="6" Orientation="Horizontal">
+            <TextBlock Text="End Time:" Margin="5"/>
+            <TextBox x:Name="endTimeS" Width="428" Margin="5" Background="DarkGray"/>
+        </StackPanel>
+
+        <StackPanel Grid.Row="7" Orientation="Horizontal">
+            <TextBlock Text="Accept Returns:" Margin="5"/>
+            <TextBox x:Name="returnsAcceptedS" Width="337" Margin="5" Background="DarkGray"/>
+        </StackPanel>
+
+        <StackPanel Grid.Row="8" Orientation="Horizontal">
+            <TextBlock Text="Description:" Margin="5"/>
+            <TextBox x:Name="descriptionS" Width="395" Margin="5" Background="DarkGray"/>
+        </StackPanel>
+    </Grid>
+</Window>
