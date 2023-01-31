@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Security.Cryptography;
@@ -68,6 +69,19 @@ namespace auctionApp
         {
             string query = $"SELECT * FROM items WHERE itemId = {pageNumber}";
             Populate(model, query);
+        }
+
+        public void ListItem(ItemModel model)
+        {
+            string format = "dd/MM/yyyy HH:mm:ss";
+            string query = $"INSERT INTO items (itemName, currentPrice, postageCost, bidIncrement, state, timeOfListing, endTime, returnsAccepted, information) VALUES ('{model.ItemName}', {model.CurrentPrice.ToString()}, {model.PostageCost.ToString()}, {model.BidIncrement.ToString()}, '{model.ItemCondition}', '{DateTime.ParseExact(DateTime.Now.ToString(), format, CultureInfo.InvariantCulture).ToString("yyyy-MM-dd HH:mm:ss")}', '{DateTime.ParseExact(model.EndTime.ToString(), format, CultureInfo.InvariantCulture).ToString("yyyy-MM-dd HH:mm:ss")}', {model.ReturnsAccepted.ToString()}, '{model.Description}')";
+            Debug.Print(query);
+            OpenConnection();
+            using (MySqlCommand command = new MySqlCommand(query, connection))
+            {
+                command.ExecuteNonQuery();
+            }
+            connection.Close();
         }
 
         public void Search(ItemModel model, string searchText)

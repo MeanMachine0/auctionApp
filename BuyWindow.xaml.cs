@@ -17,7 +17,6 @@ namespace auctionApp
         private ItemModel _model;
         private Timer _timer;
 
-
         private void refresh(int pageNumber)
         {
             DataLayer dataLayer = new DataLayer();

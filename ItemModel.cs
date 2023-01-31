@@ -143,6 +143,18 @@ namespace auctionApp
             }
         }
 
+        private DateTime endTime;
+
+        public DateTime EndTime
+        {
+            get { return endTime; }
+            set
+            {
+                endTime = value;
+                RaisePropertyChanged("EndTime");
+            }
+        }
+
         public event PropertyChangedEventHandler? PropertyChanged;
 
         protected void RaisePropertyChanged(string propertyName)
