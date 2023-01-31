@@ -1,4 +1,5 @@
 ﻿using MySql.Data.MySqlClient;
+using Mysqlx.Cursor;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -16,6 +17,7 @@ namespace auctionApp
     {
         private string connectionString = "server=localhost;port=3306;database=auctiondb;uid=root;password=pTHhHFGxB^U5!1UY^22#x0&n;";
         private MySqlConnection connection;
+        private string dBPassword;
 
         private string FormatDateTimeDb(DateTime dateTime)
         {
@@ -107,6 +109,23 @@ namespace auctionApp
                 command.ExecuteNonQuery();
             }
             connection.Close();
+        }
+
+        public bool VerifyPassword(LoginModel model)
+        {
+            OpenConnection();
+            string query = $"SELECT password FROM accounts WHERE username = '{model.Username}'";
+            using (MySqlCommand command = new MySqlCommand(query, connection))
+            {
+                using (MySqlDataReader reader = command.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        dBPassword = reader.GetString("password");
+                    };
+                }
+            }
+            if (model.Password == dBPassword) { return true; } else { return false; };
         }
     }
 }

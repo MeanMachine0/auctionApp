@@ -19,17 +19,25 @@ namespace auctionApp
     /// </summary>
     public partial class LoginWindow : Window
     {
+        private LoginModel model;
         public LoginWindow()
         {
             InitializeComponent();
+            model = new LoginModel();
         }
 
         private void login_Click(object sender, RoutedEventArgs e)
         {
-           
-           MenuWindow menuWindow = new MenuWindow();
-           menuWindow.Show();
-           this.Close();
+           model.Username = username.Text;
+           model.Password = password.Text;
+           DataLayer dataLayer = new DataLayer();
+           if (dataLayer.VerifyPassword(model) == true)
+           {
+                MenuWindow menuWindow = new MenuWindow();
+                menuWindow.Show();
+                this.Close();
+           }
+            else { MessageBox.Show("Invalid username and/or password!"); }
         }
     }
 }
