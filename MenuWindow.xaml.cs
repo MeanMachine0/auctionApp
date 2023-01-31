@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -17,6 +18,7 @@ namespace auctionApp
     /// <summary>
     /// Interaction logic for MenuWindow.xaml
     /// </summary>
+   
     public partial class MenuWindow : Window
     {
         public MenuWindow()

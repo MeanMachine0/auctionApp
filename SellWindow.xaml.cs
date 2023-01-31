@@ -55,7 +55,7 @@ namespace auctionApp
             _model.ReturnsAccepted = returnsAcceptedS.IsChecked.Value;
             _model.Description = descriptionS.Text;
             DataLayer dataLayer = new DataLayer();
-            dataLayer.ListItem(_model);
+            dataLayer.ListItem(_model, (int) App.Current.Properties["accountId"]);
         }
     }
 }

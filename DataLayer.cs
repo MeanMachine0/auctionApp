@@ -80,11 +80,16 @@ namespace auctionApp
             Populate(model, query);
         }
 
-        public void ListItem(ItemModel model)
+        public void OnEndOfListing(LoginModel model)
         {
-            string query = "INSERT INTO items (itemName, currentPrice, postageCost, bidIncrement, state, timeOfListing, endTime, returnsAccepted, information) " +
+            string query = $"";
+        }
+
+        public void ListItem(ItemModel model, int accountId)
+        {
+            string query = "INSERT INTO items (itemName, currentPrice, postageCost, bidIncrement, state, timeOfListing, endTime, returnsAccepted, information, sellerId) " +
                 $"VALUES ('{model.ItemName}', {model.CurrentPrice.ToString()}, {model.PostageCost.ToString()}, {model.BidIncrement.ToString()}, '{model.ItemCondition}', " +
-                $"'{FormatDateTimeDb(DateTime.Now)}', '{FormatDateTimeDb(model.EndTime)}', {model.ReturnsAccepted.ToString()}, '{model.Description}')";
+                $"'{FormatDateTimeDb(DateTime.Now)}', '{FormatDateTimeDb(model.EndTime)}', {model.ReturnsAccepted.ToString()}, '{model.Description}', {accountId.ToString()})";
             Debug.Print(query);
             OpenConnection();
             using (MySqlCommand command = new MySqlCommand(query, connection))
@@ -100,10 +105,11 @@ namespace auctionApp
             Populate(model, query);
         }
 
-        internal void SubmitBid(string bidPrice, string itemId)
+        internal void SubmitBid(string bidPrice, string itemId, int accountId)
         {
             OpenConnection();
-            string query = $"UPDATE items SET currentPrice = {bidPrice} WHERE itemId = {itemId}";
+            string query = $"UPDATE items SET currentPrice = {bidPrice}, buyerId = {accountId.ToString()} WHERE itemId = {itemId}";
+            Debug.Print(query);
             using (MySqlCommand command = new MySqlCommand(query, connection))
             {
                 command.ExecuteNonQuery();
@@ -114,18 +120,24 @@ namespace auctionApp
         public bool VerifyPassword(LoginModel model)
         {
             OpenConnection();
-            string query = $"SELECT password FROM accounts WHERE username = '{model.Username}'";
+            string query = $"SELECT accountId, password FROM accounts WHERE username = '{model.Username}'";
             using (MySqlCommand command = new MySqlCommand(query, connection))
             {
                 using (MySqlDataReader reader = command.ExecuteReader())
                 {
                     while (reader.Read())
                     {
+                        model.AccountId = reader.GetInt32("accountId");
                         dBPassword = reader.GetString("password");
                     };
                 }
             }
-            if (model.Password == dBPassword) { return true; } else { return false; };
+            connection.Close();
+            if (model.Password == dBPassword) 
+            {
+                return true; 
+            } 
+            else { return false; };
         }
     }
 }

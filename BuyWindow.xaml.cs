@@ -56,12 +56,13 @@ namespace auctionApp
 
         private void submit_Click(object sender, RoutedEventArgs e)
         {
+            int accountId = (int)Application.Current.Properties["accountId"];
             try
             {
                 if (float.Parse(bid.Text) >= (_model.CurrentPrice + _model.BidIncrement) & _model.TimeRemaining > new TimeOnly(0, 0, 0))
                 {
                     DataLayer dataLayer = new DataLayer();
-                    dataLayer.SubmitBid(bid.Text, pageNumber.Text);
+                    dataLayer.SubmitBid(bid.Text, pageNumber.Text, accountId);
                     MessageBox.Show("Bid submitted.");
                 }
                 else if (float.Parse(bid.Text) < (_model.CurrentPrice + _model.BidIncrement) & _model.TimeRemaining > new TimeOnly(0, 0, 0))

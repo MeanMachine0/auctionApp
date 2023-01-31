@@ -33,11 +33,12 @@ namespace auctionApp
            DataLayer dataLayer = new DataLayer();
            if (dataLayer.VerifyPassword(model) == true)
            {
+                App.Current.Properties["accountId"] = model.AccountId;
                 MenuWindow menuWindow = new MenuWindow();
                 menuWindow.Show();
                 this.Close();
            }
-            else { MessageBox.Show("Invalid username and/or password!"); }
+           else { MessageBox.Show("Invalid username and/or password!"); }
         }
     }
 }
