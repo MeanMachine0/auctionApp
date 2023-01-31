@@ -8,6 +8,7 @@ using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
+using static Org.BouncyCastle.Bcpg.Attr.ImageAttrib;
 
 namespace auctionApp
 {
@@ -15,6 +16,12 @@ namespace auctionApp
     {
         private string connectionString = "server=localhost;port=3306;database=auctiondb;uid=root;password=pTHhHFGxB^U5!1UY^22#x0&n;";
         private MySqlConnection connection;
+
+        private string FormatDateTimeDb(DateTime dateTime)
+        {
+            const string format = "dd/MM/yyyy HH:mm:ss";
+            return DateTime.ParseExact(dateTime.ToString(), format, CultureInfo.InvariantCulture).ToString("yyyy-MM-dd HH:mm:ss");
+        }
 
         private TimeOnly GetTimeRemaining(DateTime timeNow, DateTime endTime)
         {
@@ -73,8 +80,9 @@ namespace auctionApp
 
         public void ListItem(ItemModel model)
         {
-            string format = "dd/MM/yyyy HH:mm:ss";
-            string query = $"INSERT INTO items (itemName, currentPrice, postageCost, bidIncrement, state, timeOfListing, endTime, returnsAccepted, information) VALUES ('{model.ItemName}', {model.CurrentPrice.ToString()}, {model.PostageCost.ToString()}, {model.BidIncrement.ToString()}, '{model.ItemCondition}', '{DateTime.ParseExact(DateTime.Now.ToString(), format, CultureInfo.InvariantCulture).ToString("yyyy-MM-dd HH:mm:ss")}', '{DateTime.ParseExact(model.EndTime.ToString(), format, CultureInfo.InvariantCulture).ToString("yyyy-MM-dd HH:mm:ss")}', {model.ReturnsAccepted.ToString()}, '{model.Description}')";
+            string query = "INSERT INTO items (itemName, currentPrice, postageCost, bidIncrement, state, timeOfListing, endTime, returnsAccepted, information) " +
+                $"VALUES ('{model.ItemName}', {model.CurrentPrice.ToString()}, {model.PostageCost.ToString()}, {model.BidIncrement.ToString()}, '{model.ItemCondition}', " +
+                $"'{FormatDateTimeDb(DateTime.Now)}', '{FormatDateTimeDb(model.EndTime)}', {model.ReturnsAccepted.ToString()}, '{model.Description}')";
             Debug.Print(query);
             OpenConnection();
             using (MySqlCommand command = new MySqlCommand(query, connection))
