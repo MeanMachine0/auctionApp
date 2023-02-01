@@ -25,6 +25,8 @@
         </Grid.RowDefinitions>
 
         <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Center" Margin="5">
+            <Button x:Name="viewMyListings" Content="MyListings" Background="DarkGray"
+                    Click="viewMyListings_Click" Margin="5" FontSize="20"/>
             <Button x:Name="menu" Content="Menu" Background="DarkGray" 
                     Click="menu_Click" Margin="5" FontSize="20"/>
             <Button x:Name="logout" Content="Logout" Background="DarkGray"

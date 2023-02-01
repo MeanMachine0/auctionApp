@@ -57,5 +57,12 @@ namespace auctionApp
             DataLayer dataLayer = new DataLayer();
             dataLayer.ListItem(_model, (int) App.Current.Properties["accountId"]);
         }
+
+        private void viewMyListings_Click(object sender, RoutedEventArgs e)
+        {
+            OwnListings ownListings = new OwnListings();
+            ownListings.Show();
+            this.Close();
+        }
     }
 }
