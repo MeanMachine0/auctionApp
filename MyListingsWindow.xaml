@@ -1,0 +1,42 @@
+﻿<Window x:Class="auctionApp.MyListingsWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:auctionApp"
+        mc:Ignorable="d"
+        Title="MyListingsWindow" Height="720" Width="1280" FontSize="36" Background="DimGray">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Center" Margin="5">
+            <Button x:Name="back" Content="Back" Background="DarkGray"
+                    Click="back_Click" Margin="5" FontSize="20"/>
+            <Button x:Name="menu" Content="Menu" Background="DarkGray" 
+                    Click="menu_Click" Margin="5" FontSize="20"/>
+            <Button x:Name="logout" Content="Logout" Background="DarkGray"
+                    Click="logout_Click" Margin="5" FontSize="20"/>
+            <Button x:Name="refresh" Content="Refresh" Background="DarkGray"
+                    Click="refresh_Click" Margin="5" FontSize="20"/>
+        </StackPanel>
+
+        <DataGrid Grid.Row="1" AutoGenerateColumns="False" 
+                  ItemsSource="{Binding MyListingsList}" Margin="5" Background="DimGray">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Item Name" Width="auto" Binding="{Binding ItemName}"/>
+                <DataGridTextColumn Header="Sold?" Width="auto" Binding="{Binding IsSold}"/>
+                <DataGridTextColumn Header="Current Price" Width="auto" Binding="{Binding CurrentPrice}"/>
+                <DataGridTextColumn Header="Bid Increment" Width="auto" Binding="{Binding BidIncrement}"/>
+                <DataGridTextColumn Header="Condition" Width="*" Binding="{Binding ItemCondition}"/>
+                <DataGridTextColumn Header="Time of Listing" Width="*" Binding="{Binding TimeOfListing}"/>
+                <DataGridTextColumn Header="End Time" Width="*" Binding="{Binding EndTime}"/>
+                <DataGridTextColumn Header="Returns Accepted?" Width="*" Binding="{Binding ReturnsAccepted}"/>
+                <DataGridTextColumn Header="Bids" Width="*" Binding="{Binding NumBids}"/>
+                <DataGridTextColumn Header="Buyer Id" Width="*" Binding="{Binding BuyerId}"/>
+            </DataGrid.Columns>
+        </DataGrid>
+    </Grid>
+</Window>

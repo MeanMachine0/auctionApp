@@ -1,7 +1,9 @@
 ﻿using MySql.Data.MySqlClient;
 using Mysqlx.Cursor;
 using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Globalization;
 using System.IO;
@@ -9,6 +11,8 @@ using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Controls;
+using System.Xml;
 using static Org.BouncyCastle.Bcpg.Attr.ImageAttrib;
 
 namespace auctionApp
@@ -78,6 +82,34 @@ namespace auctionApp
         {
             string query = $"SELECT * FROM items WHERE itemId = {pageNumber}";
             Populate(model, query);
+        }
+
+        public void PopulateMyListings(MyListingsModel model, int accountId)
+        {
+            OpenConnection();
+            string query = $"SELECT itemName, sold, currentPrice, bidIncrement, state, timeOfListing, endTime, returnsAccepted, numBids, buyerId FROM items WHERE sellerId = {accountId}";
+            using (MySqlCommand command = new MySqlCommand(query, connection))
+            {
+                using (MySqlDataReader reader = command.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        ItemModel item = new ItemModel();
+                        item.ItemName = reader.GetString("itemName");
+                        item.IsSold = reader.GetBoolean("sold");
+                        item.CurrentPrice = reader.GetFloat("currentPrice");
+                        item.BidIncrement = reader.GetFloat("bidIncrement");
+                        item.ItemCondition = reader.GetString("state");
+                        item.TimeOfListing = reader.GetDateTime("timeOfListing");
+                        item.EndTime = reader.GetDateTime("endTime");
+                        item.ReturnsAccepted = reader.GetBoolean("returnsAccepted");
+                        item.NumBids = reader.GetInt32("numBids");
+                        item.BuyerId = reader.GetInt32("buyerId");
+                        model.MyListingsList.Add(item);
+                    }
+                }
+                connection.Close();
+            }
         }
 
         public void OnEndOfListing(LoginModel model)

@@ -60,8 +60,8 @@ namespace auctionApp
 
         private void viewMyListings_Click(object sender, RoutedEventArgs e)
         {
-            OwnListings ownListings = new OwnListings();
-            ownListings.Show();
+            MyListingsWindow myListingsWindow = new MyListingsWindow();
+            myListingsWindow.Show();
             this.Close();
         }
     }

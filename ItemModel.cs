@@ -155,6 +155,18 @@ namespace auctionApp
             }
         }
 
+        private int buyerId;
+
+        public int BuyerId
+        {
+            get { return buyerId; }
+            set
+            {
+                buyerId = value;
+                RaisePropertyChanged("BuyerId");
+            }
+        }
+
         public event PropertyChangedEventHandler? PropertyChanged;
 
         protected void RaisePropertyChanged(string propertyName)

@@ -1,6 +1,11 @@
-﻿using System;
+﻿using Org.BouncyCastle.Tls;
+using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.ComponentModel;
+using System.Diagnostics;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -15,13 +20,22 @@ using System.Windows.Shapes;
 namespace auctionApp
 {
     /// <summary>
-    /// Interaction logic for OwnListings.xaml
+    /// Interaction logic for MyListingsWindow.xaml
     /// </summary>
-    public partial class OwnListings : Window
+    public partial class MyListingsWindow : Window
     {
-        public OwnListings()
+        MyListingsModel myListings = new MyListingsModel();
+        private void _refresh()
+        {
+            int accountId = (int)Application.Current.Properties["accountId"];
+            DataLayer dataLayer = new DataLayer();
+            dataLayer.PopulateMyListings(myListings, accountId);
+        }
+        public MyListingsWindow()
         {
             InitializeComponent();
+            DataContext = myListings;
+            _refresh();
         }
 
         private void back_Click(object sender, RoutedEventArgs e)
@@ -43,6 +57,11 @@ namespace auctionApp
             LoginWindow loginWindow = new LoginWindow();
             loginWindow.Show();
             this.Close();
+        }
+
+        private void refresh_Click(object sender, RoutedEventArgs e)
+        {
+            _refresh();
         }
     }
 }
