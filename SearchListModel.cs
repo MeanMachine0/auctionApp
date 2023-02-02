@@ -8,19 +8,19 @@ using System.Threading.Tasks;
 
 namespace auctionApp
 {
-    public class MyListingsModel : INotifyPropertyChanged
+    public class SearchListModel : INotifyPropertyChanged
     {
-        public MyListingsModel() { myListingsList = new ObservableCollection<ItemModel>(); }
+        public SearchListModel() { searchList = new ObservableCollection<ItemModel>(); }
 
-        private ObservableCollection<ItemModel> myListingsList;
+        private ObservableCollection<ItemModel> searchList;
 
-        public ObservableCollection<ItemModel> MyListingsList
+        public ObservableCollection<ItemModel> SearchList
         {
-            get { return myListingsList; }
+            get { return searchList; }
             set
             {
-                myListingsList = value;
-                RaisePropertyChanged("MyListingsList");
+                searchList = value;
+                RaisePropertyChanged("SearchList");
             }
         }
 

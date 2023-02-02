@@ -1,11 +1,11 @@
-﻿<Window x:Class="auctionApp.MyListingsWindow"
+﻿<Window x:Class="auctionApp.SearchWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:auctionApp"
         mc:Ignorable="d"
-        Title="MyListingsWindow" Height="720" Width="1280" Background="DimGray">
+        Title="SearchWindow" Height="720" Width="1280" Background="DimGray">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
@@ -24,14 +24,15 @@
         </StackPanel>
 
         <DataGrid Grid.Row="1" AutoGenerateColumns="False" FontSize="16" 
-                  ItemsSource="{Binding MyListingsList}" Margin="5" Background="DimGray">
+                  ItemsSource="{Binding SearchList}" Margin="5" Background="DimGray">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Item Name" Width="auto" Binding="{Binding ItemName}"/>
                 <DataGridCheckBoxColumn Header="Sold?" Width="auto" 
                                         Binding="{Binding IsSold, StringFormat=dd MMM yyyy HH:mm:ss}"/>
                 <DataGridTextColumn Header="Current Price" Width="auto" Binding="{Binding CurrentPrice}"/>
+                <DataGridTextColumn Header="P&amp;P" Width="auto" Binding="{Binding PostageCost}"/>
                 <DataGridTextColumn Header="Bid Increment" Width="auto" Binding="{Binding BidIncrement}"/>
-                <DataGridTextColumn Header="Condition" Width="*" Binding="{Binding ItemCondition}"/>
+                <DataGridTextColumn Header="Condition" Width="auto" Binding="{Binding ItemCondition}"/>
                 <DataGridTextColumn Header="Time of Listing" Width="auto" 
                                     Binding="{Binding TimeOfListing, StringFormat=dd MMM yyyy HH:mm:ss}"/>
                 <DataGridTextColumn Header="End Time" Width="auto" 
@@ -39,7 +40,7 @@
                 <DataGridCheckBoxColumn Header="Returns Accepted?" Width="auto"
                                         Binding="{Binding ReturnsAccepted}"/>
                 <DataGridTextColumn Header="Bids" Width="auto" Binding="{Binding NumBids}"/>
-                <DataGridTextColumn Header="Buyer Id" Width="*" Binding="{Binding BuyerId}"/>
+                <DataGridTextColumn Header="Id" Width="*" Binding="{Binding ItemId}"/>
             </DataGrid.Columns>
         </DataGrid>
     </Grid>

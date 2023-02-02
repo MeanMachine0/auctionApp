@@ -5,11 +5,12 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:auctionApp"
         mc:Ignorable="d"
-        Title="Auction App" Height="720" Width="1280" FontSize="36" 
+        Title="Auction App" Height="720" Width="1280" FontSize="32" 
         Background="DimGray" KeyDown="Window_KeyDown">
 
     <Grid>
         <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="auto"/>
@@ -88,6 +89,12 @@
         <StackPanel Grid.Row="10" Orientation="Horizontal">
             <TextBlock Text="Description:" Margin="5"/>
             <TextBlock x:Name="information" Margin="5"
+                       Text="{Binding Description}"/>
+        </StackPanel>
+
+        <StackPanel Grid.Row="11" Orientation="Horizontal">
+            <TextBlock Text="Bids:" Margin="5"/>
+            <TextBlock x:Name="numBids" Margin="5"
                        Text="{Binding Description}"/>
         </StackPanel>
 

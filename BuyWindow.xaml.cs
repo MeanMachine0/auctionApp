@@ -141,9 +141,10 @@ namespace auctionApp
             if (e.Key == Key.Enter)
             {
                 Debug.Print($"Performing search for {searchBar.Text}.");
-                DataLayer dataLayer = new DataLayer();
-                dataLayer.Search(_model, searchBar.Text);
-                pageNumber.Text = _model.ItemId.ToString();
+                App.Current.Properties["searchString"] = searchBar.Text;
+                SearchWindow searchWindow = new SearchWindow();
+                searchWindow.Show();
+                this.Close();
             }
         }
 

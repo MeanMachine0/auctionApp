@@ -99,14 +99,13 @@ namespace auctionApp
                         item.ItemName = reader.GetString("itemName");
                         item.IsSold = reader.GetBoolean("sold");
                         item.CurrentPrice = reader.GetFloat("currentPrice");
+                        item.PostageCost = reader.GetFloat("postageCost");
                         item.BidIncrement = reader.GetFloat("bidIncrement");
                         item.ItemCondition = reader.GetString("state");
                         item.TimeOfListing = reader.GetDateTime("timeOfListing");
                         item.EndTime = reader.GetDateTime("endTime");
                         item.ReturnsAccepted = reader.GetBoolean("returnsAccepted");
                         item.NumBids = reader.GetInt32("numBids");
-                        try { item.BuyerId = reader.GetInt32("buyerId"); }
-                        catch { item.BuyerId = null; }
                         model.MyListingsList.Add(item);
                     }
                 }
@@ -133,10 +132,35 @@ namespace auctionApp
             connection.Close();
         }
 
-        public void Search(ItemModel model, string searchText)
+        public void Search(SearchListModel model, string searchText)
         {
-            string query = $"SELECT * FROM items WHERE itemName like '%{searchText.Trim()}%' LIMIT 1";
-            Populate(model, query);
+            
+            model.SearchList.Clear();
+            OpenConnection();
+            string query = "SELECT itemId, itemName, sold, currentPrice, bidIncrement, state, timeOfListing, endTime, " + 
+               $"returnsAccepted, numBids FROM items WHERE itemName like '%{searchText.Trim()}%'";
+            using (MySqlCommand command = new MySqlCommand(query, connection))
+            {
+                using (MySqlDataReader reader = command.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        ItemModel item = new ItemModel();
+                        item.ItemId = reader.GetInt32("itemId");
+                        item.ItemName = reader.GetString("itemName");
+                        item.IsSold = reader.GetBoolean("sold");
+                        item.CurrentPrice = reader.GetFloat("currentPrice");
+                        item.BidIncrement = reader.GetFloat("bidIncrement");
+                        item.ItemCondition = reader.GetString("state");
+                        item.TimeOfListing = reader.GetDateTime("timeOfListing");
+                        item.EndTime = reader.GetDateTime("endTime");
+                        item.ReturnsAccepted = reader.GetBoolean("returnsAccepted");
+                        item.NumBids = reader.GetInt32("numBids");
+                        model.SearchList.Add(item);
+                    }
+                }
+                connection.Close();
+            }
         }
 
         internal void SubmitBid(string bidPrice, string itemId, int accountId)
