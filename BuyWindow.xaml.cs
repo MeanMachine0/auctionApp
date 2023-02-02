@@ -29,6 +29,7 @@ namespace auctionApp
 
             _model = new ItemModel();
             DataContext = _model;
+            pageNumber.Text = App.Current.Properties["selectedId"].ToString();
 
             refresh(int.Parse(pageNumber.Text));
             _timer = new Timer(1000);

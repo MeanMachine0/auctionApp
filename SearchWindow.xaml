@@ -24,7 +24,7 @@
         </StackPanel>
 
         <DataGrid Grid.Row="1" AutoGenerateColumns="False" FontSize="16" 
-                  ItemsSource="{Binding SearchList}" Margin="5" Background="DimGray">
+                  ItemsSource="{Binding SearchList}" Margin="5" Background="DimGray" SelectionChanged="DataGrid_SelectionChanged">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Item Name" Width="auto" Binding="{Binding ItemName}"/>
                 <DataGridCheckBoxColumn Header="Sold?" Width="auto" 
@@ -40,7 +40,8 @@
                 <DataGridCheckBoxColumn Header="Returns Accepted?" Width="auto"
                                         Binding="{Binding ReturnsAccepted}"/>
                 <DataGridTextColumn Header="Bids" Width="auto" Binding="{Binding NumBids}"/>
-                <DataGridTextColumn Header="Id" Width="*" Binding="{Binding ItemId}"/>
+                <DataGridTextColumn Header="Description" Width="*" Binding="{Binding Description}"/>
+                <DataGridTextColumn Header="Id" Width="auto" Binding="{Binding ItemId}"/>
             </DataGrid.Columns>
         </DataGrid>
     </Grid>

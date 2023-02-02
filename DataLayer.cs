@@ -137,7 +137,7 @@ namespace auctionApp
             
             model.SearchList.Clear();
             OpenConnection();
-            string query = "SELECT itemId, itemName, sold, currentPrice, bidIncrement, state, timeOfListing, endTime, " + 
+            string query = "SELECT itemId, information, itemName, sold, currentPrice, bidIncrement, state, timeOfListing, endTime, " + 
                $"returnsAccepted, numBids FROM items WHERE itemName like '%{searchText.Trim()}%'";
             using (MySqlCommand command = new MySqlCommand(query, connection))
             {
@@ -147,6 +147,7 @@ namespace auctionApp
                     {
                         ItemModel item = new ItemModel();
                         item.ItemId = reader.GetInt32("itemId");
+                        item.Description = reader.GetString("information");
                         item.ItemName = reader.GetString("itemName");
                         item.IsSold = reader.GetBoolean("sold");
                         item.CurrentPrice = reader.GetFloat("currentPrice");

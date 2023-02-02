@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -58,6 +59,15 @@ namespace auctionApp
         private void refresh_Click(object sender, RoutedEventArgs e)
         {
             _refresh();
+        }
+
+        private void DataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            DataGrid dataGrid = sender as DataGrid;
+            DataGridRow row = (DataGridRow)dataGrid.ItemContainerGenerator.ContainerFromIndex(dataGrid.SelectedIndex);
+            DataGridCell RowColumn = dataGrid.Columns[11].GetCellContent(row).Parent as DataGridCell;
+            App.Current.Properties["selectedId"] = ((TextBlock)RowColumn.Content).Text;
+            back_Click(this, new RoutedEventArgs());
         }
     }
 }
