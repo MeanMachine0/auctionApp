@@ -94,18 +94,22 @@ namespace auctionApp
                 {
                     while (reader.Read())
                     {
-                        ItemModel item = new ItemModel();
-                        item.ItemName = reader.GetString("itemName");
-                        item.IsSold = reader.GetBoolean("sold");
-                        item.CurrentPrice = reader.GetFloat("currentPrice");
-                        item.BidIncrement = reader.GetFloat("bidIncrement");
-                        item.ItemCondition = reader.GetString("state");
-                        item.TimeOfListing = reader.GetDateTime("timeOfListing");
-                        item.EndTime = reader.GetDateTime("endTime");
-                        item.ReturnsAccepted = reader.GetBoolean("returnsAccepted");
-                        item.NumBids = reader.GetInt32("numBids");
-                        item.BuyerId = reader.GetInt32("buyerId");
-                        model.MyListingsList.Add(item);
+                        try
+                        {
+                            ItemModel item = new ItemModel();
+                            item.ItemName = reader.GetString("itemName");
+                            item.IsSold = reader.GetBoolean("sold");
+                            item.CurrentPrice = reader.GetFloat("currentPrice");
+                            item.BidIncrement = reader.GetFloat("bidIncrement");
+                            item.ItemCondition = reader.GetString("state");
+                            item.TimeOfListing = reader.GetDateTime("timeOfListing");
+                            item.EndTime = reader.GetDateTime("endTime");
+                            item.ReturnsAccepted = reader.GetBoolean("returnsAccepted");
+                            item.NumBids = reader.GetInt32("numBids");
+                            item.BuyerId = reader.GetInt32("buyerId");
+                            model.MyListingsList.Add(item);
+                        }
+                        catch { Debug.Print("Query Error"); }
                     }
                 }
                 connection.Close();

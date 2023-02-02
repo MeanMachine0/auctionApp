@@ -23,18 +23,22 @@
                     Click="refresh_Click" Margin="5" FontSize="20"/>
         </StackPanel>
 
-        <DataGrid Grid.Row="1" AutoGenerateColumns="False" 
+        <DataGrid Grid.Row="1" AutoGenerateColumns="False" FontSize="16" 
                   ItemsSource="{Binding MyListingsList}" Margin="5" Background="DimGray">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Item Name" Width="auto" Binding="{Binding ItemName}"/>
-                <DataGridTextColumn Header="Sold?" Width="auto" Binding="{Binding IsSold}"/>
+                <DataGridCheckBoxColumn Header="Sold?" Width="auto" 
+                                        Binding="{Binding IsSold, StringFormat=dd MMM yyyy HH:mm:ss}"/>
                 <DataGridTextColumn Header="Current Price" Width="auto" Binding="{Binding CurrentPrice}"/>
                 <DataGridTextColumn Header="Bid Increment" Width="auto" Binding="{Binding BidIncrement}"/>
                 <DataGridTextColumn Header="Condition" Width="*" Binding="{Binding ItemCondition}"/>
-                <DataGridTextColumn Header="Time of Listing" Width="*" Binding="{Binding TimeOfListing}"/>
-                <DataGridTextColumn Header="End Time" Width="*" Binding="{Binding EndTime}"/>
-                <DataGridTextColumn Header="Returns Accepted?" Width="*" Binding="{Binding ReturnsAccepted}"/>
-                <DataGridTextColumn Header="Bids" Width="*" Binding="{Binding NumBids}"/>
+                <DataGridTextColumn Header="Time of Listing" Width="*" 
+                                    Binding="{Binding TimeOfListing, StringFormat=dd MMM yyyy HH:mm:ss}"/>
+                <DataGridTextColumn Header="End Time" Width="*" 
+                                    Binding="{Binding EndTime, StringFormat=dd MMM yyyy HH:mm:ss}"/>
+                <DataGridCheckBoxColumn Header="Returns Accepted?" Width="*"
+                                        Binding="{Binding ReturnsAccepted}"/>
+                <DataGridTextColumn Header="Bids" Width="auto" Binding="{Binding NumBids}"/>
                 <DataGridTextColumn Header="Buyer Id" Width="*" Binding="{Binding BuyerId}"/>
             </DataGrid.Columns>
         </DataGrid>
