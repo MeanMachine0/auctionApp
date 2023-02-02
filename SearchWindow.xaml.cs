@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Diagnostics;
 using System.Linq;
 using System.Text;
@@ -22,6 +23,12 @@ namespace auctionApp
     {
         SearchListModel searchList = new SearchListModel();
 
+        private void sortBy(string column)
+        {
+            searchResults.Items.SortDescriptions.Clear();
+            searchResults.Items.SortDescriptions.Add(new SortDescription(column, ListSortDirection.Ascending));
+            searchResults.Items.Refresh();
+        }
         private void _refresh()
         {
             DataLayer dataLayer = new DataLayer();
@@ -33,6 +40,7 @@ namespace auctionApp
             InitializeComponent();
             DataContext = searchList;
             _refresh();
+            sortBy("ItemName");
         }
 
         private void back_Click(object sender, RoutedEventArgs e)

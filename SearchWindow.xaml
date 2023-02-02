@@ -23,8 +23,9 @@
                     Click="refresh_Click" Margin="5" FontSize="20"/>
         </StackPanel>
 
-        <DataGrid Grid.Row="1" AutoGenerateColumns="False" FontSize="16" 
-                  ItemsSource="{Binding SearchList}" Margin="5" Background="DimGray" SelectionChanged="DataGrid_SelectionChanged">
+        <DataGrid Grid.Row="1" AutoGenerateColumns="False" FontSize="16" x:Name="searchResults"
+                  ItemsSource="{Binding SearchList}" Margin="5" Background="DimGray" 
+                  SelectionChanged="DataGrid_SelectionChanged">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Item Name" Width="auto" Binding="{Binding ItemName}"/>
                 <DataGridCheckBoxColumn Header="Sold?" Width="auto" 
