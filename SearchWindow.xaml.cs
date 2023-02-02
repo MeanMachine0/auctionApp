@@ -32,6 +32,7 @@ namespace auctionApp
         private void _refresh()
         {
             DataLayer dataLayer = new DataLayer();
+            if(searchBar.Text != "") { Application.Current.Properties["searchString"] = searchBar.Text; }
             dataLayer.Search(searchList, Application.Current.Properties["searchString"].ToString());
         }
 
@@ -41,6 +42,7 @@ namespace auctionApp
             DataContext = searchList;
             _refresh();
             sortBy("ItemName");
+            searchBar.Text = Application.Current.Properties["searchString"].ToString();
         }
 
         private void back_Click(object sender, RoutedEventArgs e)
@@ -76,6 +78,17 @@ namespace auctionApp
             DataGridCell RowColumn = dataGrid.Columns[11].GetCellContent(row).Parent as DataGridCell;
             App.Current.Properties["selectedId"] = ((TextBlock)RowColumn.Content).Text;
             back_Click(this, new RoutedEventArgs());
+        }
+
+        private void searchBar_KeyDown(object sender, KeyEventArgs e)
+        {
+            switch (e.Key)
+            {
+                case Key.Enter:
+                    _refresh();
+                    e.Handled = true;
+                    break;
+            }
         }
     }
 }
