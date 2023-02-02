@@ -155,9 +155,9 @@ namespace auctionApp
             }
         }
 
-        private int buyerId;
+        private int? buyerId;
 
-        public int BuyerId
+        public int? BuyerId
         {
             get { return buyerId; }
             set

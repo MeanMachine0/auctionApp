@@ -86,6 +86,7 @@ namespace auctionApp
 
         public void PopulateMyListings(MyListingsModel model, int accountId)
         {
+            model.MyListingsList.Clear();
             OpenConnection();
             string query = $"SELECT itemName, sold, currentPrice, bidIncrement, state, timeOfListing, endTime, returnsAccepted, numBids, buyerId FROM items WHERE sellerId = {accountId}";
             using (MySqlCommand command = new MySqlCommand(query, connection))
@@ -93,23 +94,20 @@ namespace auctionApp
                 using (MySqlDataReader reader = command.ExecuteReader())
                 {
                     while (reader.Read())
-                    {
-                        try
-                        {
-                            ItemModel item = new ItemModel();
-                            item.ItemName = reader.GetString("itemName");
-                            item.IsSold = reader.GetBoolean("sold");
-                            item.CurrentPrice = reader.GetFloat("currentPrice");
-                            item.BidIncrement = reader.GetFloat("bidIncrement");
-                            item.ItemCondition = reader.GetString("state");
-                            item.TimeOfListing = reader.GetDateTime("timeOfListing");
-                            item.EndTime = reader.GetDateTime("endTime");
-                            item.ReturnsAccepted = reader.GetBoolean("returnsAccepted");
-                            item.NumBids = reader.GetInt32("numBids");
-                            item.BuyerId = reader.GetInt32("buyerId");
-                            model.MyListingsList.Add(item);
-                        }
-                        catch { Debug.Print("Query Error"); }
+                    {   
+                        ItemModel item = new ItemModel();
+                        item.ItemName = reader.GetString("itemName");
+                        item.IsSold = reader.GetBoolean("sold");
+                        item.CurrentPrice = reader.GetFloat("currentPrice");
+                        item.BidIncrement = reader.GetFloat("bidIncrement");
+                        item.ItemCondition = reader.GetString("state");
+                        item.TimeOfListing = reader.GetDateTime("timeOfListing");
+                        item.EndTime = reader.GetDateTime("endTime");
+                        item.ReturnsAccepted = reader.GetBoolean("returnsAccepted");
+                        item.NumBids = reader.GetInt32("numBids");
+                        try { item.BuyerId = reader.GetInt32("buyerId"); }
+                        catch { item.BuyerId = null; }
+                        model.MyListingsList.Add(item);
                     }
                 }
                 connection.Close();
