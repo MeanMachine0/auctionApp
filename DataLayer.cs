@@ -88,7 +88,7 @@ namespace auctionApp
         {
             model.MyListingsList.Clear();
             OpenConnection();
-            string query = $"SELECT itemName, sold, currentPrice, bidIncrement, state, timeOfListing, endTime, returnsAccepted, numBids, buyerId FROM items WHERE sellerId = {accountId}";
+            string query = $"SELECT itemName, sold, currentPrice, bidIncrement, state, postageCost, timeOfListing, endTime, returnsAccepted, numBids, buyerId FROM items WHERE sellerId = {accountId}";
             using (MySqlCommand command = new MySqlCommand(query, connection))
             {
                 using (MySqlDataReader reader = command.ExecuteReader())
@@ -106,6 +106,8 @@ namespace auctionApp
                         item.EndTime = reader.GetDateTime("endTime");
                         item.ReturnsAccepted = reader.GetBoolean("returnsAccepted");
                         item.NumBids = reader.GetInt32("numBids");
+                        try { item.BuyerId = reader.GetInt32("buyerId"); }
+                        catch { item.BuyerId = null; }
                         model.MyListingsList.Add(item);
                     }
                 }

@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:auctionApp"
         mc:Ignorable="d"
-        Title="Auction App" Height="800" Width="1280" FontSize="32" 
+        Title="Auction App" Height="750" Width="1280" FontSize="32" 
         Background="DimGray" KeyDown="Window_KeyDown">
 
     <Grid>

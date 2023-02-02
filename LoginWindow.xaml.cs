@@ -30,7 +30,7 @@ namespace auctionApp
         private void login_Click(object sender, RoutedEventArgs e)
         {
            model.Username = username.Text;
-           model.Password = password.Text;
+           model.Password = password.Password;
            DataLayer dataLayer = new DataLayer();
            if (dataLayer.VerifyPassword(model) == true)
            {
