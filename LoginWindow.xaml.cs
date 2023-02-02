@@ -24,6 +24,7 @@ namespace auctionApp
         {
             InitializeComponent();
             model = new LoginModel();
+            username.Focus();
         }
 
         private void login_Click(object sender, RoutedEventArgs e)
@@ -39,6 +40,28 @@ namespace auctionApp
                 this.Close();
            }
            else { MessageBox.Show("Invalid username and/or password!"); }
+        }
+
+        private void username_KeyDown(object sender, KeyEventArgs e)
+        {
+            switch (e.Key)
+            {
+                case Key.Enter:
+                    login_Click(this, new RoutedEventArgs());
+                    e.Handled = true;
+                    break;
+            }
+        }
+
+        private void password_KeyDown(object sender, KeyEventArgs e)
+        {
+            switch (e.Key)
+            {
+                case Key.Enter:
+                    login_Click(this, new RoutedEventArgs());
+                    e.Handled = true; 
+                    break;
+            }
         }
     }
 }
