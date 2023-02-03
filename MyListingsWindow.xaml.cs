@@ -36,6 +36,7 @@ namespace auctionApp
             InitializeComponent();
             DataContext = myListings;
             _refresh();
+            username.Text = App.Current.Properties["username"].ToString();
         }
 
         private void back_Click(object sender, RoutedEventArgs e)

@@ -43,6 +43,7 @@ namespace auctionApp
             _refresh();
             sortBy("ItemName");
             searchBar.Text = Application.Current.Properties["searchString"].ToString();
+            username.Text = Application.Current.Properties["username"].ToString();
         }
 
         private void back_Click(object sender, RoutedEventArgs e)

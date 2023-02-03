@@ -29,6 +29,7 @@ namespace auctionApp
 
             _model = new ItemModel();
             DataContext = _model;
+            username.Text = App.Current.Properties["username"].ToString();
         }
 
         private void menu_Click(object sender, RoutedEventArgs e)

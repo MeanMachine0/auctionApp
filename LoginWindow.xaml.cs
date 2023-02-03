@@ -71,6 +71,7 @@ namespace auctionApp
         {
            model.Username = username.Text;
            model.Password = Encrypt(password.Password);
+           App.Current.Properties["username"] = model.Username;
            DataLayer dataLayer = new DataLayer();
            if (dataLayer.VerifyPassword(model) == true)
            {

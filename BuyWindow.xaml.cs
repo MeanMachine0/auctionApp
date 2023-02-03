@@ -30,6 +30,7 @@ namespace auctionApp
             _model = new ItemModel();
             DataContext = _model;
             pageNumber.Text = App.Current.Properties["selectedId"].ToString();
+            username.Text = App.Current.Properties["username"].ToString();
 
             refresh(int.Parse(pageNumber.Text));
             _timer = new Timer(1000);
@@ -147,6 +148,7 @@ namespace auctionApp
         {
             if (e.Key == Key.Enter)
             {
+                _timer.Stop();
                 Debug.Print($"Performing search for {searchBar.Text}.");
                 App.Current.Properties["searchString"] = searchBar.Text;
                 SearchWindow searchWindow = new SearchWindow();
@@ -157,17 +159,17 @@ namespace auctionApp
 
         private void menu_Click(object sender, RoutedEventArgs e)
         {
+            _timer.Stop();
             MenuWindow menuWindow = new MenuWindow();
             menuWindow.Show();
-            _timer.Enabled = false;
             this.Close();
         }
 
         private void logout_Click(object sender, RoutedEventArgs e)
         {
+            _timer.Stop();
             LoginWindow loginWindow = new LoginWindow();
             loginWindow.Show();
-            _timer.Enabled = false;
             this.Close();
         }
     }

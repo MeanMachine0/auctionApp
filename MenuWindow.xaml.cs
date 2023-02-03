@@ -24,6 +24,7 @@ namespace auctionApp
         public MenuWindow()
         {
             InitializeComponent();
+            username.Text = App.Current.Properties["username"].ToString();
         }
 
         private void buy_Click(object sender, RoutedEventArgs e)

@@ -15,11 +15,12 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <Button x:Name="buy" Content="Buy" Grid.Row="0" Click="buy_Click" Background="DarkGray" 
+        <TextBlock x:Name="username" Grid.Row="0" HorizontalAlignment="Center" Width="auto" Margin="5"/>
+        <Button x:Name="buy" Content="Buy" Grid.Row="1" Click="buy_Click" Background="DarkGray" 
                 HorizontalAlignment="Center" Width="100" Margin="5"/>
-        <Button x:Name="sell" Content="Sell" Grid.Row="1" Click="sell_Click" Background="DarkGray" 
+        <Button x:Name="sell" Content="Sell" Grid.Row="2" Click="sell_Click" Background="DarkGray" 
                 HorizontalAlignment="Center" Width="100" Margin="5"/>
-        <Button x:Name="logout" Content="Logout" Grid.Row="2" Click="logout_Click" Background="DarkGray" 
+        <Button x:Name="logout" Content="Logout" Grid.Row="3" Click="logout_Click" Background="DarkGray" 
                 HorizontalAlignment="Center" Width="100" Margin="5"/>
     </Grid>
 </Window>
