@@ -180,5 +180,10 @@ namespace auctionApp
                 this.DragMove();
             }
         }
+
+        private void closeApp_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
     }
 }
