@@ -159,6 +159,7 @@ namespace auctionApp
         {
             MenuWindow menuWindow = new MenuWindow();
             menuWindow.Show();
+            _timer.Enabled = false;
             this.Close();
         }
 
@@ -166,6 +167,7 @@ namespace auctionApp
         {
             LoginWindow loginWindow = new LoginWindow();
             loginWindow.Show();
+            _timer.Enabled = false
             this.Close();
         }
     }
