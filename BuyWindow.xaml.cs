@@ -46,11 +46,7 @@ namespace auctionApp
             {
                 try 
                 { 
-                    returnsAccepted.IsEnabled = true;
-                    sold.IsEnabled = true;
                     refresh(int.Parse(pageNumber.Text)); 
-                    returnsAccepted.IsEnabled = false;
-                    sold.IsEnabled = false;
                 }
                 catch { MessageBox.Show("Invalid Page Number!"); await Task.Delay(1000); }
                 _timer.Enabled = true;
@@ -69,13 +65,13 @@ namespace auctionApp
                 int hours = int.Parse(timeRemaining[1]);
                 int minutes = int.Parse(timeRemaining[2]);
                 int seconds = int.Parse((timeRemaining[3]));
-                if (float.Parse(bid.Text) >= (_model.CurrentPrice + _model.BidIncrement) & (days > 0 | hours > 0 | minutes > 0 | seconds > 0))
+                if (float.Parse(bid.Text) >= (_model.CurrentPrice + _model.BidIncrement) & _model.TotalSecondsRemaining > 0)
                 {
                     DataLayer dataLayer = new DataLayer();
                     dataLayer.SubmitBid(bid.Text, pageNumber.Text, accountId);
                     MessageBox.Show("Bid submitted.");
                 }
-                else if (float.Parse(bid.Text) < (_model.CurrentPrice + _model.BidIncrement) & (days > 0 | hours > 0 | minutes > 0 | seconds > 0))
+                else if (float.Parse(bid.Text) < (_model.CurrentPrice + _model.BidIncrement) & _model.TotalSecondsRemaining > 0)
                 {
                     MessageBox.Show("Cannot submit bid: bid is less than the current price plus the bid increment.");
                 }

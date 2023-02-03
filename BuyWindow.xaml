@@ -9,6 +9,10 @@
         Title="Auction App" Height="720" Width="1280" FontSize="28" Foreground="LightGray"
         Background="Transparent" KeyDown="Window_KeyDown" WindowStartupLocation="CenterScreen"
         ResizeMode="NoResize" AllowsTransparency="True" WindowStyle="None">
+    
+    <Window.Resources>
+        <local:BooleanToYesNoConverter x:Key="BooleanToYesNo"/>
+    </Window.Resources>
 
     <Border Background="LightBlue" CornerRadius="40" BorderThickness="2" BorderBrush="#ebedf3"
             Padding="20" MouseDown="Border_MouseDown">
@@ -65,8 +69,8 @@
 
                 <StackPanel Grid.Row="2" Orientation="Horizontal">
                     <TextBlock Text="Sold:" Margin="5"/>
-                    <CheckBox x:Name="sold" Margin="0, 20, 0, 0" 
-                      Background="DarkGray" IsChecked="{Binding IsSold}"/>
+                    <TextBlock x:Name="sold" Margin="5" 
+                               Text="{Binding IsSold, Converter={StaticResource BooleanToYesNo}}"/>
                 </StackPanel>
 
                 <StackPanel Grid.Row="3" Orientation="Horizontal">
@@ -96,7 +100,7 @@
                 <StackPanel Grid.Row="7" Orientation="Horizontal">
                     <TextBlock Text="Time Remaining:" Margin="5"/>
                     <TextBlock x:Name="timeRemaining" Margin="5"
-                       Text="{Binding TimeRemaining, StringFormat=dd:HH:mm:ss}"/>
+                       Text="{Binding TimeRemaining}"/>
                 </StackPanel>
 
                 <StackPanel Grid.Row="8" Orientation="Horizontal">
@@ -107,8 +111,8 @@
 
                 <StackPanel Grid.Row="9" Orientation="Horizontal">
                     <TextBlock Text="Returns Accepted:" Margin="5"/>
-                    <CheckBox x:Name="returnsAccepted" Margin="0, 20, 0, 0" 
-                      Background="DarkGray" IsChecked="{Binding ReturnsAccepted}"/>
+                    <TextBlock x:Name="returnsAccepted" Margin="5" 
+                               Text="{Binding ReturnsAccepted, Converter={StaticResource BooleanToYesNo}}"/>
                 </StackPanel>
 
                 <StackPanel Grid.Row="10" Orientation="Horizontal">
