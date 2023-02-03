@@ -75,8 +75,8 @@ namespace auctionApp
         {
             DataGrid dataGrid = sender as DataGrid;
             DataGridRow row = (DataGridRow)dataGrid.ItemContainerGenerator.ContainerFromIndex(dataGrid.SelectedIndex);
-            DataGridCell RowColumn = dataGrid.Columns[11].GetCellContent(row).Parent as DataGridCell;
-            App.Current.Properties["selectedId"] = ((TextBlock)RowColumn.Content).Text;
+            DataGridCell rowColumn = dataGrid.Columns[11].GetCellContent(row).Parent as DataGridCell;
+            App.Current.Properties["selectedId"] = ((TextBlock)rowColumn.Content).Text;
             back_Click(this, new RoutedEventArgs());
         }
 

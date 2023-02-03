@@ -11,6 +11,9 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using System.Security.Cryptography;
+using System.Diagnostics;
+using Org.BouncyCastle.Crypto.Parameters;
 
 namespace auctionApp
 {
@@ -20,9 +23,34 @@ namespace auctionApp
     public partial class LoginWindow : Window
     {
         private LoginModel model;
+
+        public byte[] dbSalt;
+
+        private string GetHash(string password, byte[] salt)
+        {
+            using (var hmac = new HMACSHA256(salt))
+            {
+                byte[] hash = hmac.ComputeHash(Encoding.UTF8.GetBytes(password));
+
+                StringBuilder builder = new StringBuilder();
+                for (int i = 0; i < hash.Length; i++)
+                {
+                    builder.Append(hash[i].ToString("x2"));
+                }
+                return builder.ToString();
+            }
+        }
+
+        private string Encrypt(string password)
+        {
+            string hash = GetHash(password, dbSalt);
+            return hash;
+        }
+
         public LoginWindow()
         {
             InitializeComponent();
+            dbSalt = Convert.FromBase64String("WiDyv9IM58jXJ0dle5Fwow==");
             model = new LoginModel();
             username.Focus();
         }
@@ -30,7 +58,7 @@ namespace auctionApp
         private void login_Click(object sender, RoutedEventArgs e)
         {
            model.Username = username.Text;
-           model.Password = password.Password;
+           model.Password = Encrypt(password.Password);
            DataLayer dataLayer = new DataLayer();
            if (dataLayer.VerifyPassword(model) == true)
            {
@@ -43,24 +71,13 @@ namespace auctionApp
            else { MessageBox.Show("Invalid username and/or password!"); }
         }
 
-        private void username_KeyDown(object sender, KeyEventArgs e)
+        private void Window_KeyDown(object sender, KeyEventArgs e)
         {
             switch (e.Key)
             {
                 case Key.Enter:
                     login_Click(this, new RoutedEventArgs());
                     e.Handled = true;
-                    break;
-            }
-        }
-
-        private void password_KeyDown(object sender, KeyEventArgs e)
-        {
-            switch (e.Key)
-            {
-                case Key.Enter:
-                    login_Click(this, new RoutedEventArgs());
-                    e.Handled = true; 
                     break;
             }
         }

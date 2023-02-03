@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:auctionApp"
         mc:Ignorable="d"
-        Title="LoginWindow" Height="360" Width="640" FontSize="25" Background="DimGray">
+        Title="LoginWindow" Height="360" Width="640" FontSize="25" Background="DimGray" KeyDown="Window_KeyDown">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
@@ -17,14 +17,12 @@
 
         <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0, 100, 0, 0">
             <TextBlock Text="Username:" Margin="5, 5, 0, 5" Width="120"/>
-            <TextBox x:Name="username" Margin="0, 5, 5, 5" Width="400" Background="DarkGray" 
-                     KeyDown="username_KeyDown"/>
+            <TextBox x:Name="username" Margin="0, 5, 5, 5" Width="400" Background="DarkGray"/>
         </StackPanel>
 
         <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center">
             <TextBlock Text="Password:" Margin="5, 5, 0, 5" Width="120"/>
-            <PasswordBox x:Name="password" Margin="0, 5, 5, 5" Width="400" Background="DarkGray" 
-                     KeyDown="password_KeyDown"/>
+            <PasswordBox x:Name="password" Margin="0, 5, 5, 5" Width="400" Background="DarkGray"/>
         </StackPanel>
 
         <Button x:Name="login" Content="Login" Grid.Row="2" HorizontalAlignment="Center"

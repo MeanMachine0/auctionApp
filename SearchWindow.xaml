@@ -32,9 +32,9 @@
                 <DataGridTextColumn Header="Item Name" Width="auto" Binding="{Binding ItemName}"/>
                 <DataGridCheckBoxColumn Header="Sold?" Width="auto" 
                                         Binding="{Binding IsSold, StringFormat=dd MMM yyyy HH:mm:ss}"/>
-                <DataGridTextColumn Header="Current Price" Width="auto" Binding="{Binding CurrentPrice}"/>
-                <DataGridTextColumn Header="P&amp;P" Width="auto" Binding="{Binding PostageCost}"/>
-                <DataGridTextColumn Header="Bid Increment" Width="auto" Binding="{Binding BidIncrement}"/>
+                <DataGridTextColumn Header="Current Price (£)" Width="auto" Binding="{Binding CurrentPrice}"/>
+                <DataGridTextColumn Header="P&amp;P (£)" Width="auto" Binding="{Binding PostageCost}"/>
+                <DataGridTextColumn Header="Bid Increment (£)" Width="auto" Binding="{Binding BidIncrement}"/>
                 <DataGridTextColumn Header="Condition" Width="auto" Binding="{Binding ItemCondition}"/>
                 <DataGridTextColumn Header="Time of Listing" Width="auto" 
                                     Binding="{Binding TimeOfListing, StringFormat=dd MMM yyyy HH:mm:ss}"/>

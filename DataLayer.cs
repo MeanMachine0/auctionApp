@@ -21,7 +21,7 @@ namespace auctionApp
     {
         private string connectionString = "server=localhost;port=3306;database=auctiondb;uid=root;password=pTHhHFGxB^U5!1UY^22#x0&n;";
         private MySqlConnection connection;
-        private string dBPassword;
+        private string dbHashedPassword;
 
         private string FormatDateTimeDb(DateTime dateTime)
         {
@@ -182,7 +182,7 @@ namespace auctionApp
         public bool VerifyPassword(LoginModel model)
         {
             OpenConnection();
-            string query = $"SELECT accountId, password FROM accounts WHERE username = '{model.Username}'";
+            string query = $"SELECT accountId, hashedPassword FROM accounts WHERE username = '{model.Username}'";
             using (MySqlCommand command = new MySqlCommand(query, connection))
             {
                 using (MySqlDataReader reader = command.ExecuteReader())
@@ -190,12 +190,12 @@ namespace auctionApp
                     while (reader.Read())
                     {
                         model.AccountId = reader.GetInt32("accountId");
-                        dBPassword = reader.GetString("password");
+                        dbHashedPassword = reader.GetString("hashedPassword");
                     };
                 }
             }
             connection.Close();
-            if (model.Password == dBPassword) 
+            if (model.Password == dbHashedPassword) 
             {
                 return true; 
             } 
