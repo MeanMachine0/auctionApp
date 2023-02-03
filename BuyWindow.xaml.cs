@@ -167,7 +167,7 @@ namespace auctionApp
         {
             LoginWindow loginWindow = new LoginWindow();
             loginWindow.Show();
-            _timer.Enabled = false
+            _timer.Enabled = false;
             this.Close();
         }
     }
