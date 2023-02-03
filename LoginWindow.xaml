@@ -5,7 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:auctionApp"
         mc:Ignorable="d"
-        Title="LoginWindow" Height="360" Width="640" FontSize="25" Background="DimGray" KeyDown="Window_KeyDown">
+        Title="LoginWindow" Height="360" Width="640" FontSize="25" Background="DimGray" 
+        KeyDown="Window_KeyDown" WindowStartupLocation="CenterScreen">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>

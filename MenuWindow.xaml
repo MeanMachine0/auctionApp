@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:auctionApp"
         mc:Ignorable="d"
-        Title="MenuWindow" Height="300" Width="200" FontSize="25" Background="DimGray">
+        Title="MenuWindow" Height="300" Width="200" FontSize="25" Background="DimGray" WindowStartupLocation="CenterScreen">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
