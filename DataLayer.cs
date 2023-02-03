@@ -31,8 +31,8 @@ namespace auctionApp
 
         private TimeOnly GetTimeRemaining(DateTime timeNow, DateTime endTime)
         {
-            TimeOnly endsIn = new TimeOnly((endTime - timeNow).Hours, (endTime - timeNow).Minutes, (endTime - timeNow).Seconds);
-            return endsIn;
+            TimeOnly timeRemaining = new TimeOnly((endTime - timeNow).Hours, (endTime - timeNow).Minutes, (endTime - timeNow).Seconds);
+            return timeRemaining;
         }
 
         private void OpenConnection()

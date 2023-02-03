@@ -47,19 +47,19 @@
         <StackPanel Grid.Row="3" Orientation="Horizontal">
             <TextBlock Text="Current Price:" Margin="5"/>
             <TextBlock x:Name="currentPrice" Margin="5" 
-                       Text="{Binding CurrentPrice}"/>
+                       Text="{Binding CurrentPrice, StringFormat=£{0:0.00}}"/>
         </StackPanel>
 
         <StackPanel Grid.Row="4" Orientation="Horizontal">
             <TextBlock Text="P&amp;P:" Margin="5"/>
             <TextBlock x:Name="postageCost" Margin="5"
-                       Text="{Binding PostageCost}"/>
+                       Text="{Binding PostageCost, StringFormat=£{0:0.00}}"/>
         </StackPanel>
 
         <StackPanel Grid.Row="5" Orientation="Horizontal">
             <TextBlock Text="Bid Increment:" Margin="5"/>
             <TextBlock x:Name="bidIncrement" Margin="5"
-                       Text="{Binding BidIncrement}"/>
+                       Text="{Binding BidIncrement, StringFormat=£{0:0.00}}"/>
         </StackPanel>
 
         <StackPanel Grid.Row="6" Orientation="Horizontal">

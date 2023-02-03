@@ -29,8 +29,8 @@
                 <DataGridTextColumn Header="Item Name" Width="auto" Binding="{Binding ItemName}"/>
                 <DataGridCheckBoxColumn Header="Sold?" Width="auto" 
                                         Binding="{Binding IsSold, StringFormat=dd MMM yyyy HH:mm:ss}"/>
-                <DataGridTextColumn Header="Current Price" Width="auto" Binding="{Binding CurrentPrice}"/>
-                <DataGridTextColumn Header="Bid Increment" Width="auto" Binding="{Binding BidIncrement}"/>
+                <DataGridTextColumn Header="Current Price" Width="auto" Binding="{Binding CurrentPrice, StringFormat=£{0:0.00}}"/>
+                <DataGridTextColumn Header="Bid Increment" Width="auto" Binding="{Binding BidIncrement, StringFormat=£{0:0.00}}"/>
                 <DataGridTextColumn Header="Condition" Width="*" Binding="{Binding ItemCondition}"/>
                 <DataGridTextColumn Header="Time of Listing" Width="auto" 
                                     Binding="{Binding TimeOfListing, StringFormat=dd MMM yyyy HH:mm:ss}"/>
