@@ -39,5 +39,12 @@ namespace auctionApp
             sellwindow.Show();
             this.Close();
         }
+
+        private void logout_Click(object sender, RoutedEventArgs e)
+        {
+            LoginWindow loginWindow = new LoginWindow();
+            loginWindow.Show();
+            this.Close();
+        }
     }
 }

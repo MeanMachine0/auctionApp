@@ -53,6 +53,9 @@ namespace auctionApp
             dbSalt = Convert.FromBase64String("WiDyv9IM58jXJ0dle5Fwow==");
             model = new LoginModel();
             username.Focus();
+            username.Text = "meanmachine";
+            password.Password = "egger";
+            login_Click(this, new RoutedEventArgs());
         }
 
         private void login_Click(object sender, RoutedEventArgs e)
