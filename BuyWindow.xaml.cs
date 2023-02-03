@@ -58,11 +58,12 @@ namespace auctionApp
         }
 
         private void submit_Click(object sender, RoutedEventArgs e)
+        
         {
             int accountId = (int)Application.Current.Properties["accountId"];
             try
             {
-                string[] timeRemaining = _model.TimeRemaining.Split("");
+                string[] timeRemaining = _model.TimeRemaining.Split(":");
                 int days = int.Parse(timeRemaining[0]);
                 int hours = int.Parse(timeRemaining[1]);
                 int minutes = int.Parse(timeRemaining[2]);
