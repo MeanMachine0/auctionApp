@@ -71,7 +71,7 @@
         <StackPanel Grid.Row="7" Orientation="Horizontal">
             <TextBlock Text="Time Remaining:" Margin="5"/>
             <TextBlock x:Name="timeRemaining" Margin="5"
-                       Text="{Binding TimeRemaining, StringFormat=HHH:mm:ss}"/>
+                       Text="{Binding TimeRemaining, StringFormat=dd:HH:mm:ss}"/>
         </StackPanel>
 
         <StackPanel Grid.Row="8" Orientation="Horizontal">

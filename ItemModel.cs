@@ -87,8 +87,8 @@ namespace auctionApp
             }
         }
 
-        private TimeOnly timeRemaining;
-        public TimeOnly TimeRemaining
+        private string timeRemaining;
+        public string TimeRemaining
         {
             get { return timeRemaining; }
             set

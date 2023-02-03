@@ -29,10 +29,13 @@ namespace auctionApp
             return DateTime.ParseExact(dateTime.ToString(), format, CultureInfo.InvariantCulture).ToString("yyyy-MM-dd HH:mm:ss");
         }
 
-        private TimeOnly GetTimeRemaining(DateTime timeNow, DateTime endTime)
+        private int[] GetTimeRemaining(DateTime timeNow, DateTime endTime)
         {
-            TimeOnly timeRemaining = new TimeOnly((endTime - timeNow).Hours, (endTime - timeNow).Minutes, (endTime - timeNow).Seconds);
-            return timeRemaining;
+            int days = (int)(endTime - timeNow).Days;
+            int hours = (int)(endTime - timeNow).Hours;
+            int mins = (int)(endTime - timeNow).Minutes;
+            int secs = (int)(endTime - timeNow).Seconds;
+            return new int[] { days, hours, mins, secs };
         }
 
         private void OpenConnection()
@@ -59,15 +62,24 @@ namespace auctionApp
                         model.TimeOfListing = reader.GetDateTime("timeOfListing");
                         DateTime endTime = reader.GetDateTime("endTime");
                         DateTime timeNow = DateTime.Now;
-                        if (timeNow < endTime) { model.TimeRemaining = GetTimeRemaining(timeNow, endTime); }
-                        else { model.TimeRemaining = new TimeOnly(0, 0, 0); }
+                        model.TimeRemaining = "";
+                        if (timeNow < endTime)
+                        {
+                            int[] timeRemaining = GetTimeRemaining(timeNow, endTime);
+                            for (int i = 0; i < timeRemaining.Length; i++)
+                            {
+                                model.TimeRemaining += timeRemaining[i].ToString() + ":";
+                            }
+                            model.TimeRemaining = model.TimeRemaining.TrimEnd(':');
+                        }
+                        else { model.TimeRemaining = "00:00:00:00"; }
                         model.ReturnsAccepted = reader.GetBoolean("returnsAccepted");
                         model.Description = reader.GetString("information");
                         model.NumBids = reader.GetInt32("numBids");
                     }
                 }
             }
-            if (model.TimeRemaining == new TimeOnly(0, 0, 0) & model.NumBids > 0 & model.IsSold == false)
+            if (model.TimeRemaining == "00:00:00:00" & model.NumBids > 0 & model.IsSold == false)
             {
                 query = $"UPDATE items SET sold = 1 WHERE itemId = {model.ItemId.ToString()}";
                 using (MySqlCommand command = new MySqlCommand(query, connection))
