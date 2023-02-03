@@ -50,12 +50,21 @@ namespace auctionApp
         public LoginWindow()
         {
             InitializeComponent();
+            if (App.Current.Properties["autoLoginBool"] == null)
+            {
+                App.Current.Properties["autoLoginBool"] = true;
+            }
+            
             dbSalt = Convert.FromBase64String("WiDyv9IM58jXJ0dle5Fwow==");
             model = new LoginModel();
             username.Focus();
-            username.Text = "meanmachine";
-            password.Password = "egger";
-            login_Click(this, new RoutedEventArgs());
+            if (App.Current.Properties["autoLoginBool"] is true)
+            {
+                App.Current.Properties["autoLoginBool"] = false;
+                username.Text = "meanmachine";
+                password.Password = "egger";
+                login_Click(this, new RoutedEventArgs());
+            }
         }
 
         private void login_Click(object sender, RoutedEventArgs e)
