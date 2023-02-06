@@ -3,8 +3,8 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:Icon="http://metro.mahapps.com/winfx/xaml/iconpacks"
         xmlns:local="clr-namespace:auctionApp"
+        xmlns:Icon="http://metro.mahapps.com/winfx/xaml/iconpacks"
         mc:Ignorable="d"
         Title="Auction App" Height="720" Width="1280" FontSize="28" Foreground="LightGray"
         Background="Transparent" KeyDown="Window_KeyDown" WindowStartupLocation="CenterScreen"
@@ -14,7 +14,7 @@
         <local:BooleanToYesNoConverter x:Key="BooleanToYesNo"/>
     </Window.Resources>
 
-    <Border Background="LightBlue" CornerRadius="40" BorderThickness="2" BorderBrush="#ebedf3"
+    <Border Background="LightBlue" CornerRadius="40" BorderThickness="2" 
             Padding="15" MouseDown="border_MouseDown">
         <Border CornerRadius="20">
             <Border.Background>

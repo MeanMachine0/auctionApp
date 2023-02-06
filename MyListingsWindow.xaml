@@ -6,13 +6,18 @@
         xmlns:local="clr-namespace:auctionApp"
         mc:Ignorable="d"
         Title="MyListingsWindow" Height="720" Width="1280" Background="DimGray" WindowStartupLocation="CenterScreen">
+
+    <Window.Resources>
+        <local:BooleanToYesNoConverter x:Key="BooleanToYesNo"/>
+    </Window.Resources>
+
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <TextBlock x:Name="username" Margin="5" HorizontalAlignment="Left" FontSize="20" Grid.Row="0"/>
+        <TextBlock x:Name="username" Margin="5" HorizontalAlignment="Left" FontSize="28" Grid.Row="0"/>
 
         <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Center" Margin="5">
             <Button x:Name="back" Content="Back" Background="DarkGray"
@@ -29,17 +34,13 @@
                   ItemsSource="{Binding MyListingsList}" Margin="5" Background="DimGray">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Item Name" Width="auto" Binding="{Binding ItemName}"/>
-                <DataGridCheckBoxColumn Header="Sold?" Width="auto" 
-                                        Binding="{Binding IsSold, StringFormat=dd MMM yyyy HH:mm:ss}"/>
+                <DataGridTextColumn Header="Sold?" Width="auto" Binding="{Binding IsSold, Converter={StaticResource BooleanToYesNo}}"/>
                 <DataGridTextColumn Header="Current Price" Width="auto" Binding="{Binding CurrentPrice, StringFormat=£{0:0.00}}"/>
                 <DataGridTextColumn Header="Bid Increment" Width="auto" Binding="{Binding BidIncrement, StringFormat=£{0:0.00}}"/>
                 <DataGridTextColumn Header="Condition" Width="*" Binding="{Binding ItemCondition}"/>
-                <DataGridTextColumn Header="Time of Listing" Width="auto" 
-                                    Binding="{Binding TimeOfListing, StringFormat=dd MMM yyyy HH:mm:ss}"/>
-                <DataGridTextColumn Header="End Time" Width="auto" 
-                                    Binding="{Binding EndTime, StringFormat=dd MMM yyyy HH:mm:ss}"/>
-                <DataGridCheckBoxColumn Header="Returns Accepted?" Width="auto"
-                                        Binding="{Binding ReturnsAccepted}"/>
+                <DataGridTextColumn Header="Time of Listing" Width="auto" Binding="{Binding TimeOfListing, StringFormat=dd MMM yyyy HH:mm:ss}"/>
+                <DataGridTextColumn Header="End Time" Width="auto" Binding="{Binding EndTime, StringFormat=dd MMM yyyy HH:mm:ss}"/>
+                <DataGridTextColumn Header="Returns Accepted?" Width="auto" Binding="{Binding ReturnsAccepted, Converter={StaticResource BooleanToYesNo}}"/>
                 <DataGridTextColumn Header="Bids" Width="auto" Binding="{Binding NumBids}"/>
                 <DataGridTextColumn Header="Buyer Id" Width="*" Binding="{Binding BuyerId}"/>
             </DataGrid.Columns>

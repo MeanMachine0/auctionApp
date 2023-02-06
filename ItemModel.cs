@@ -167,6 +167,18 @@ namespace auctionApp
             }
         }
 
+        private int totalSecondsRemaining;
+
+        public int TotalSecondsRemaining
+        {
+            get { return totalSecondsRemaining; }
+            set
+            {
+                totalSecondsRemaining = value;
+                RaisePropertyChanged("TotalSecondsRemaining");
+            }
+        }
+
         public event PropertyChangedEventHandler? PropertyChanged;
 
         protected void RaisePropertyChanged(string propertyName)

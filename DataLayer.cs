@@ -29,13 +29,23 @@ namespace auctionApp
             return DateTime.ParseExact(dateTime.ToString(), format, CultureInfo.InvariantCulture).ToString("yyyy-MM-dd HH:mm:ss");
         }
 
-        private int[] GetTimeRemaining(DateTime timeNow, DateTime endTime)
+        private string GetTimeRemaining(DateTime timeNow, DateTime endTime)
         {
             int days = (int)(endTime - timeNow).Days;
             int hours = (int)(endTime - timeNow).Hours;
             int mins = (int)(endTime - timeNow).Minutes;
             int secs = (int)(endTime - timeNow).Seconds;
-            return new int[] { days, hours, mins, secs };
+
+            if (days == 0 & hours == 0 & mins == 0) { return $"{secs}s"; }
+            else if (days == 0 & hours == 0) { return $"{mins}m {secs}s"; }
+            else if (days == 0) { return $"{hours}h {mins}m"; }
+            else { return $"{days}d {hours}h"; }
+        }
+
+        private int GetTotalSecondsRemaining(DateTime timeNow, DateTime endTime)
+        {
+            int totalSecondsRemaining = (int)(endTime - timeNow).TotalSeconds;
+            return totalSecondsRemaining;
         }
 
         private void OpenConnection()
@@ -60,26 +70,19 @@ namespace auctionApp
                         model.ItemCondition = reader.GetString("state");
                         model.BidIncrement = reader.GetFloat("bidIncrement");
                         model.TimeOfListing = reader.GetDateTime("timeOfListing");
-                        DateTime endTime = reader.GetDateTime("endTime");
                         DateTime timeNow = DateTime.Now;
+                        DateTime endTime = reader.GetDateTime("endTime");
                         model.TimeRemaining = "";
-                        if (timeNow < endTime)
-                        {
-                            int[] timeRemaining = GetTimeRemaining(timeNow, endTime);
-                            for (int i = 0; i < timeRemaining.Length; i++)
-                            {
-                                model.TimeRemaining += timeRemaining[i].ToString() + ":";
-                            }
-                            model.TimeRemaining = model.TimeRemaining.TrimEnd(':');
-                        }
-                        else { model.TimeRemaining = "00:00:00:00"; }
+                        if (timeNow < endTime) { model.TimeRemaining = GetTimeRemaining(timeNow, endTime); }
+                        else { model.TimeRemaining = "0s"; }
+                        model.TotalSecondsRemaining = GetTotalSecondsRemaining(timeNow, endTime);
                         model.ReturnsAccepted = reader.GetBoolean("returnsAccepted");
                         model.Description = reader.GetString("information");
                         model.NumBids = reader.GetInt32("numBids");
                     }
                 }
             }
-            if (model.TimeRemaining == "00:00:00:00" & model.NumBids > 0 & model.IsSold == false)
+            if (model.TimeRemaining == "0s" & model.NumBids > 0 & model.IsSold == false)
             {
                 query = $"UPDATE items SET sold = 1 WHERE itemId = {model.ItemId.ToString()}";
                 using (MySqlCommand command = new MySqlCommand(query, connection))

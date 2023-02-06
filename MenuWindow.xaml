@@ -4,23 +4,45 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:auctionApp"
+        xmlns:Icon="http://metro.mahapps.com/winfx/xaml/iconpacks"
         mc:Ignorable="d"
-        Title="MenuWindow" Height="300" Width="200" FontSize="25" Background="DimGray" WindowStartupLocation="CenterScreen">
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="auto"/>
-            <RowDefinition Height="auto"/>
-            <RowDefinition Height="auto"/>
-            <RowDefinition Height="auto"/>
-            <RowDefinition Height="*"/>
-        </Grid.RowDefinitions>
+        Title="MenuWindow" Height="400" Width="300" FontSize="28" Background="Transparent"
+        ResizeMode="NoResize" WindowStartupLocation="CenterScreen" AllowsTransparency="True" WindowStyle="None">
 
-        <TextBlock x:Name="username" Grid.Row="0" HorizontalAlignment="Center" Width="auto" Margin="5"/>
-        <Button x:Name="buy" Content="Buy" Grid.Row="1" Click="buy_Click" Background="DarkGray" 
-                HorizontalAlignment="Center" Width="100" Margin="5"/>
-        <Button x:Name="sell" Content="Sell" Grid.Row="2" Click="sell_Click" Background="DarkGray" 
-                HorizontalAlignment="Center" Width="100" Margin="5"/>
-        <Button x:Name="logout" Content="Logout" Grid.Row="3" Click="logout_Click" Background="DarkGray" 
-                HorizontalAlignment="Center" Width="100" Margin="5"/>
-    </Grid>
+    <Border Background="LightBlue" CornerRadius="40" BorderThickness="2" Padding="15" MouseDown="border_MouseDown">
+        <Border CornerRadius="20">
+            <Border.Background>
+                <LinearGradientBrush StartPoint="0, 0" EndPoint="0, 1">
+                    <GradientStop Color="DimGray" Offset="-0.125"/>
+                    <GradientStop Color="Black" Offset="1.25"/>
+                </LinearGradientBrush>
+            </Border.Background>
+            
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+
+                <TextBlock Grid.Row="0" x:Name="username" HorizontalAlignment="Center" Width="auto" Foreground="LightBlue" Margin="5" Text="username"/>
+
+                <Border CornerRadius="40" Background="LightBlue" Margin="50, 55, 50, 15">
+                    <StackPanel Grid.Row="1" HorizontalAlignment="Center" Orientation="Vertical" Margin="0, 25">
+                        <Button x:Name="buy" Click="buy_Click" Background="DarkGray" Width="100" Margin="0, 5">
+                            <Icon:PackIconMaterial Kind="CurrencyGbp" Height="35" Width="100" Margin="0, 5"/>
+                        </Button>
+                        <Button x:Name="sell" Click="sell_Click" Background="DarkGray" Width="100" Margin="0, 5">
+                            <Icon:PackIconMaterial Kind="BankPlus" Height="35" Width="100" Margin="0, 5"/>
+                        </Button>
+                        <Button x:Name="logout" Click="logout_Click" Background="DarkGray" Width="100" Margin="0, 5">
+                            <Icon:PackIconMaterial Kind="Logout" Height="35" Width="100" Margin="0, 5"/>
+                        </Button>
+                        <Button x:Name="closeApp" Click="closeApp_Click" Background="DarkGray" Width="100" Margin="0, 5, 0, 0">
+                            <Icon:PackIconMaterial Kind="CloseBoxOutline" Height="35" Width="100" Margin="0, 5"/>
+                        </Button>
+                    </StackPanel>
+                </Border>
+            </Grid>
+        </Border>
+    </Border>
 </Window>
