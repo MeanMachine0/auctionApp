@@ -35,12 +35,11 @@
                     <RowDefinition Height="auto"/>
                     <RowDefinition Height="auto"/>
                     <RowDefinition Height="auto"/>
-                    <RowDefinition Height="auto"/>
-                    <RowDefinition Height="auto"/>
                     <RowDefinition Height="*"/>
+                    <RowDefinition Height="auto"/>
                 </Grid.RowDefinitions>
 
-                <TextBlock x:Name="username" Margin="5" HorizontalAlignment="Left" FontSize="20" Grid.Row="0" Foreground="LightBlue"/>
+                <TextBlock x:Name="username" Margin="25" HorizontalAlignment="Left" FontSize="20" Grid.Row="0" Foreground="LightBlue"/>
 
                 <Border CornerRadius="30" Background="LightBlue" Margin="500, 15, 500, 0">
                     <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Center" Margin="5">
@@ -62,73 +61,75 @@
 
 
                 <StackPanel Grid.Row="1" Orientation="Horizontal">
-                    <TextBlock Text="Item:" Margin="5, 0, 5, 5"/>
+                    <TextBlock Text="Item:" Margin="25, 0, 5, 5"/>
                     <TextBlock x:Name="itemName" Margin="5, 0, 5, 5" Text="{Binding ItemName}"/>
                 </StackPanel>
 
-                <TextBlock Grid.Row="4" Text="Description:" Margin="520, 0, 5, 5"/>
-
                 <StackPanel Grid.Row="2" Orientation="Horizontal">
-                    <TextBlock Text="Sold:" Margin="5"/>
+                    <TextBlock Text="Sold:" Margin="25, 5, 5, 5"/>
                     <TextBlock x:Name="sold" Margin="5" 
                                Text="{Binding IsSold, Converter={StaticResource BooleanToYesNo}}"/>
                 </StackPanel>
 
-                <TextBox Grid.Row="3" x:Name="information" Margin="460, -5, 5, 5" Background="DarkGray"
-                         TextWrapping="Wrap" Width="650" Height="300" Grid.RowSpan="9" 
-                         Text="{Binding Description}" IsReadOnly="True"/>
-
                 <StackPanel Grid.Row="3" Orientation="Horizontal">
-                    <TextBlock Text="Current Price:" Margin="5"/>
+                    <TextBlock Text="Current Price:" Margin="25, 5, 5, 5"/>
                     <TextBlock x:Name="currentPrice" Margin="5" 
                        Text="{Binding CurrentPrice, StringFormat=£{0:0.00}}"/>
                 </StackPanel>
 
                 <StackPanel Grid.Row="4" Orientation="Horizontal">
-                    <TextBlock Text="P&amp;P:" Margin="5"/>
+                    <TextBlock Text="P&amp;P:" Margin="25, 5, 5, 5"/>
                     <TextBlock x:Name="postageCost" Margin="5"
                        Text="{Binding PostageCost, StringFormat=£{0:0.00}}"/>
                 </StackPanel>
+                
+                <TextBlock Grid.Row="4" Text="Description:" Margin="520, 0, 5, 5"/>
 
                 <StackPanel Grid.Row="5" Orientation="Horizontal">
-                    <TextBlock Text="Bid Increment:" Margin="5"/>
+                    <TextBlock Text="Bid Increment:" Margin="25, 5, 5, 5"/>
                     <TextBlock x:Name="bidIncrement" Margin="5"
                        Text="{Binding BidIncrement, StringFormat=£{0:0.00}}"/>
                 </StackPanel>
+                
+                <Border Grid.Row="5" Grid.RowSpan="6" CornerRadius="45" Background="LightBlue" Margin="520, 0, 25, 50">
+                    <TextBox Grid.Row="5" x:Name="information" Background="DarkGray"
+                         TextWrapping="Wrap" Width="625" Height="250" Grid.RowSpan="6" 
+                         Text="{Binding Description}" IsReadOnly="True"/>
+                </Border>
 
                 <StackPanel Grid.Row="6" Orientation="Horizontal">
-                    <TextBlock Text="Condition:" Margin="5"/>
+                    <TextBlock Text="Condition:" Margin="25, 5, 5, 5"/>
                     <TextBlock x:Name="state" Margin="5"
                        Text="{Binding ItemCondition}"/>
                 </StackPanel>
 
                 <StackPanel Grid.Row="7" Orientation="Horizontal">
-                    <TextBlock Text="Time Remaining:" Margin="5"/>
+                    <TextBlock Text="Time Remaining:" Margin="25, 5, 5, 5"/>
                     <TextBlock x:Name="timeRemaining" Margin="5"
                        Text="{Binding TimeRemaining}"/>
                 </StackPanel>
 
                 <StackPanel Grid.Row="8" Orientation="Horizontal">
-                    <TextBlock Text="Time of Listing:" Margin="5"/>
+                    <TextBlock Text="Time of Listing:" Margin="25, 5, 5, 5"/>
                     <TextBlock x:Name="timeOfListing" Margin="5"
                        Text="{Binding TimeOfListing, StringFormat=dd MMM yyyy HH:mm:ss}"/>
                 </StackPanel>
 
                 <StackPanel Grid.Row="9" Orientation="Horizontal">
-                    <TextBlock Text="Returns Accepted:" Margin="5"/>
+                    <TextBlock Text="Returns Accepted:" Margin="25, 5, 5, 5"/>
                     <TextBlock x:Name="returnsAccepted" Margin="5" 
                                Text="{Binding ReturnsAccepted, Converter={StaticResource BooleanToYesNo}}"/>
                 </StackPanel>
 
                 <StackPanel Grid.Row="10" Orientation="Horizontal">
-                    <TextBlock Text="Bids:" Margin="5"/>
-                    <TextBlock x:Name="numBids" Margin="5, 5, 5, 60"
+                    <TextBlock Text="Bids:" Margin="25, 5, 5, 5"/>
+                    <TextBlock x:Name="numBids" Margin="5"
                        Text="{Binding NumBids}"/>
                 </StackPanel>
 
-                <StackPanel Grid.Row="11" Orientation="Horizontal" Margin="5" Height="60">
+                <StackPanel Grid.Row="12" Orientation="Horizontal" Margin="25, 5" Height="60">
                     <Button x:Name="pagePrevious" Content="&lt;" 
-                    Click="pagePrevious_Click" Margin="5" Background="DarkGray"/>
+                    Click="pagePrevious_Click" Margin="0, 5, 5, 5" Background="DarkGray"/>
                     <Button x:Name="pageNext" Content=">" Click="pageNext_Click" Margin="5"
                     Background="DarkGray"/>
                     <TextBlock Text="Page:" Margin="5"/>
@@ -138,7 +139,7 @@
                     <Button x:Name="submit" Content="Submit Bid" Click="submit_Click"
                     Margin="5" Background="DarkGray"/>
                     <TextBlock Text="Search:" Margin="5" Width="auto"/>
-                    <TextBox x:Name="searchBar" Width="550" Margin="5"
+                    <TextBox x:Name="searchBar" Width="600" Margin="5"
                      Background="DarkGray" KeyDown="searchBar_KeyDown"/>
                 </StackPanel>
             </Grid>
