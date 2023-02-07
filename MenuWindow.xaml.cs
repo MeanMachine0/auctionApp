@@ -25,6 +25,7 @@ namespace auctionApp
         {
             InitializeComponent();
             username.Text = App.Current.Properties["username"].ToString();
+            Debug.Print(Colors.LightBlue.ToString());
         }
 
         private void buy_Click(object sender, RoutedEventArgs e)

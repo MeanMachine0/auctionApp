@@ -135,16 +135,21 @@ namespace auctionApp
             }
         }
 
+        private void search_Click(object sender, RoutedEventArgs e)
+        {
+            _timer.Stop();
+            Debug.Print($"Performing search for {searchBar.Text}.");
+            App.Current.Properties["searchString"] = searchBar.Text;
+            SearchWindow searchWindow = new SearchWindow();
+            searchWindow.Show();
+            this.Close();
+        }
+
         private void searchBar_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.Key == Key.Enter)
             {
-                _timer.Stop();
-                Debug.Print($"Performing search for {searchBar.Text}.");
-                App.Current.Properties["searchString"] = searchBar.Text;
-                SearchWindow searchWindow = new SearchWindow();
-                searchWindow.Show();
-                this.Close();
+                search_Click(this, new RoutedEventArgs());
             }
         }
 

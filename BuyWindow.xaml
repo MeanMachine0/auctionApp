@@ -14,7 +14,7 @@
         <local:BooleanToYesNoConverter x:Key="BooleanToYesNo"/>
     </Window.Resources>
 
-    <Border Background="LightBlue" CornerRadius="40" BorderThickness="2" 
+    <Border Background="#ffadd8e6" CornerRadius="40" BorderThickness="2" 
             Padding="15" MouseDown="border_MouseDown">
         <Border CornerRadius="20">
             <Border.Background>
@@ -41,18 +41,21 @@
 
                 <TextBlock x:Name="username" Margin="25" HorizontalAlignment="Left" FontSize="20" Grid.Row="0" Foreground="LightBlue"/>
 
-                <Border CornerRadius="30" Background="LightBlue" Margin="500, 15, 500, 0">
+                <Border CornerRadius="30" Background="#ffadd8e6" Margin="500, 15, 500, 0">
                     <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Center" Margin="5">
 
-                        <Button x:Name="menu" Background="DarkGray" Click="menu_Click" Width="50" Height="50" Margin="5, 0">
+                        <Button x:Name="menu" Click="menu_Click" Background="#ffadd8e6"
+                                Width="50" Height="50" BorderThickness="0" Margin="5, 0">
                             <Icon:PackIconMaterial Kind="HomeOutline" Width="40" Height="40"/>
                         </Button>
 
-                        <Button x:Name="logout" Background="DarkGray" Click="logout_Click" Width="50" Height="50" Margin="5, 0">
+                        <Button x:Name="logout" Click="logout_Click" Background="#ffadd8e6"
+                                Width="50" Height="50" BorderThickness="0" Margin="5, 0">
                             <Icon:PackIconMaterial Kind="Logout" Width="40" Height="40"/>
                         </Button>
 
-                        <Button x:Name="closeApp" Background="DarkGray" Click="closeApp_Click" Width="50" Height="50" Margin="5, 0">
+                        <Button x:Name="closeApp" Click="closeApp_Click" Background="#ffadd8e6"
+                                Width="50" Height="50" BorderThickness="0" Margin="5, 0">
                             <Icon:PackIconMaterial Kind="CloseBoxOutline" Width="40" Height="40"/>
                         </Button>
 
@@ -90,11 +93,11 @@
                     <TextBlock x:Name="bidIncrement" Margin="5"
                        Text="{Binding BidIncrement, StringFormat=£{0:0.00}}"/>
                 </StackPanel>
-                
-                <Border Grid.Row="5" Grid.RowSpan="6" CornerRadius="35" Background="LightBlue" Margin="520, 0, 25, 50">
-                    <TextBox Grid.Row="5" x:Name="information" Background="DarkGray"
-                         TextWrapping="Wrap" Width="645" Height="250" Grid.RowSpan="6" 
-                         Text="{Binding Description}" IsReadOnly="True"/>
+
+                <Border Grid.Row="5" Grid.RowSpan="6" CornerRadius="50" Background="#ffadd8e6" Margin="520, 0, 25, 50">
+                    <TextBlock Grid.Row="5" x:Name="information" Foreground="Black"
+                         TextWrapping="Wrap" Width="630" Height="230" Grid.RowSpan="6" 
+                         Text="{Binding Description}"/>
                 </Border>
 
                 <StackPanel Grid.Row="6" Orientation="Horizontal">
@@ -127,21 +130,25 @@
                        Text="{Binding NumBids}"/>
                 </StackPanel>
 
-                <Border Grid.Row="12" CornerRadius="30" Background="LightBlue" Margin="25, 0, 25, 15">
+                <Border Grid.Row="12" CornerRadius="30" Background="#ffadd8e6" Margin="25, 0, 25, 15">
                     <StackPanel Grid.Row="12" Orientation="Horizontal" Margin="25, 5" Height="60">
-                        <Button x:Name="pagePrevious" Content="&lt;" Height="40"
-                                Click="pagePrevious_Click" Margin="0, 5, 5, 5" Background="DarkGray"/>
-                        <Button x:Name="pageNext" Content=">" Click="pageNext_Click" Margin="5"
-                                Background="DarkGray" Height="40"/>
+                        <Button x:Name="pagePrevious" Content="&lt;" Height="40" BorderThickness="0"
+                                Click="pagePrevious_Click" Margin="0, 5" Background="#ffadd8e6"/>
+                        <Button x:Name="pageNext" Content="&gt;" Click="pageNext_Click" Margin="5" 
+                                Background="#ffadd8e6" Height="40" BorderThickness="0"/>
                         <TextBlock Text="Page:" Margin="5" Foreground="Black" Height="40"/>
                         <TextBox x:Name="pageNumber" Text="1" Margin="5" Width="50" Height="40"
-                                 Background="DarkGray" KeyDown="pageNumber_KeyDown"/>
-                        <TextBox x:Name="bid" Width="150" Height="40" Margin="5" Background="DarkGray" KeyDown="bid_KeyDown"/>
+                                 Background="#ffadd8e6" KeyDown="pageNumber_KeyDown"/>
+                        <TextBlock Text="Bid:" Margin="5" Foreground="Black" Height="40"/>
+                        <TextBox x:Name="bid" Width="150" Height="40" Margin="5" Background="#ffadd8e6" KeyDown="bid_KeyDown"/>
                         <Button x:Name="submit" Content="Submit Bid" Click="submit_Click"
-                                Height="40" Margin="5" Background="DarkGray"/>
-                        <TextBlock Text="Search:" Margin="5" Width="auto" Height="40" Foreground="Black"/>
-                        <TextBox x:Name="searchBar" Width="600" Height="40" Margin="5"
-                                 Background="DarkGray" KeyDown="searchBar_KeyDown"/>
+                                Height="40" Margin="5" Background="#ffadd8e6" BorderThickness="0"/>
+                        <TextBox x:Name="searchBar" Width="530" Height="40" Margin="5"
+                                 Background="#ffadd8e6" KeyDown="searchBar_KeyDown"/>
+                        <Button x:Name="search" Margin="5" Width="50" Height="50" Foreground="Black" 
+                                Background="#ffadd8e6" BorderThickness="0" Click="search_Click">
+                            <Icon:PackIconMaterial Kind="Magnify" Width="40" Height="40"/>
+                        </Button>
                     </StackPanel>
                 </Border>
             </Grid>

@@ -9,7 +9,7 @@
         Title="MenuWindow" Height="400" Width="300" FontSize="28" Background="Transparent"
         ResizeMode="NoResize" WindowStartupLocation="CenterScreen" AllowsTransparency="True" WindowStyle="None">
 
-    <Border Background="LightBlue" CornerRadius="40" BorderThickness="2" Padding="15" MouseDown="border_MouseDown">
+    <Border Background="#ffadd8e6" CornerRadius="40" BorderThickness="2" Padding="15" MouseDown="border_MouseDown">
         <Border CornerRadius="20">
             <Border.Background>
                 <LinearGradientBrush StartPoint="0, 0" EndPoint="0, 1">
@@ -24,9 +24,9 @@
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
 
-                <TextBlock Grid.Row="0" x:Name="username" HorizontalAlignment="Center" Width="auto" Foreground="LightBlue" Margin="5" Text="username"/>
+                <TextBlock Grid.Row="0" x:Name="username" HorizontalAlignment="Center" Width="auto" Foreground="#ffadd8e6" Margin="5" Text="username"/>
 
-                <Border CornerRadius="40" Background="LightBlue" Margin="50, 55, 50, 15">
+                <Border CornerRadius="40" Background="#ffadd8e6" Margin="50, 55, 50, 15">
                     <StackPanel Grid.Row="1" HorizontalAlignment="Center" Orientation="Vertical" Margin="0, 25">
                         <Button x:Name="buy" Click="buy_Click" Background="DarkGray" Width="100" Margin="0, 5">
                             <Icon:PackIconMaterial Kind="CurrencyGbp" Height="35" Width="100" Margin="0, 5"/>
