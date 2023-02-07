@@ -138,14 +138,14 @@
                                 Background="#ffadd8e6" Height="40" BorderThickness="0"/>
                         <TextBlock Text="Page:" Margin="5" Foreground="Black" Height="40"/>
                         <TextBox x:Name="pageNumber" Text="1" Margin="5" Width="50" Height="40"
-                                 Background="#ffadd8e6" KeyDown="pageNumber_KeyDown"/>
+                                 Background="#ffadd8e6" KeyDown="pageNumber_KeyDown" BorderThickness="2"/>
                         <TextBlock Text="Bid:" Margin="5" Foreground="Black" Height="40"/>
                         <TextBox x:Name="bid" Width="150" Height="40" Margin="5" 
-                                 Background="#ffadd8e6" KeyDown="bid_KeyDown"/>
+                                 Background="#ffadd8e6" KeyDown="bid_KeyDown" BorderThickness="2"/>
                         <Button x:Name="submit" Content="Submit Bid" Click="submit_Click"
                                 Height="40" Margin="5" Background="#ffadd8e6" BorderThickness="0"/>
                         <TextBox x:Name="searchBar" Width="530" Height="40" Margin="5"
-                                 Background="#ffadd8e6" KeyDown="searchBar_KeyDown"/>
+                                 Background="#ffadd8e6" KeyDown="searchBar_KeyDown" BorderThickness="2"/>
                         <Button x:Name="search" Margin="5" Width="50" Height="50" Foreground="Black" 
                                 Background="#ffadd8e6" BorderThickness="0" Click="search_Click">
                             <Icon:PackIconMaterial Kind="Magnify" Width="40" Height="40"/>
