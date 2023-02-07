@@ -129,7 +129,7 @@
                         <StackPanel Orientation="Horizontal">
                             <Icon:PackIconMaterial Kind="PlaylistPlus" 
                                                Width="40" Height="40" Margin="5, 0"/>
-                            <TextBlock Text="List Item" Height="40" Margin="10, 0" 
+                            <TextBlock Text="List Item" Height="40" Margin="5, 0" 
                                        Foreground="Black"/>
                         </StackPanel>
                     </Button>

@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:auctionApp"
         xmlns:Icon="http://metro.mahapps.com/winfx/xaml/iconpacks"
         mc:Ignorable="d"
-        Title="MenuWindow" Height="400" Width="300" FontSize="28" Background="Transparent"
+        Title="MenuWindow" Height="400" Width="400" FontSize="28" Background="Transparent"
         ResizeMode="NoResize" WindowStartupLocation="CenterScreen" AllowsTransparency="True" WindowStyle="None">
 
     <Border Background="#ffadd8e6" CornerRadius="40" BorderThickness="2" Padding="15" MouseDown="border_MouseDown">
@@ -20,29 +20,44 @@
             
             <Grid>
                 <Grid.RowDefinitions>
+                    <RowDefinition Height="15"/>
                     <RowDefinition Height="auto"/>
                     <RowDefinition Height="*"/>
+                    <RowDefinition Height="50"/>
                 </Grid.RowDefinitions>
 
-                <TextBlock Grid.Row="0" x:Name="username" HorizontalAlignment="Center" Width="auto" Foreground="#ffadd8e6" Margin="5" Text="username"/>
+                <TextBlock Grid.Row="1" x:Name="username" HorizontalAlignment="Center" Width="auto" 
+                           Foreground="#ffadd8e6" Text="username" Margin="0, 0, 0, 10"/>
 
-                <Border CornerRadius="60" Background="#ffadd8e6" Margin="70, 55, 70, 15">
-                    <StackPanel Grid.Row="1" HorizontalAlignment="Center" Orientation="Vertical" Margin="0, 25">
+                <Border Grid.Row="2" CornerRadius="30" Background="#ffadd8e6" Margin="50, 0">
+                    <StackPanel Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Center" Orientation="Vertical">
                         <Button x:Name="buy" Click="buy_Click" Background="#ffadd8e6" 
-                                BorderThickness="0" Width="90" Margin="0, 5, 0, 0">
-                            <Icon:PackIconMaterial Kind="CurrencyGbp" Height="40" Width="40" Margin="0, 5"/>
+                                BorderThickness="0" Margin="0, 0, 0, 5" HorizontalAlignment="Left">
+                            <StackPanel Orientation="Horizontal">
+                                <Icon:PackIconMaterial Kind="CurrencyGbp" Height="40" Width="40" Margin="0, 5"/>
+                                <TextBlock Text="Browse Items" Height="40" Margin="10, 0, 0, 0"/>
+                            </StackPanel>
                         </Button>
                         <Button x:Name="sell" Click="sell_Click" Background="#ffadd8e6" 
-                                BorderThickness="0" Width="90" Margin="0, 5">
-                            <Icon:PackIconMaterial Kind="PiggyBankOutline" Height="40" Width="40" Margin="0, 5"/>
+                                BorderThickness="0" Margin="0, 5" HorizontalAlignment="Left">
+                            <StackPanel Orientation="Horizontal">
+                                <Icon:PackIconMaterial Kind="PiggyBankOutline" Height="40" Width="40" />
+                                <TextBlock Text="List Items" Height="40" Margin="10, 0, 0, 0"/>
+                            </StackPanel>
                         </Button>
                         <Button x:Name="logout" Click="logout_Click" Background="#ffadd8e6" 
-                                BorderThickness="0" Width="90" Margin="0, 5">
-                            <Icon:PackIconMaterial Kind="Logout" Height="40" Width="40" Margin="0, 5"/>
+                                BorderThickness="0" Margin="0, 5" HorizontalAlignment="Left">
+                            <StackPanel Orientation="Horizontal">
+                                <Icon:PackIconMaterial Kind="Logout" Height="40" Width="40"/>
+                                <TextBlock Text="Logout" Height="40" Margin="10, 0, 0, 0"/>
+                            </StackPanel>
                         </Button>
                         <Button x:Name="closeApp" Click="closeApp_Click" Background="#ffadd8e6" 
-                                BorderThickness="0" Width="90" Margin="0, 5, 0, 0">
-                            <Icon:PackIconMaterial Kind="CloseBoxOutline" Height="40" Width="40" Margin="0, 5"/>
+                                BorderThickness="0" Margin="0, 5, 0, 0" HorizontalAlignment="Left">
+                            <StackPanel Orientation="Horizontal">
+                                <Icon:PackIconMaterial Kind="CloseBoxOutline" Height="40" Width="40"/>
+                                <TextBlock Text="Close App" Height="40" Margin="10, 0, 0, 0"/>
+                            </StackPanel>
                         </Button>
                     </StackPanel>
                 </Border>
