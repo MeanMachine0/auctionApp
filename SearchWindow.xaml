@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:auctionApp"
         mc:Ignorable="d"
-        Title="SearchWindow" Height="720" Width="1295" Background="DimGray" WindowStartupLocation="CenterScreen">
+        Title="SearchWindow" Height="720" Width="1280" Background="DimGray" WindowStartupLocation="CenterScreen">
 
     <Window.Resources>
         <local:BooleanToYesNoConverter x:Key="BooleanToYesNo"/>

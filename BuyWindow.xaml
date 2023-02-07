@@ -39,24 +39,24 @@
                     <RowDefinition Height="auto"/>
                 </Grid.RowDefinitions>
 
-                <TextBlock x:Name="username" Margin="25" HorizontalAlignment="Left" FontSize="20" Grid.Row="0" Foreground="LightBlue"/>
+                <TextBlock x:Name="username" Margin="25" HorizontalAlignment="Left" FontSize="20" Grid.Row="0" Foreground="#ffadd8e6"/>
 
                 <Border CornerRadius="30" Background="#ffadd8e6" Margin="500, 15, 500, 0">
                     <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Center" Margin="5">
 
                         <Button x:Name="menu" Click="menu_Click" Background="#ffadd8e6"
                                 Width="50" Height="50" BorderThickness="0" Margin="5, 0">
-                            <Icon:PackIconMaterial Kind="HomeOutline" Width="40" Height="40"/>
+                            <Icon:PackIconMaterial Kind="HomeOutline" Width="40" Height="40" ToolTip="Menu"/>
                         </Button>
 
                         <Button x:Name="logout" Click="logout_Click" Background="#ffadd8e6"
                                 Width="50" Height="50" BorderThickness="0" Margin="5, 0">
-                            <Icon:PackIconMaterial Kind="Logout" Width="40" Height="40"/>
+                            <Icon:PackIconMaterial Kind="Logout" Width="40" Height="40" ToolTip="Logout"/>
                         </Button>
 
                         <Button x:Name="closeApp" Click="closeApp_Click" Background="#ffadd8e6"
                                 Width="50" Height="50" BorderThickness="0" Margin="5, 0">
-                            <Icon:PackIconMaterial Kind="CloseBoxOutline" Width="40" Height="40"/>
+                            <Icon:PackIconMaterial Kind="CloseBoxOutline" Width="40" Height="40" ToolTip="Exit App"/>
                         </Button>
 
                     </StackPanel>
@@ -85,7 +85,7 @@
                     <TextBlock x:Name="postageCost" Margin="5"
                        Text="{Binding PostageCost, StringFormat=£{0:0.00}}"/>
                 </StackPanel>
-                
+
                 <TextBlock Grid.Row="4" Text="Description:" Margin="520, 0, 5, 5"/>
 
                 <StackPanel Grid.Row="5" Orientation="Horizontal">
@@ -133,21 +133,21 @@
                 <Border Grid.Row="12" CornerRadius="30" Background="#ffadd8e6" Margin="25, 0, 25, 15">
                     <StackPanel Grid.Row="12" Orientation="Horizontal" Margin="25, 5" Height="60">
                         <Button x:Name="pagePrevious" Content="&lt;" Height="40" BorderThickness="0"
-                                Click="pagePrevious_Click" Margin="0, 5" Background="#ffadd8e6"/>
+                                Click="pagePrevious_Click" Margin="0, 5" Background="#ffadd8e6" ToolTip="Previous Page"/>
                         <Button x:Name="pageNext" Content="&gt;" Click="pageNext_Click" Margin="5" 
-                                Background="#ffadd8e6" Height="40" BorderThickness="0"/>
+                                Background="#ffadd8e6" Height="40" BorderThickness="0" ToolTip="Next Page"/>
                         <TextBlock Text="Page:" Margin="5" Foreground="Black" Height="40"/>
                         <TextBox x:Name="pageNumber" Text="1" Margin="5" Width="50" Height="40"
                                  Background="#ffadd8e6" KeyDown="pageNumber_KeyDown" BorderThickness="2"/>
                         <TextBlock Text="Bid:" Margin="5" Foreground="Black" Height="40"/>
-                        <TextBox x:Name="bid" Width="150" Height="40" Margin="5" 
-                                 Background="#ffadd8e6" KeyDown="bid_KeyDown" BorderThickness="2"/>
+                        <TextBox x:Name="bid" Width="150" Height="40" Margin="5" TextChanged="keepPound"
+                                 Background="#ffadd8e6" KeyDown="bid_KeyDown" BorderThickness="2" Text="£"/>
                         <Button x:Name="submit" Content="Submit Bid" Click="submit_Click"
                                 Height="40" Margin="5" Background="#ffadd8e6" BorderThickness="0"/>
                         <TextBox x:Name="searchBar" Width="530" Height="40" Margin="5"
                                  Background="#ffadd8e6" KeyDown="searchBar_KeyDown" BorderThickness="2"/>
                         <Button x:Name="search" Margin="5" Width="50" Height="50" Foreground="Black" 
-                                Background="#ffadd8e6" BorderThickness="0" Click="search_Click">
+                                Background="#ffadd8e6" BorderThickness="0" Click="search_Click" ToolTip="Search">
                             <Icon:PackIconMaterial Kind="Magnify" Width="40" Height="40"/>
                         </Button>
                     </StackPanel>

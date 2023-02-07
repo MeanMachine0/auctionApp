@@ -50,34 +50,56 @@ namespace auctionApp
         {
             try
             {
-                _model.ItemName = itemNameS.Text;
-                _model.CurrentPrice = float.Parse(startingPrice.Text);
-                _model.PostageCost = float.Parse(postageCostS.Text);
-                _model.BidIncrement = float.Parse(bidIncrementS.Text);
-                _model.ItemCondition = conditionS.Text;
-                _model.EndTime = DateTime.Parse(endTimeS.Text);
-                _model.ReturnsAccepted = returnsAcceptedS.IsChecked.Value;
-                _model.Description = descriptionS.Text;
+                _model.ItemName = itemName.Text;
+                _model.CurrentPrice = float.Parse(startingPrice.Text.Replace("£", "").Replace(" ", ""));
+                _model.PostageCost = float.Parse(postageCost.Text.Replace("£", "").Replace(" ", ""));
+                _model.BidIncrement = float.Parse(bidIncrement.Text.Replace("£", "").Replace(" ", ""));
+                _model.ItemCondition = condition.Text;
+                _model.EndTime = DateTime.Parse(endTime.Text);
+                _model.ReturnsAccepted = returnsAccepted.IsChecked.Value;
+                _model.Description = description.Text;
+
+                if (itemName.Text.Length > 0 & startingPrice.Text.Length - 1 > 0 & postageCost.Text.Length - 1 > 0 & bidIncrement.Text.Length - 1 > 0 & _model.BidIncrement > 0 & condition.Text.Length > 0 &
+                endTime.Text.Length > 0 & description.Text.Length > 0)
+                {
+                    DataLayer dataLayer = new DataLayer();
+                    dataLayer.ListItem(_model, (int)App.Current.Properties["accountId"]);
+                    MessageBox.Show($"{_model.ItemName} Listed. You can go to 'My Listings' to view your listed item(s).");
+                }
+                else if (_model.BidIncrement <= 0) { MessageBox.Show("Error: Bid Increment must be greater than £0!"); }
+                else { MessageBox.Show("Error: one or more field(s) are empty!"); }
             }
 
             catch { }
-
-            if (itemNameS.Text.Length > 0 & startingPrice.Text.Length > 0 & postageCostS.Text.Length > 0 & bidIncrementS.Text.Length > 0 & _model.BidIncrement > 0 & conditionS.Text.Length > 0 &
-                endTimeS.Text.Length > 0 & descriptionS.Text.Length > 0)
-            {
-                DataLayer dataLayer = new DataLayer();
-                dataLayer.ListItem(_model, (int)App.Current.Properties["accountId"]);
-                MessageBox.Show($"{_model.ItemName} Listed. You can go to 'My Listings' to view your listed item(s).");
-            }
-            else  if (_model.BidIncrement <= 0){ MessageBox.Show("Error: Bid Increment must be greater than £0!"); }
-            else { MessageBox.Show("Error: one or more field(s) are empty!"); }
         }
 
-        private void viewMyListings_Click(object sender, RoutedEventArgs e)
+        private void myListings_Click(object sender, RoutedEventArgs e)
         {
             MyListingsWindow myListingsWindow = new MyListingsWindow();
             myListingsWindow.Show();
             this.Close();
+        }
+
+        private void closeApp_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
+
+        private void border_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            if (e.ChangedButton == MouseButton.Left)
+            {
+                this.DragMove();
+            }
+        }
+
+        private void keepPound(object sender, TextChangedEventArgs e)
+        {
+            TextBox textBox = (TextBox)sender;
+            if (textBox.Text.Length > 0 && textBox.Text[0] != '£')
+            {
+                textBox.Text = "£" + textBox.Text.Substring(1);
+            }
         }
     }
 }

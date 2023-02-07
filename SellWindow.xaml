@@ -4,79 +4,137 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:auctionApp"
+        xmlns:Icon="http://metro.mahapps.com/winfx/xaml/iconpacks"
         mc:Ignorable="d"
-        Title="SellWindow" Height="720" Width="1280" FontSize="28" 
-        Background="DimGray" WindowStartupLocation="CenterScreen">
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="auto"/>
-            <RowDefinition Height="auto"/>
-            <RowDefinition Height="auto"/>
-            <RowDefinition Height="auto"/>
-            <RowDefinition Height="auto"/>
-            <RowDefinition Height="auto"/>
-            <RowDefinition Height="auto"/>
-            <RowDefinition Height="auto"/>
-            <RowDefinition Height="auto"/>
-            <RowDefinition Height="auto"/>
-            <RowDefinition Height="auto"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="auto"/>
-        </Grid.RowDefinitions>
+        Title="SellWindow" Height="720" Width="1280" FontSize="28" Foreground="LightGray"
+        Background="Transparent" WindowStartupLocation="CenterScreen"
+        ResizeMode="NoResize" AllowsTransparency="True" WindowStyle="None">
 
-        <TextBlock x:Name="username" Margin="5" HorizontalAlignment="Left" FontSize="20" Grid.Row="0"/>
-        
-        <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Center" Margin="5">
-            <Button x:Name="viewMyListings" Content="MyListings" Background="DarkGray"
-                    Click="viewMyListings_Click" Margin="5" FontSize="20"/>
-            <Button x:Name="menu" Content="Menu" Background="DarkGray" 
-                    Click="menu_Click" Margin="5" FontSize="20"/>
-            <Button x:Name="logout" Content="Logout" Background="DarkGray"
-                    Click="logout_Click" Margin="5" FontSize="20"/>
-        </StackPanel>
+    <Window.Resources>
+        <local:BooleanToYesNoConverter x:Key="BooleanToYesNo"/>
+    </Window.Resources>
 
-        <StackPanel Grid.Row="1" Orientation="Horizontal">
-            <TextBlock Text="Item Name:" Margin="5"/>
-            <TextBox x:Name="itemNameS" Width="398" Margin="5" Background="DarkGray"/>
-        </StackPanel>
+    <Border Background="#ffadd8e6" CornerRadius="40" BorderThickness="2" 
+            Padding="15" MouseDown="border_MouseDown">
+        <Border CornerRadius="20">
+            <Border.Background>
+                <LinearGradientBrush StartPoint="0, 0" EndPoint="0, 1">
+                    <GradientStop Color="DimGray" Offset="-0.125"/>
+                    <GradientStop Color="Black" Offset="1.25"/>
+                </LinearGradientBrush>
+            </Border.Background>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="40"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="auto"/>
+                </Grid.RowDefinitions>
 
-        <StackPanel Grid.Row="2" Orientation="Horizontal">
-            <TextBlock Text="Starting Price:" Margin="5"/>
-            <TextBox x:Name="startingPrice" Width="365" Margin="5" Background="DarkGray"/>
-        </StackPanel>
+                <TextBlock x:Name="username" Margin="25" HorizontalAlignment="Left" 
+                           FontSize="20" Grid.Row="0" Foreground="#ffadd8e6"/>
 
-        <StackPanel Grid.Row="3" Orientation="Horizontal">
-            <TextBlock Text="P&amp;P:" Margin="5"/>
-            <TextBox x:Name="postageCostS" Width="507" Margin="5" Background="DarkGray"/>
-        </StackPanel>
+                <Border CornerRadius="30" Background="#ffadd8e6" Margin="475, 15, 475, 0">
+                    <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Center" Margin="5">
+                        <Button x:Name="myListings" Click="myListings_Click" Background="#ffadd8e6"
+                                Width="50" Height="50" BorderThickness="0" Margin="5, 0" ToolTip="My Listings">
+                            <Icon:PackIconMaterial Kind="ViewListOutline" Width="40" Height="40"/>
+                        </Button>
 
-        <StackPanel Grid.Row="4" Orientation="Horizontal">
-            <TextBlock Text="Bid Increment:" Margin="5"/>
-            <TextBox x:Name="bidIncrementS" Width="355" Margin="5" Background="DarkGray"/>
-        </StackPanel>
+                        <Button x:Name="menu" Click="menu_Click" Background="#ffadd8e6"
+                                Width="50" Height="50" BorderThickness="0" Margin="5, 0" ToolTip="Menu">
+                            <Icon:PackIconMaterial Kind="HomeOutline" Width="40" Height="40"/>
+                        </Button>
 
-        <StackPanel Grid.Row="5" Orientation="Horizontal">
-            <TextBlock Text="Condition:" Margin="5"/>
-            <TextBox x:Name="conditionS" Width="420" Margin="5" Background="DarkGray"/>
-        </StackPanel>
+                        <Button x:Name="logout" Click="logout_Click" Background="#ffadd8e6"
+                                Width="50" Height="50" BorderThickness="0" Margin="5, 0" ToolTip="Logout">
+                            <Icon:PackIconMaterial Kind="Logout" Width="40" Height="40"/>
+                        </Button>
 
-        <StackPanel Grid.Row="6" Orientation="Horizontal">
-            <TextBlock Text="End Time:" Margin="5"/>
-            <TextBox x:Name="endTimeS" Width="428" Margin="5" Background="DarkGray"/>
-        </StackPanel>
+                        <Button x:Name="closeApp" Click="closeApp_Click" Background="#ffadd8e6"
+                                Width="50" Height="50" BorderThickness="0" Margin="5, 0" ToolTip="Exit App">
+                            <Icon:PackIconMaterial Kind="CloseBoxOutline" Width="40" Height="40"/>
+                        </Button>
+                    </StackPanel>
+                </Border>
 
-        <StackPanel Grid.Row="7" Orientation="Horizontal">
-            <TextBlock Text="Accept Returns:" Margin="5"/>
-            <CheckBox x:Name="returnsAcceptedS" Margin="0, 10, 0, 0" 
-                      Background="DarkGray" VerticalAlignment="Center"/>
-        </StackPanel>
+                <StackPanel Grid.Row="1" Orientation="Horizontal" Margin="0, 100, 0, 0">
+                    <TextBlock Text="Item Name:" Margin="25, 0, 5, 5"/>
+                    <TextBox x:Name="itemName" Height="40" Width="315" Margin="5" 
+                             Background="Transparent" Foreground="LightGray"
+                             BorderThickness="2"/>
+                </StackPanel>
 
-        <StackPanel Grid.Row="8" Orientation="Horizontal">
-            <TextBlock Text="Description:" Margin="5"/>
-            <TextBox x:Name="descriptionS" Width="395" Margin="5" Background="DarkGray"/>
-        </StackPanel>
+                <StackPanel Grid.Row="2" Orientation="Horizontal">
+                    <TextBlock Text="Starting Price:" Margin="25, 5, 5, 5"/>
+                    <TextBox x:Name="startingPrice" Height="40" Width="288" Margin="5" 
+                             Background="Transparent" Foreground="LightGray"
+                             BorderThickness="2" Text="£" TextChanged="keepPound"/>
+                </StackPanel>
 
-        <Button Grid.Row="12" x:Name="submitListing" Content="List Item" Background="DarkGray"
-                Width="500" Margin="10" Click="submitListing_Click"/>
-    </Grid>
+                <StackPanel Grid.Row="3" Orientation="Horizontal">
+                    <TextBlock Text="P&amp;P:" Margin="25, 5, 5, 5"/>
+                    <TextBox x:Name="postageCost" Height="40" Width="398" Margin="5" 
+                             Background="Transparent" Foreground="LightGray"
+                             BorderThickness="2" Text="£" TextChanged="keepPound"/>
+                </StackPanel>
+
+                <StackPanel Grid.Row="4" Orientation="Horizontal">
+                    <TextBlock Text="Bid Increment:" Margin="25, 5, 5, 5"/>
+                    <TextBox x:Name="bidIncrement" Height="40" Width="280" Margin="5" 
+                             Background="Transparent" Foreground="LightGray"
+                             BorderThickness="2" Text="£" TextChanged="keepPound"/>
+                </StackPanel>
+
+                <TextBlock Grid.Row="1" Text="Description:" Margin="520, 100, 5, 5"/>
+
+                <StackPanel Grid.Row="5" Orientation="Horizontal">
+                    <TextBlock Text="Condition:" Height="40" Margin="25, 5, 5, 5"/>
+                    <TextBox x:Name="condition" Height="40" Width="330" Margin="5" 
+                             Background="Transparent" Foreground="LightGray"
+                             BorderThickness="2"/>
+                </StackPanel>
+                
+                <Border Grid.Row="2" Grid.RowSpan="6" CornerRadius="50" Background="#ffadd8e6" Margin="520, 0, 25, 50">
+                    <TextBox Grid.Row="5" x:Name="description" Foreground="Black" Background="Transparent"
+                         TextWrapping="Wrap" Width="630" Height="230" Grid.RowSpan="4" Margin="0, 20"
+                         BorderThickness="0" AcceptsReturn="True"/>
+                </Border>
+
+                <StackPanel Grid.Row="6" Orientation="Horizontal">
+                    <TextBlock Text="End Time:" Height="40" Margin="25, 5, 5, 5"/>
+                    <TextBox x:Name="endTime" Height="40" Width="337" Margin="5" 
+                             Background="Transparent" Foreground="LightGray"
+                             BorderThickness="2"/>
+                </StackPanel>
+
+                <StackPanel Grid.Row="7" Orientation="Horizontal">
+                    <TextBlock Text="Accept Returns:" Height="40" Margin="25, 5, 5, 5"/>
+                    <CheckBox x:Name="returnsAccepted" Margin="0, 7, 0, 0" Background="Transparent"
+                              Foreground="LightGray" VerticalAlignment="Center" BorderThickness="2"/>
+                </StackPanel>
+
+                <Border Grid.Row="12" CornerRadius="30" Background="#ffadd8e6" Margin="510, 15">
+                    <Button Grid.Row="12" x:Name="submitListing" Background="Transparent" Margin="10"
+                            Click="submitListing_Click" BorderThickness="0" Width="200" Height="50">
+                        <StackPanel Orientation="Horizontal">
+                            <Icon:PackIconMaterial Kind="PlaylistPlus" 
+                                               Width="40" Height="40" Margin="5, 0"/>
+                            <TextBlock Text="List Item" Height="40" Margin="10, 0" 
+                                       Foreground="Black"/>
+                        </StackPanel>
+                    </Button>
+                </Border>
+            </Grid>
+        </Border>
+    </Border>
 </Window>

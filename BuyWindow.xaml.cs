@@ -60,10 +60,10 @@ namespace auctionApp
             int accountId = (int)Application.Current.Properties["accountId"];
             try
             {
-                if (float.Parse(bid.Text) >= (_model.CurrentPrice + _model.BidIncrement) & _model.TotalSecondsRemaining > 0)
+                if (float.Parse(bid.Text.Replace("£", "").Replace(" ", "")) >= (_model.CurrentPrice + _model.BidIncrement) & _model.TotalSecondsRemaining > 0)
                 {
                     DataLayer dataLayer = new DataLayer();
-                    dataLayer.SubmitBid(bid.Text, pageNumber.Text, accountId);
+                    dataLayer.SubmitBid(bid.Text.Replace("£", "").Replace(" ", ""), pageNumber.Text, accountId);
                     MessageBox.Show("Bid submitted.");
                 }
                 else if (float.Parse(bid.Text) < (_model.CurrentPrice + _model.BidIncrement) & _model.TotalSecondsRemaining > 0)
@@ -180,6 +180,15 @@ namespace auctionApp
         private void closeApp_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
+        }
+
+        private void keepPound(object sender, TextChangedEventArgs e)
+        {
+            TextBox textBox = (TextBox)sender;
+            if (textBox.Text.Length > 0 && textBox.Text[0] != '£')
+            {
+                textBox.Text = "£" + textBox.Text.Substring(1);
+            }
         }
     }
 }

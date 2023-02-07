@@ -38,12 +38,12 @@
                 <Border Background="#ffadd8e6" CornerRadius="30" Margin="220, 0, 220, 10" Grid.Row="1">
                     <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center">
                         <Button x:Name="login" Background="#ffadd8e6" Click="login_Click" 
-                                BorderThickness="0" Margin="0, 0, 5, 0" Width="50" Height="50">
+                                BorderThickness="0" Margin="0, 0, 5, 0" Width="50" Height="50" ToolTip="Login">
                             <Icon:PackIconMaterial Kind="Login" Width="40" Height="40"/>
                         </Button>
 
                         <Button x:Name="closeApp" Background="#ffadd8e6" Click="closeApp_Click" 
-                                BorderThickness="0" Margin="5, 0, 0, 0" Width="50" Height="50">
+                                BorderThickness="0" Margin="5, 0, 0, 0" Width="50" Height="50" ToolTip="Exit App">
                             <Icon:PackIconMaterial Kind="CloseBoxOutline" Width="40" Height="40"/>
                         </Button>
                     </StackPanel>
