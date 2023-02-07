@@ -26,19 +26,23 @@
 
                 <TextBlock Grid.Row="0" x:Name="username" HorizontalAlignment="Center" Width="auto" Foreground="#ffadd8e6" Margin="5" Text="username"/>
 
-                <Border CornerRadius="40" Background="#ffadd8e6" Margin="50, 55, 50, 15">
+                <Border CornerRadius="60" Background="#ffadd8e6" Margin="70, 55, 70, 15">
                     <StackPanel Grid.Row="1" HorizontalAlignment="Center" Orientation="Vertical" Margin="0, 25">
-                        <Button x:Name="buy" Click="buy_Click" Background="DarkGray" Width="100" Margin="0, 5">
-                            <Icon:PackIconMaterial Kind="CurrencyGbp" Height="35" Width="100" Margin="0, 5"/>
+                        <Button x:Name="buy" Click="buy_Click" Background="#ffadd8e6" 
+                                BorderThickness="0" Width="90" Margin="0, 5, 0, 0">
+                            <Icon:PackIconMaterial Kind="CurrencyGbp" Height="40" Width="80" Margin="0, 5"/>
                         </Button>
-                        <Button x:Name="sell" Click="sell_Click" Background="DarkGray" Width="100" Margin="0, 5">
-                            <Icon:PackIconMaterial Kind="BankPlus" Height="35" Width="100" Margin="0, 5"/>
+                        <Button x:Name="sell" Click="sell_Click" Background="#ffadd8e6" 
+                                BorderThickness="0" Width="90" Margin="0, 5">
+                            <Icon:PackIconMaterial Kind="BankPlus" Height="40" Width="80" Margin="0, 5"/>
                         </Button>
-                        <Button x:Name="logout" Click="logout_Click" Background="DarkGray" Width="100" Margin="0, 5">
-                            <Icon:PackIconMaterial Kind="Logout" Height="35" Width="100" Margin="0, 5"/>
+                        <Button x:Name="logout" Click="logout_Click" Background="#ffadd8e6" 
+                                BorderThickness="0" Width="90" Margin="0, 5">
+                            <Icon:PackIconMaterial Kind="Logout" Height="40" Width="80" Margin="0, 5"/>
                         </Button>
-                        <Button x:Name="closeApp" Click="closeApp_Click" Background="DarkGray" Width="100" Margin="0, 5, 0, 0">
-                            <Icon:PackIconMaterial Kind="CloseBoxOutline" Height="35" Width="100" Margin="0, 5"/>
+                        <Button x:Name="closeApp" Click="closeApp_Click" Background="#ffadd8e6" 
+                                BorderThickness="0" Width="90" Margin="0, 5, 0, 0">
+                            <Icon:PackIconMaterial Kind="CloseBoxOutline" Height="40" Width="80" Margin="0, 5"/>
                         </Button>
                     </StackPanel>
                 </Border>
