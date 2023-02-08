@@ -12,6 +12,7 @@
     
     <Window.Resources>
         <local:BooleanToYesNoConverter x:Key="BooleanToYesNo"/>
+        <local:StringIsEmptyToVisibilityConverter x:Key="StringIsEmptyToVisConv"/>
     </Window.Resources>
 
     <Border Background="#ffadd8e6" CornerRadius="40" BorderThickness="2" 
@@ -146,6 +147,9 @@
                                 Height="40" Margin="5" Background="#ffadd8e6" BorderThickness="0"/>
                         <TextBox x:Name="searchBar" Width="530" Height="40" Margin="5"
                                  Background="#ffadd8e6" KeyDown="searchBar_KeyDown" BorderThickness="2"/>
+                        <TextBlock Height="40" Margin="-531, 4, 0, 0" Foreground="Black" 
+                                   Text="Search" Opacity="0.4" IsHitTestVisible="False" Panel.ZIndex="1"
+                                   Visibility="{Binding ElementName=searchBar,Path=Text,Converter={StaticResource StringIsEmptyToVisConv}}"/>
                         <Button x:Name="search" Margin="5" Width="50" Height="50" Foreground="Black" 
                                 Background="#ffadd8e6" BorderThickness="0" Click="search_Click" ToolTip="Search">
                             <Icon:PackIconMaterial Kind="Magnify" Width="40" Height="40"/>

@@ -12,6 +12,7 @@
 
     <Window.Resources>
         <local:BooleanToYesNoConverter x:Key="BooleanToYesNo"/>
+        <local:StringIsEmptyToVisibilityConverter x:Key="StringIsEmptyToVisConv"/>
     </Window.Resources>
 
     <Border Background="#ffadd8e6" CornerRadius="40" BorderThickness="2" 
@@ -74,12 +75,20 @@
                              BorderThickness="2"/>
                 </StackPanel>
 
+                <TextBlock Grid.Row="1" Text="Description:" Margin="520, 100, 5, 5"/>
+                
                 <StackPanel Grid.Row="2" Orientation="Horizontal">
                     <TextBlock Text="Starting Price:" Margin="25, 5, 5, 5"/>
                     <TextBox x:Name="startingPrice" Height="40" Width="288" Margin="5" 
                              Background="Transparent" Foreground="LightGray"
                              BorderThickness="2" Text="£" TextChanged="keepPound"/>
                 </StackPanel>
+
+                <Border Grid.Row="2" Grid.RowSpan="6" CornerRadius="50" Background="#ffadd8e6" Margin="520, 0, 25, 50">
+                    <TextBox Grid.Row="5" x:Name="description" Foreground="Black" Background="Transparent"
+                         TextWrapping="Wrap" Width="630" Height="230" Grid.RowSpan="4" Margin="0, 20"
+                         BorderThickness="0" AcceptsReturn="True"/>
+                </Border>
 
                 <StackPanel Grid.Row="3" Orientation="Horizontal">
                     <TextBlock Text="P&amp;P:" Margin="25, 5, 5, 5"/>
@@ -95,26 +104,47 @@
                              BorderThickness="2" Text="£" TextChanged="keepPound"/>
                 </StackPanel>
 
-                <TextBlock Grid.Row="1" Text="Description:" Margin="520, 100, 5, 5"/>
-
                 <StackPanel Grid.Row="5" Orientation="Horizontal">
                     <TextBlock Text="Condition:" Height="40" Margin="25, 5, 5, 5"/>
                     <TextBox x:Name="condition" Height="40" Width="330" Margin="5" 
                              Background="Transparent" Foreground="LightGray"
                              BorderThickness="2"/>
                 </StackPanel>
-                
-                <Border Grid.Row="2" Grid.RowSpan="6" CornerRadius="50" Background="#ffadd8e6" Margin="520, 0, 25, 50">
-                    <TextBox Grid.Row="5" x:Name="description" Foreground="Black" Background="Transparent"
-                         TextWrapping="Wrap" Width="630" Height="230" Grid.RowSpan="4" Margin="0, 20"
-                         BorderThickness="0" AcceptsReturn="True"/>
-                </Border>
 
                 <StackPanel Grid.Row="6" Orientation="Horizontal">
                     <TextBlock Text="End Time:" Height="40" Margin="25, 5, 5, 5"/>
-                    <TextBox x:Name="endTime" Height="40" Width="337" Margin="5" 
-                             Background="Transparent" Foreground="LightGray"
-                             BorderThickness="2"/>
+                    <DatePicker x:Name="endDate" Width="180" Height="40" Background="Transparent" 
+                                Foreground="LightGray" BorderThickness="2" Margin="5">
+                        <DatePicker.CalendarStyle>
+                            <Style TargetType="{x:Type Calendar}">
+                                <Setter Property="Background" Value="#ffadd8e6"/>
+                            </Style>
+                        </DatePicker.CalendarStyle>
+                        <DatePicker.Resources>
+                            <Style TargetType="DatePickerTextBox">
+                                <Setter Property="Background" Value="Transparent"/>
+                                <Setter Property="BorderThickness" Value="0"/>
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="{x:Type DatePickerTextBox}">
+                                            <Grid>
+                                                <Border x:Name="Border" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}">
+                                                    <Grid x:Name="WatermarkContent">
+                                                        <ScrollViewer x:Name="PART_ContentHost" Margin="0, -1.5, 0, 0"/>
+                                                    </Grid>
+                                                </Border>
+                                            </Grid>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                            </Style>
+                        </DatePicker.Resources>
+                    </DatePicker>
+                    <TextBox x:Name="endTime" Height="40" Width="147" Background="Transparent" BorderThickness="2" 
+                             Margin="5" Foreground="LightGray"/>
+                    <TextBlock Height="40" Margin="-148, 4, 0, 0" Foreground="LightGray" 
+                               Text="HH:mm:ss" Opacity="0.4" IsHitTestVisible="False" Panel.ZIndex="1"
+                               Visibility="{Binding ElementName=endTime,Path=Text,Converter={StaticResource StringIsEmptyToVisConv}}"/>
                 </StackPanel>
 
                 <StackPanel Grid.Row="7" Orientation="Horizontal">
