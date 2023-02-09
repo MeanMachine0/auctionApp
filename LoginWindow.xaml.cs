@@ -71,6 +71,8 @@ namespace auctionApp
         {
            model.Username = username.Text;
            model.Password = Encrypt(password.Password);
+           Debug.Print(username.Text.GetType().ToString());
+           Debug.Print(password.Password.GetType().ToString());
            App.Current.Properties["username"] = model.Username;
            DataLayer dataLayer = new DataLayer();
            if (dataLayer.VerifyPassword(model) == true)
@@ -106,6 +108,11 @@ namespace auctionApp
         private void closeApp_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
+        }
+
+        private void password_PasswordChanged(object sender, RoutedEventArgs e)
+        {
+            passwordPlaceholder.Visibility = string.IsNullOrEmpty(password.Password) ? Visibility.Visible : Visibility.Collapsed;
         }
     }
 }

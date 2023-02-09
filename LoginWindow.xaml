@@ -8,7 +8,7 @@
         mc:Ignorable="d"
         Title="LoginWindow" Height="360" Width="640" FontSize="28" Background="Transparent" KeyDown="Window_KeyDown" 
         ResizeMode="NoResize" WindowStartupLocation="CenterScreen" AllowsTransparency="True" WindowStyle="None">
-
+    
     <Window.Resources>
         <local:StringIsEmptyToVisibilityConverter x:Key="StringIsEmptyToVisConv"/>
     </Window.Resources>
@@ -28,7 +28,7 @@
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
 
-                <Border Background="#ffadd8e6" CornerRadius="40" Margin="60, 70, 60, 10">
+                <Border Background="#ffadd8e6" CornerRadius="45" Margin="60, 70, 60, 10">
                     <StackPanel Grid.Row="0" Orientation="Vertical" HorizontalAlignment="Center">
                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                             <TextBox x:Name="username" Height="40" Width="400" Margin="0, 15, 0, 5" 
@@ -39,10 +39,10 @@
                         </StackPanel>
                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                             <PasswordBox x:Name="password" Height="40" Width="400" Margin="0, 5, 0, 15"
-                                         Background="Transparent" BorderThickness="2"/>
-                            <TextBlock Text="Password" Height="40" Opacity="0.4" Margin="-396, 4, 0, 10"
-                                       IsHitTestVisible="False" Panel.ZIndex="1"
-                                       Visibility="{Binding ElementName=password,Path=Password,Converter={StaticResource StringIsEmptyToVisConv}}"/>
+                                         Background="Transparent" BorderThickness="2"
+                                         PasswordChanged="password_PasswordChanged"/>
+                            <TextBlock x:Name="passwordPlaceholder" Text="Password" Height="40" Opacity="0.4" Margin="-396, 4, 0, 10"
+                                       IsHitTestVisible="False" Panel.ZIndex="1"/>
                         </StackPanel>
                     </StackPanel>
                 </Border>

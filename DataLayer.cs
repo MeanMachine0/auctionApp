@@ -73,8 +73,7 @@ namespace auctionApp
                         DateTime timeNow = DateTime.Now;
                         DateTime endTime = reader.GetDateTime("endTime");
                         model.TimeRemaining = "";
-                        if (timeNow < endTime) { model.TimeRemaining = GetTimeRemaining(timeNow, endTime); }
-                        else { model.TimeRemaining = "0s"; }
+                        model.TimeRemaining = timeNow < endTime ? GetTimeRemaining(timeNow, endTime) : "0s";
                         model.TotalSecondsRemaining = GetTotalSecondsRemaining(timeNow, endTime);
                         model.ReturnsAccepted = reader.GetBoolean("returnsAccepted");
                         model.Description = reader.GetString("information");
@@ -210,11 +209,8 @@ namespace auctionApp
                 }
             }
             connection.Close();
-            if (model.Password == dbHashedPassword) 
-            {
-                return true; 
-            } 
-            else { return false; };
+            bool boolean = model.Password == dbHashedPassword ? true : false;
+            return boolean;
         }
     }
 }
