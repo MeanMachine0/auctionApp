@@ -26,7 +26,7 @@
 
                 <TextBlock Grid.Row="0" x:Name="username" FontSize="20" Margin="25" HorizontalAlignment="Left" Foreground="#ffadd8e6"/>
 
-                <Border Grid.Row="0" Background="#ffadd8e6" CornerRadius="30" Margin="475, 15, 475, 10">
+                <Border Grid.Row="0" Background="#ffadd8e6" CornerRadius="30" Margin="475, 15, 475, 0">
                     <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Center" Margin="5">
                         <Button x:Name="back" Background="Transparent" Click="back_Click" Width="50" Height="50" Margin="0" BorderThickness="0" ToolTip="Browse Items">
                             <Icon:PackIconMaterial Kind="CurrencyGbp" Width="40" Height="40"/>
@@ -43,7 +43,7 @@
                     </StackPanel>
                 </Border>
 
-                <DataGrid Grid.Row="1" x:Name="searchResults" Style="{StaticResource dGridStyle}" ColumnHeaderStyle="{StaticResource columnHeaderStyle}" RowStyle="{StaticResource rowStyle}" CellStyle="{StaticResource cellStyle}" ItemsSource="{Binding SearchList}" Margin="25, 15, 25, 25" SelectionChanged="DataGrid_SelectionChanged">
+                <DataGrid Grid.Row="1" x:Name="searchResults" Style="{StaticResource dGridStyle}" ColumnHeaderStyle="{StaticResource columnHeaderStyle}" RowStyle="{StaticResource rowStyle}" CellStyle="{StaticResource cellStyle}" ItemsSource="{Binding SearchList}" Margin="25" SelectionChanged="DataGrid_SelectionChanged">
                     <DataGrid.Resources>
                         <Style TargetType="ScrollBar" BasedOn="{StaticResource scrollBarStyle}"/>
                     </DataGrid.Resources>

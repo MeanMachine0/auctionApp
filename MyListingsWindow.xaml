@@ -24,27 +24,27 @@
                     <RowDefinition Height="auto"/>
                 </Grid.RowDefinitions>
 
-                <TextBlock Grid.Row="0" x:Name="username" Margin="25" HorizontalAlignment="Left" Foreground="#ffadd8e6"/>
+                <TextBlock Grid.Row="0" x:Name="username" FontSize="20" Margin="25" HorizontalAlignment="Left" Foreground="#ffadd8e6"/>
 
-                <Border Grid.Row="0" Background="#ffadd8e6" CornerRadius="30" Margin="475, 15, 475, 10">
+                <Border Grid.Row="0" Background="#ffadd8e6" CornerRadius="30" Margin="475, 15, 475, 0">
                     <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Center" Margin="5">
-                        <Button x:Name="back" Width="50" Height="50" Margin="5" Background="Transparent" BorderThickness="0" ToolTip="List an Item" Click="back_Click">
+                        <Button x:Name="back" Width="50" Height="50" Margin="5, 0" Background="Transparent" BorderThickness="0" ToolTip="List an Item" Click="back_Click">
                             <Icon:PackIconMaterial Kind="PiggyBankOutline" Width="40" Height="40"/>
                         </Button>
-                        <Button x:Name="menu" Width="50" Height="50" Margin="5" Background="Transparent" BorderThickness="0" ToolTip="Menu" Click="menu_Click">
+                        <Button x:Name="menu" Width="50" Height="50" Margin="5, 0" Background="Transparent" BorderThickness="0" ToolTip="Menu" Click="menu_Click">
                             <Icon:PackIconMaterial Kind="HomeOutline" Width="40" Height="40"/>
                         </Button>
-                        <Button x:Name="logout" Width="50" Height="50" Margin="5" Background="Transparent" BorderThickness="0" ToolTip="Logout" Click="logout_Click">
+                        <Button x:Name="logout" Width="50" Height="50" Margin="5, 0" Background="Transparent" BorderThickness="0" ToolTip="Logout" Click="logout_Click">
                             <Icon:PackIconMaterial Kind="Logout" Width="40" Height="40"/>
                         </Button>
-                        <Button x:Name="exitApp" Width="50" Height="50" Margin="5" Background="Transparent" BorderThickness="0" ToolTip="Exit App" Click="exitApp_Click">
+                        <Button x:Name="exitApp" Width="50" Height="50" Margin="5, 0" Background="Transparent" BorderThickness="0" ToolTip="Exit App" Click="exitApp_Click">
                             <Icon:PackIconMaterial Kind="CloseBoxOutline" Width="40" Height="40"/>
                         </Button>
                     </StackPanel>
                 </Border>
                 
 
-                <DataGrid Grid.Row="1" x:Name="myListingsResults" Style="{StaticResource dGridStyle}" ColumnHeaderStyle="{StaticResource columnHeaderStyle}" RowStyle="{StaticResource rowStyle}" CellStyle="{StaticResource cellStyle}" ItemsSource="{Binding MyListingsList}" Margin="25, 15, 25, 25">
+                <DataGrid Grid.Row="1" x:Name="myListingsResults" Style="{StaticResource dGridStyle}" ColumnHeaderStyle="{StaticResource columnHeaderStyle}" RowStyle="{StaticResource rowStyle}" CellStyle="{StaticResource cellStyle}" ItemsSource="{Binding MyListingsList}" Margin="25">
                     <DataGrid.Resources>
                         <Style TargetType="ScrollBar" BasedOn="{StaticResource scrollBarStyle}"/>
                     </DataGrid.Resources>

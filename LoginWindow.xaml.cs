@@ -82,7 +82,7 @@ namespace auctionApp
 
         private void OnTimedEvent(object? sender, ElapsedEventArgs e)
         {
-            Debug.Print("Updated at {0:HH:mm:ss.fff}", e.SignalTime);
+            Debug.Print("Updated sold statuses at {0:HH:mm:ss.fff}", e.SignalTime);
             Application.Current.Dispatcher.Invoke(new Action(async () =>
             {
                 try
