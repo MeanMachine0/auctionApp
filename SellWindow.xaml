@@ -123,12 +123,11 @@
                         <DatePicker.Resources>
                             <Style TargetType="DatePickerTextBox">
                                 <Setter Property="Background" Value="Transparent"/>
-                                <Setter Property="BorderThickness" Value="0"/>
                                 <Setter Property="Template">
                                     <Setter.Value>
                                         <ControlTemplate TargetType="{x:Type DatePickerTextBox}">
                                             <Grid>
-                                                <Border x:Name="Border" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}">
+                                                <Border x:Name="Border" Background="{TemplateBinding Background}">
                                                     <Grid x:Name="WatermarkContent">
                                                         <ScrollViewer x:Name="PART_ContentHost" Margin="0, -1.5, 0, 0"/>
                                                     </Grid>

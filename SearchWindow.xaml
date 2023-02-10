@@ -4,49 +4,89 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:auctionApp"
+        xmlns:Icon="http://metro.mahapps.com/winfx/xaml/iconpacks"
         mc:Ignorable="d"
-        Title="SearchWindow" Height="720" Width="1280" Background="DimGray" WindowStartupLocation="CenterScreen">
+        Title="SearchWindow" Height="720" Width="1280" FontSize="28" Foreground="LightGray"
+        Background="Transparent" WindowStartupLocation="CenterScreen"
+        ResizeMode="NoResize" AllowsTransparency="True" WindowStyle="None">
 
     <Window.Resources>
         <local:BooleanToYesNoConverter x:Key="BooleanToYesNo"/>
+        <local:StringIsEmptyToVisibilityConverter x:Key="StringIsEmptyToVisConv"/>
     </Window.Resources>
 
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="auto"/>
-            <RowDefinition Height="*"/>
-        </Grid.RowDefinitions>
+    <Border Background="#ffadd8e6" CornerRadius="40" BorderThickness="2" Padding="15" MouseDown="border_MouseDown">
+        <Border CornerRadius="20">
+            <Border.Background>
+                <LinearGradientBrush StartPoint="0, 0" EndPoint="0, 1">
+                    <GradientStop Color="DimGray" Offset="-0.125"/>
+                    <GradientStop Color="Black" Offset="1.25"/>
+                </LinearGradientBrush>
+            </Border.Background>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="15"/>
+                </Grid.RowDefinitions>
 
-        <TextBlock x:Name="username" Margin="5" HorizontalAlignment="Left" FontSize="20" Grid.Row="0"/>
+                <TextBlock Grid.Row="0" x:Name="username" FontSize="20" Margin="25" HorizontalAlignment="Left" Foreground="#ffadd8e6"/>
 
-        <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Center" Margin="5">
-            <Button x:Name="back" Content="Back" Background="DarkGray"
-                    Click="back_Click" Margin="5" FontSize="20"/>
-            <Button x:Name="menu" Content="Menu" Background="DarkGray" 
-                    Click="menu_Click" Margin="5" FontSize="20"/>
-            <Button x:Name="logout" Content="Logout" Background="DarkGray"
-                    Click="logout_Click" Margin="5" FontSize="20"/>
-            <TextBlock Text="Search:" Width="auto" Margin="95, 5, 5, 5" FontSize="20"/>
-            <TextBox x:Name="searchBar" Width="550" Background="DarkGray" Margin="5" FontSize="20" KeyDown="searchBar_KeyDown"/>
-            <Button x:Name="refresh" Content="Refresh" Background="DarkGray"
-                    Click="refresh_Click" Margin="5" FontSize="20"/>
-        </StackPanel>
+                <Border Grid.Row="0" Background="#ffadd8e6" CornerRadius="30" Margin="475, 15, 475, 10">
+                    <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Center" Margin="5">
+                        <Button x:Name="back" Background="Transparent" Click="back_Click" Width="50" Height="50" Margin="0" BorderThickness="0" ToolTip="Browse Items">
+                            <Icon:PackIconMaterial Kind="CurrencyGbp" Width="40" Height="40"/>
+                        </Button>
+                        <Button x:Name="menu" Background="Transparent" Click="menu_Click" Width="50" Height="50" Margin="5, 0" BorderThickness="0" ToolTip="Menu">
+                            <Icon:PackIconMaterial Kind="HomeOutline" Width="40" Height="40"/>
+                        </Button>
+                        <Button x:Name="logout" Background="Transparent" Click="logout_Click" Width="50" Height="50" Margin="5, 0" BorderThickness="0" ToolTip="Logout">
+                            <Icon:PackIconMaterial Kind="Logout" Width="40" Height="40"/>
+                        </Button>
+                        <Button x:Name="exitApp" Background="Transparent" Click="exitApp_Click" Width="50" Height="50" Margin="5, 0" BorderThickness="0" ToolTip="Exit App">
+                            <Icon:PackIconMaterial Kind="CloseBoxOutline" Width="40" Height="40"/>
+                        </Button>
+                    </StackPanel>
+                </Border>
 
-        <DataGrid Grid.Row="1" AutoGenerateColumns="False" FontSize="16" x:Name="searchResults" ItemsSource="{Binding SearchList}" Margin="5" Background="DimGray" SelectionChanged="DataGrid_SelectionChanged">
-            <DataGrid.Columns>
-                <DataGridTextColumn Header="Item Name" Width="auto" Binding="{Binding ItemName}"/>
-                <DataGridTextColumn Header="Sold?" Width="auto" Binding="{Binding IsSold, Converter={StaticResource BooleanToYesNo}}"/>
-                <DataGridTextColumn Header="Current Price" Width="auto" Binding="{Binding CurrentPrice, StringFormat=£{0:0.00}}"/>
-                <DataGridTextColumn Header="P&amp;P" Width="auto" Binding="{Binding PostageCost, StringFormat=£{0:0.00}}"/>
-                <DataGridTextColumn Header="Bid Increment" Width="auto" Binding="{Binding BidIncrement, StringFormat=£{0:0.00}}"/>
-                <DataGridTextColumn Header="Condition" Width="auto" Binding="{Binding ItemCondition}"/>
-                <DataGridTextColumn Header="Time of Listing" Width="auto" Binding="{Binding TimeOfListing, StringFormat=dd MMM yyyy HH:mm:ss}"/>
-                <DataGridTextColumn Header="End Time" Width="auto" Binding="{Binding EndTime, StringFormat=dd MMM yyyy HH:mm:ss}"/>
-                <DataGridTextColumn Header="Returns Accepted?" Width="auto" Binding="{Binding ReturnsAccepted, Converter={StaticResource BooleanToYesNo}}"/>
-                <DataGridTextColumn Header="Bids" Width="auto" Binding="{Binding NumBids}"/>
-                <DataGridTextColumn Header="Description" Width="*" Binding="{Binding Description}"/>
-                <DataGridTextColumn Header="Id" Width="auto" Binding="{Binding ItemId}"/>
-            </DataGrid.Columns>
-        </DataGrid>
-    </Grid>
+                <DataGrid Grid.Row="1" Background="Transparent" x:Name="searchResults" FontSize="20" AutoGenerateColumns="False" ItemsSource="{Binding SearchList}" Margin="25, 15, 25, 25" BorderThickness="0" Foreground="LightGray" SelectionChanged="DataGrid_SelectionChanged">
+                    <DataGrid.CellStyle>
+                        <Style TargetType="DataGridCell">
+                            <Setter Property="Background" Value="Transparent"/>
+                        </Style>
+                    </DataGrid.CellStyle>
+                    <DataGrid.RowStyle>
+                        <Style TargetType="DataGridRow">
+                            <Setter Property="Background" Value="Transparent"/>
+                        </Style>
+                    </DataGrid.RowStyle>
+
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Item Name" Width="auto" Binding="{Binding ItemName}"/>
+                        <DataGridTextColumn Header="Sold?" Width="auto" Binding="{Binding IsSold, Converter={StaticResource BooleanToYesNo}}"/>
+                        <DataGridTextColumn Header="Crnt Price" Width="auto" Binding="{Binding CurrentPrice, StringFormat=£{0:0.00}}"/>
+                        <DataGridTextColumn Header="P&amp;P" Width="auto" Binding="{Binding PostageCost, StringFormat=£{0:0.00}}"/>
+                        <DataGridTextColumn Header="Bid Inc" Width="auto" Binding="{Binding BidIncrement, StringFormat=£{0:0.00}}"/>
+                        <DataGridTextColumn Header="Condition" Width="auto" Binding="{Binding ItemCondition}"/>
+                        <DataGridTextColumn Header="End Time" Width="auto" Binding="{Binding EndTime, StringFormat=dd MMM yyyy HH:mm:ss}"/>
+                        <DataGridTextColumn Header="Rtns Acpd?" Width="auto" Binding="{Binding ReturnsAccepted, Converter={StaticResource BooleanToYesNo}}"/>
+                        <DataGridTextColumn Header="Bids" Width="auto" Binding="{Binding NumBids}"/>
+                        <DataGridTextColumn Header="Id" Width="*" Binding="{Binding ItemId}"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+
+                <Border Grid.Row="2" Background="#ffadd8e6" CornerRadius="30" Margin="280, 0">
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                        <TextBox x:Name="searchBar" Height="40" Width="550" Background="Transparent" Margin="5" KeyDown="searchBar_KeyDown" BorderThickness="2"/>
+                        <TextBlock Text="Search" Height="40" Margin="-551, 4, 0, 0" Foreground="Black" Opacity="0.4"
+                                   Visibility="{Binding ElementName=searchBar,Path=Text,Converter={StaticResource StringIsEmptyToVisConv}}"/>
+                        <Button x:Name="refresh" Background="Transparent" Click="refresh_Click" Width="50" Height="50" Margin="5" BorderThickness="0">
+                            <Icon:PackIconMaterial Kind="Magnify" Width="40" Height="40"/>
+                        </Button>
+                    </StackPanel>
+                </Border>
+            </Grid>
+        </Border>
+    </Border>
 </Window>

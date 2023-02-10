@@ -60,13 +60,13 @@ namespace auctionApp
             int accountId = (int)Application.Current.Properties["accountId"];
             try
             {
-                if (float.Parse(bid.Text.Replace("£", "").Replace(" ", "")) >= (_model.CurrentPrice + _model.BidIncrement) & _model.TotalSecondsRemaining > 0)
+                if (float.Parse(bid.Text.Replace("£", "").Replace(" ", "")) >= (_model.CurrentPrice + _model.BidIncrement) && _model.TotalSecondsRemaining > 0)
                 {
                     DataLayer dataLayer = new DataLayer();
                     dataLayer.SubmitBid(bid.Text.Replace("£", "").Replace(" ", ""), pageNumber.Text, accountId);
                     MessageBox.Show("Bid submitted.");
                 }
-                else if (float.Parse(bid.Text) < (_model.CurrentPrice + _model.BidIncrement) & _model.TotalSecondsRemaining > 0)
+                else if (float.Parse(bid.Text) < (_model.CurrentPrice + _model.BidIncrement) && _model.TotalSecondsRemaining > 0)
                 {
                     MessageBox.Show("Cannot submit bid: bid is less than the current price plus the bid increment.");
                 }
@@ -177,7 +177,7 @@ namespace auctionApp
             }
         }
 
-        private void closeApp_Click(object sender, RoutedEventArgs e)
+        private void exitApp_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
         }

@@ -42,7 +42,7 @@
 
                 <TextBlock x:Name="username" Margin="25" HorizontalAlignment="Left" FontSize="20" Grid.Row="0" Foreground="#ffadd8e6"/>
 
-                <Border CornerRadius="30" Background="#ffadd8e6" Margin="500, 15, 500, 0">
+                <Border Grid.Row="0" CornerRadius="30" Background="#ffadd8e6" Margin="500, 15, 500, 0">
                     <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Center" Margin="5">
 
                         <Button x:Name="menu" Click="menu_Click" Background="#ffadd8e6"
@@ -55,7 +55,7 @@
                             <Icon:PackIconMaterial Kind="Logout" Width="40" Height="40" ToolTip="Logout"/>
                         </Button>
 
-                        <Button x:Name="closeApp" Click="closeApp_Click" Background="#ffadd8e6"
+                        <Button x:Name="exitApp" Click="exitApp_Click" Background="#ffadd8e6"
                                 Width="50" Height="50" BorderThickness="0" Margin="5, 0">
                             <Icon:PackIconMaterial Kind="CloseBoxOutline" Width="40" Height="40" ToolTip="Exit App"/>
                         </Button>

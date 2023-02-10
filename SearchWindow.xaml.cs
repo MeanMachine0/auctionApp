@@ -67,6 +67,11 @@ namespace auctionApp
             this.Close();
         }
 
+        private void exitApp_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
+
         private void refresh_Click(object sender, RoutedEventArgs e)
         {
             _refresh();
@@ -74,11 +79,15 @@ namespace auctionApp
 
         private void DataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            DataGrid dataGrid = sender as DataGrid;
-            DataGridRow row = (DataGridRow)dataGrid.ItemContainerGenerator.ContainerFromIndex(dataGrid.SelectedIndex);
-            DataGridCell rowColumn = dataGrid.Columns[11].GetCellContent(row).Parent as DataGridCell;
-            App.Current.Properties["selectedId"] = ((TextBlock)rowColumn.Content).Text;
-            back_Click(this, new RoutedEventArgs());
+            try 
+            {
+                DataGrid dataGrid = sender as DataGrid;
+                DataGridRow row = (DataGridRow)dataGrid.ItemContainerGenerator.ContainerFromIndex(dataGrid.SelectedIndex);
+                DataGridCell rowColumn = dataGrid.Columns[9].GetCellContent(row).Parent as DataGridCell;
+                App.Current.Properties["selectedId"] = ((TextBlock)rowColumn.Content).Text;
+                back_Click(this, new RoutedEventArgs());
+            }
+            catch { }
         }
 
         private void searchBar_KeyDown(object sender, KeyEventArgs e)
@@ -89,6 +98,14 @@ namespace auctionApp
                     _refresh();
                     e.Handled = true;
                     break;
+            }
+        }
+
+        private void border_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            if (e.ChangedButton == MouseButton.Left)
+            {
+                this.DragMove();
             }
         }
     }

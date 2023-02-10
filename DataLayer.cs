@@ -36,8 +36,8 @@ namespace auctionApp
             int mins = (int)(endTime - timeNow).Minutes;
             int secs = (int)(endTime - timeNow).Seconds;
 
-            if (days == 0 & hours == 0 & mins == 0) { return $"{secs}s"; }
-            else if (days == 0 & hours == 0) { return $"{mins}m {secs}s"; }
+            if (days == 0 && hours == 0 && mins == 0) { return $"{secs}s"; }
+            else if (days == 0 && hours == 0) { return $"{mins}m {secs}s"; }
             else if (days == 0) { return $"{hours}h {mins}m"; }
             else { return $"{days}d {hours}h"; }
         }
@@ -81,7 +81,7 @@ namespace auctionApp
                     }
                 }
             }
-            if (model.TimeRemaining == "0s" & model.NumBids > 0 & model.IsSold == false)
+            if (model.TimeRemaining == "0s" && model.NumBids > 0 && model.IsSold == false)
             {
                 query = $"UPDATE items SET sold = 1 WHERE itemId = {model.ItemId.ToString()}";
                 using (MySqlCommand command = new MySqlCommand(query, connection))
@@ -163,14 +163,12 @@ namespace auctionApp
                     {
                         ItemModel item = new ItemModel();
                         item.ItemId = reader.GetInt32("itemId");
-                        item.Description = reader.GetString("information");
                         item.PostageCost = reader.GetFloat("postageCost");
                         item.ItemName = reader.GetString("itemName");
                         item.IsSold = reader.GetBoolean("sold");
                         item.CurrentPrice = reader.GetFloat("currentPrice");
                         item.BidIncrement = reader.GetFloat("bidIncrement");
                         item.ItemCondition = reader.GetString("state");
-                        item.TimeOfListing = reader.GetDateTime("timeOfListing");
                         item.EndTime = reader.GetDateTime("endTime");
                         item.ReturnsAccepted = reader.GetBoolean("returnsAccepted");
                         item.NumBids = reader.GetInt32("numBids");

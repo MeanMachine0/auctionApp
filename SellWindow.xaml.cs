@@ -62,19 +62,21 @@ namespace auctionApp
                 _model.Description = description.Text;
 
                 DateTime timeNow = DateTime.Now;
-                if (itemName.Text.Length > 0 & startingPrice.Text.Length - 1 > 0 & postageCost.Text.Length - 1 > 0 & bidIncrement.Text.Length - 1 > 0 & _model.BidIncrement > 0 & condition.Text.Length > 0 &
-                _model.EndTime > timeNow & description.Text.Length > 0)
+                if (itemName.Text.Length > 0 && itemName.Text.Length <= 30 && startingPrice.Text.Length - 1 > 0 && postageCost.Text.Length - 1 > 0 && bidIncrement.Text.Length - 1 > 0 && _model.BidIncrement > 0 && condition.Text.Length > 0 &&
+                _model.EndTime > timeNow && description.Text.Length > 0 && description.Text.Length <= 1000)
                 {
                     DataLayer dataLayer = new DataLayer();
                     dataLayer.ListItem(_model, (int)App.Current.Properties["accountId"]);
                     MessageBox.Show($"{_model.ItemName} Listed. You can go to 'My Listings' to view your listed item(s).");
                 }
                 else if (_model.EndTime <= timeNow) { MessageBox.Show("Error: the end of the listing must be set in the future!"); }
+                else if (_model.ItemName.Length > 30) { MessageBox.Show("Error: item name is too long (30 character limit)!"); }
+                else if (_model.Description.Length > 1000) { MessageBox.Show("Error: description is too long (1000 character limit)!"); }
                 else if (_model.BidIncrement <= 0) { MessageBox.Show("Error: Bid Increment must be greater than £0!"); }
                 else { MessageBox.Show("Error: one or more field(s) are empty!"); }
             }
 
-            catch { }
+            catch { MessageBox.Show("Error: one or more field(s) have invalid input types!"); }
         }
 
         private void myListings_Click(object sender, RoutedEventArgs e)

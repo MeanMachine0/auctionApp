@@ -54,7 +54,7 @@
                             <Icon:PackIconMaterial Kind="Login" Width="40" Height="40"/>
                         </Button>
 
-                        <Button x:Name="closeApp" Background="#ffadd8e6" Click="closeApp_Click" 
+                        <Button x:Name="exitApp" Background="#ffadd8e6" Click="exitApp_Click" 
                                 BorderThickness="0" Margin="5, 0, 0, 0" Width="50" Height="50" ToolTip="Exit App">
                             <Icon:PackIconMaterial Kind="CloseBoxOutline" Width="40" Height="40"/>
                         </Button>
