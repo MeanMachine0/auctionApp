@@ -23,12 +23,6 @@ namespace auctionApp
     {
         SearchListModel searchList = new SearchListModel();
 
-        private void sortBy(string column)
-        {
-            searchResults.Items.SortDescriptions.Clear();
-            searchResults.Items.SortDescriptions.Add(new SortDescription(column, ListSortDirection.Ascending));
-            searchResults.Items.Refresh();
-        }
         private void _refresh()
         {
             DataLayer dataLayer = new DataLayer();
@@ -41,7 +35,6 @@ namespace auctionApp
             InitializeComponent();
             DataContext = searchList;
             _refresh();
-            sortBy("ItemName");
             searchBar.Text = Application.Current.Properties["searchString"].ToString();
             username.Text = Application.Current.Properties["username"].ToString();
         }

@@ -6,10 +6,9 @@
         xmlns:local="clr-namespace:auctionApp"
         xmlns:Icon="http://metro.mahapps.com/winfx/xaml/iconpacks"
         mc:Ignorable="d"
-        Title="MenuWindow" Height="400" Width="400" FontSize="28" Background="Transparent"
-        ResizeMode="NoResize" WindowStartupLocation="CenterScreen" AllowsTransparency="True" WindowStyle="None">
+        Title="MenuWindow" Style="{StaticResource windowPresets}" Height="400" Width="400" WindowStartupLocation="CenterScreen">
 
-    <Border Background="#ffadd8e6" CornerRadius="40" BorderThickness="2" Padding="15" MouseDown="border_MouseDown">
+    <Border Style="{StaticResource windowBorder}" MouseDown="border_MouseDown">
         <Border CornerRadius="20">
             <Border.Background>
                 <LinearGradientBrush StartPoint="0, 0" EndPoint="0, 1">
@@ -42,7 +41,7 @@
                                 BorderThickness="0" Margin="0, 5" HorizontalAlignment="Left">
                             <StackPanel Orientation="Horizontal">
                                 <Icon:PackIconMaterial Kind="PiggyBankOutline" Height="40" Width="40" />
-                                <TextBlock Text="List Items" Height="40" Margin="10, 0, 0, 0"/>
+                                <TextBlock Text="List an Item" Height="40" Margin="10, 0, 0, 0"/>
                             </StackPanel>
                         </Button>
                         <Button x:Name="logout" Click="logout_Click" Background="#ffadd8e6" 

@@ -29,7 +29,7 @@ namespace auctionApp
         {
             int accountId = (int)Application.Current.Properties["accountId"];
             DataLayer dataLayer = new DataLayer();
-            dataLayer.PopulateMyListings(myListings, accountId);
+            dataLayer.PopulateMyListings(myListings, accountId, searchBar.Text);
         }
         public MyListingsWindow()
         {
@@ -59,10 +59,25 @@ namespace auctionApp
             loginWindow.Show();
             this.Close();
         }
+        private void exitApp_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
 
         private void refresh_Click(object sender, RoutedEventArgs e)
         {
             _refresh();
+        }
+
+        private void searchBar_KeyDown(object sender, KeyEventArgs e)
+        {
+            switch (e.Key)
+            {
+                case Key.Enter:
+                    _refresh();
+                    e.Handled = true;
+                    break;
+            }
         }
     }
 }

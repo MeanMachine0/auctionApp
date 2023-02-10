@@ -6,17 +6,10 @@
         xmlns:local="clr-namespace:auctionApp"
         xmlns:Icon="http://metro.mahapps.com/winfx/xaml/iconpacks"
         mc:Ignorable="d"
-        Title="SellWindow" Height="720" Width="1280" FontSize="28" Foreground="LightGray"
-        Background="Transparent" WindowStartupLocation="CenterScreen"
-        ResizeMode="NoResize" AllowsTransparency="True" WindowStyle="None">
+        Title="SellWindow" Style="{StaticResource windowPresets}" Height="720" Width="1280" 
+        Foreground="LightGray" WindowStartupLocation="CenterScreen">
 
-    <Window.Resources>
-        <local:BooleanToYesNoConverter x:Key="BooleanToYesNo"/>
-        <local:StringIsEmptyToVisibilityConverter x:Key="StringIsEmptyToVisConv"/>
-    </Window.Resources>
-
-    <Border Background="#ffadd8e6" CornerRadius="40" BorderThickness="2" 
-            Padding="15" MouseDown="border_MouseDown">
+    <Border Style="{StaticResource windowBorder}" MouseDown="border_MouseDown">
         <Border CornerRadius="20">
             <Border.Background>
                 <LinearGradientBrush StartPoint="0, 0" EndPoint="0, 1">
@@ -61,7 +54,7 @@
                             <Icon:PackIconMaterial Kind="Logout" Width="40" Height="40"/>
                         </Button>
 
-                        <Button x:Name="closeApp" Click="closeApp_Click" Background="#ffadd8e6"
+                        <Button x:Name="exitApp" Click="exitApp_Click" Background="#ffadd8e6"
                                 Width="50" Height="50" BorderThickness="0" Margin="5, 0" ToolTip="Exit App">
                             <Icon:PackIconMaterial Kind="CloseBoxOutline" Width="40" Height="40"/>
                         </Button>
@@ -141,8 +134,8 @@
                     </DatePicker>
                     <TextBox x:Name="endTime" Height="40" Width="147" Background="Transparent" BorderThickness="2" 
                              Margin="5" Foreground="LightGray"/>
-                    <TextBlock Height="40" Margin="-148, 4, 0, 0" Foreground="LightGray" 
-                               Text="HH:mm:ss" Opacity="0.4" IsHitTestVisible="False" Panel.ZIndex="1"
+                    <TextBlock Margin="-148, 4, 0, 0" Foreground="LightGray" 
+                               Text="HH:mm:ss" Style="{StaticResource placeholderText}"
                                Visibility="{Binding ElementName=endTime,Path=Text,Converter={StaticResource StringIsEmptyToVisConv}}"/>
                 </StackPanel>
 

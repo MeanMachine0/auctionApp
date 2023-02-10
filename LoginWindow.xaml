@@ -6,14 +6,10 @@
         xmlns:local="clr-namespace:auctionApp"
         xmlns:Icon="http://metro.mahapps.com/winfx/xaml/iconpacks"
         mc:Ignorable="d"
-        Title="LoginWindow" Height="360" Width="640" FontSize="28" Background="Transparent" KeyDown="Window_KeyDown" 
-        ResizeMode="NoResize" WindowStartupLocation="CenterScreen" AllowsTransparency="True" WindowStyle="None">
+        Title="LoginWindow" Style="{StaticResource windowPresets}" Height="360" Width="640" 
+        WindowStartupLocation="CenterScreen" KeyDown="Window_KeyDown">
     
-    <Window.Resources>
-        <local:StringIsEmptyToVisibilityConverter x:Key="StringIsEmptyToVisConv"/>
-    </Window.Resources>
-
-    <Border Background="#ffadd8e6" CornerRadius="40" BorderThickness="2" Padding="15" MouseDown="border_MouseDown">
+    <Border Style="{StaticResource windowBorder}" MouseDown="border_MouseDown">
         <Border CornerRadius="20">
             <Border.Background>
                 <LinearGradientBrush StartPoint="0, 0" EndPoint="0, 1">
@@ -33,16 +29,14 @@
                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                             <TextBox x:Name="username" Height="40" Width="400" Margin="0, 15, 0, 5" 
                                      Background="Transparent" BorderThickness="2"/>
-                            <TextBlock Text="Username" Height="40" Opacity="0.4" Margin="-396, 14, 0, 0"
-                                       IsHitTestVisible="False" Panel.ZIndex="1"
+                            <TextBlock Text="Username" Style="{StaticResource placeholderText}" Margin="-396, 14, 0, 0"
                                        Visibility="{Binding ElementName=username,Path=Text,Converter={StaticResource StringIsEmptyToVisConv}}"/>
                         </StackPanel>
                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                             <PasswordBox x:Name="password" Height="40" Width="400" Margin="0, 5, 0, 15"
                                          Background="Transparent" BorderThickness="2"
                                          PasswordChanged="password_PasswordChanged"/>
-                            <TextBlock x:Name="passwordPlaceholder" Text="Password" Height="40" Opacity="0.4" Margin="-396, 4, 0, 10"
-                                       IsHitTestVisible="False" Panel.ZIndex="1"/>
+                            <TextBlock x:Name="passwordPlaceholder" Text="Password" Style="{StaticResource placeholderText}" Margin="-396, 4, 0, 10"/>
                         </StackPanel>
                     </StackPanel>
                 </Border>

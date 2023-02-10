@@ -86,7 +86,7 @@ namespace auctionApp
             this.Close();
         }
 
-        private void closeApp_Click(object sender, RoutedEventArgs e)
+        private void exitApp_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
         }

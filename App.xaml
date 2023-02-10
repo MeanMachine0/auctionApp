@@ -4,6 +4,49 @@
              xmlns:local="clr-namespace:auctionApp"
              StartupUri="LoginWindow.xaml">
     <Application.Resources>
-         
+        <local:BooleanToYesNoConverter x:Key="BooleanToYesNo"/>
+        <local:StringIsEmptyToVisibilityConverter x:Key="StringIsEmptyToVisConv"/>
+        <Style x:Key="dGridStyle" TargetType="DataGrid">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="FontSize" Value="20"/>
+            <Setter Property="AutoGenerateColumns" Value="False"/>
+            <Setter Property="Foreground" Value="LightGray"/>
+            <Setter Property="HorizontalGridLinesBrush" Value="DimGray"/>
+            <Setter Property="VerticalGridLinesBrush" Value="DimGray"/>
+            <Setter Property="BorderThickness" Value="0"/>
+        </Style>
+        <Style x:Key="columnHeaderStyle" TargetType="DataGridColumnHeader">
+            <Setter Property="Background" Value="#ffadd8e6"/>
+            <Setter Property="Foreground" Value="Black"/>
+            <Setter Property="Margin" Value="0, 0, 5, 0"/>
+        </Style>
+        <Style x:Key="rowStyle" TargetType="DataGridRow">
+            <Setter Property="Background" Value="Transparent"/>
+        </Style>
+        <Style x:Key="cellStyle" TargetType="DataGridCell">
+            <Setter Property="Background" Value="Transparent"/>
+        </Style>
+        <Style x:Key="scrollBarStyle" TargetType="ScrollBar">
+            <Setter Property="Background" Value="Transparent"/>
+        </Style>
+        <Style x:Key="windowBorder" TargetType="Border">
+            <Setter Property="Background" Value="#ffadd8e6"/>
+            <Setter Property="CornerRadius" Value="40"/>
+            <Setter Property="BorderThickness" Value="2"/>
+            <Setter Property="Padding" Value="15"/>
+        </Style>
+        <Style x:Key="placeholderText" TargetType="TextBlock">
+            <Setter Property="Height" Value="40"/>
+            <Setter Property="Opacity" Value="0.4"/>
+            <Setter Property="IsHitTestVisible" Value="False"/>
+            <Setter Property="Panel.ZIndex" Value="1"/>
+        </Style>
+        <Style x:Key="windowPresets" TargetType="Window">
+            <Setter Property="FontSize" Value="28"/>
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="ResizeMode" Value="NoResize"/>
+            <Setter Property="AllowsTransparency" Value="True"/>
+            <Setter Property="WindowStyle" Value="None"/>
+        </Style>
     </Application.Resources>
 </Application>

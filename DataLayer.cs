@@ -98,11 +98,11 @@ namespace auctionApp
             Populate(model, query);
         }
 
-        public void PopulateMyListings(MyListingsModel model, int accountId)
+        public void PopulateMyListings(MyListingsModel model, int accountId, string searchText)
         {
             model.MyListingsList.Clear();
             OpenConnection();
-            string query = $"SELECT itemName, sold, currentPrice, bidIncrement, state, postageCost, timeOfListing, endTime, returnsAccepted, numBids, buyerId FROM items WHERE sellerId = {accountId}";
+            string query = $"SELECT itemName, sold, currentPrice, bidIncrement, state, postageCost, timeOfListing, endTime, returnsAccepted, numBids, buyerId FROM items WHERE sellerId = {accountId} AND itemName like '%{searchText.Trim()}%' ORDER BY itemName";
             using (MySqlCommand command = new MySqlCommand(query, connection))
             {
                 using (MySqlDataReader reader = command.ExecuteReader())
@@ -129,11 +129,6 @@ namespace auctionApp
             }
         }
 
-        public void OnEndOfListing(LoginModel model)
-        {
-            string query = $"";
-        }
-
         public void ListItem(ItemModel model, int accountId)
         {
             string query = "INSERT INTO items (itemName, currentPrice, postageCost, bidIncrement, state, timeOfListing, endTime, returnsAccepted, information, sellerId) " +
@@ -154,7 +149,7 @@ namespace auctionApp
             model.SearchList.Clear();
             OpenConnection();
             string query = "SELECT itemId, information, itemName, sold, currentPrice, bidIncrement, state, timeOfListing, endTime, " + 
-               $"returnsAccepted, numBids, postageCost FROM items WHERE itemName like '%{searchText.Trim()}%'";
+               $"returnsAccepted, numBids, postageCost FROM items WHERE itemName like '%{searchText.Trim()}%' ORDER BY itemName";
             using (MySqlCommand command = new MySqlCommand(query, connection))
             {
                 using (MySqlDataReader reader = command.ExecuteReader())

@@ -6,17 +6,10 @@
         xmlns:local="clr-namespace:auctionApp"
         xmlns:Icon="http://metro.mahapps.com/winfx/xaml/iconpacks"
         mc:Ignorable="d"
-        Title="Auction App" Height="720" Width="1280" FontSize="28" Foreground="LightGray"
-        Background="Transparent" KeyDown="Window_KeyDown" WindowStartupLocation="CenterScreen"
-        ResizeMode="NoResize" AllowsTransparency="True" WindowStyle="None">
+        Title="Auction App" Style="{StaticResource windowPresets}" Height="720" Width="1280" 
+        Foreground="LightGray" WindowStartupLocation="CenterScreen" KeyDown="Window_KeyDown">
     
-    <Window.Resources>
-        <local:BooleanToYesNoConverter x:Key="BooleanToYesNo"/>
-        <local:StringIsEmptyToVisibilityConverter x:Key="StringIsEmptyToVisConv"/>
-    </Window.Resources>
-
-    <Border Background="#ffadd8e6" CornerRadius="40" BorderThickness="2" 
-            Padding="15" MouseDown="border_MouseDown">
+    <Border Style="{StaticResource windowBorder}" MouseDown="border_MouseDown">
         <Border CornerRadius="20">
             <Border.Background>
                 <LinearGradientBrush StartPoint="0, 0" EndPoint="0, 1">
@@ -147,8 +140,7 @@
                                 Height="40" Margin="5" Background="#ffadd8e6" BorderThickness="0"/>
                         <TextBox x:Name="searchBar" Width="530" Height="40" Margin="5"
                                  Background="#ffadd8e6" KeyDown="searchBar_KeyDown" BorderThickness="2"/>
-                        <TextBlock Height="40" Margin="-531, 4, 0, 0" Foreground="Black" 
-                                   Text="Search" Opacity="0.4" IsHitTestVisible="False" Panel.ZIndex="1"
+                        <TextBlock Style="{StaticResource placeholderText}" Margin="-531, 4, 0, 0" Foreground="Black" Text="Search" 
                                    Visibility="{Binding ElementName=searchBar,Path=Text,Converter={StaticResource StringIsEmptyToVisConv}}"/>
                         <Button x:Name="search" Margin="5" Width="50" Height="50" Foreground="Black" 
                                 Background="#ffadd8e6" BorderThickness="0" Click="search_Click" ToolTip="Search">

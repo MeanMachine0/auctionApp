@@ -6,16 +6,10 @@
         xmlns:local="clr-namespace:auctionApp"
         xmlns:Icon="http://metro.mahapps.com/winfx/xaml/iconpacks"
         mc:Ignorable="d"
-        Title="SearchWindow" Height="720" Width="1280" FontSize="28" Foreground="LightGray"
-        Background="Transparent" WindowStartupLocation="CenterScreen"
-        ResizeMode="NoResize" AllowsTransparency="True" WindowStyle="None">
+        Title="SearchWindow" Style="{StaticResource windowPresets}" Height="720" Width="1280"
+        Foreground="LightGray" WindowStartupLocation="CenterScreen">
 
-    <Window.Resources>
-        <local:BooleanToYesNoConverter x:Key="BooleanToYesNo"/>
-        <local:StringIsEmptyToVisibilityConverter x:Key="StringIsEmptyToVisConv"/>
-    </Window.Resources>
-
-    <Border Background="#ffadd8e6" CornerRadius="40" BorderThickness="2" Padding="15" MouseDown="border_MouseDown">
+    <Border Style="{StaticResource windowBorder}" MouseDown="border_MouseDown">
         <Border CornerRadius="20">
             <Border.Background>
                 <LinearGradientBrush StartPoint="0, 0" EndPoint="0, 1">
@@ -28,7 +22,6 @@
                     <RowDefinition Height="auto"/>
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="auto"/>
-                    <RowDefinition Height="15"/>
                 </Grid.RowDefinitions>
 
                 <TextBlock Grid.Row="0" x:Name="username" FontSize="20" Margin="25" HorizontalAlignment="Left" Foreground="#ffadd8e6"/>
@@ -50,30 +43,10 @@
                     </StackPanel>
                 </Border>
 
-                <DataGrid Grid.Row="1" Background="Transparent" x:Name="searchResults" FontSize="20" AutoGenerateColumns="False" ItemsSource="{Binding SearchList}" Margin="25, 15, 25, 25" BorderThickness="0" Foreground="LightGray" HorizontalGridLinesBrush="DimGray" VerticalGridLinesBrush="DimGray" SelectionChanged="DataGrid_SelectionChanged">
-                    <DataGrid.CellStyle>
-                        <Style TargetType="DataGridCell">
-                            <Setter Property="Background" Value="Transparent"/>
-                        </Style>
-                    </DataGrid.CellStyle>
-                    <DataGrid.RowStyle>
-                        <Style TargetType="DataGridRow">
-                            <Setter Property="Background" Value="Transparent"/>
-                        </Style>
-                    </DataGrid.RowStyle>
-                    <DataGrid.ColumnHeaderStyle>
-                        <Style TargetType="DataGridColumnHeader">
-                            <Setter Property="Background" Value="#ffadd8e6"/>
-                            <Setter Property="Foreground" Value="Black"/>
-                            <Setter Property="Margin" Value="0, 0, 5, 0"/>
-                        </Style>
-                    </DataGrid.ColumnHeaderStyle>
+                <DataGrid Grid.Row="1" x:Name="searchResults" Style="{StaticResource dGridStyle}" ColumnHeaderStyle="{StaticResource columnHeaderStyle}" RowStyle="{StaticResource rowStyle}" CellStyle="{StaticResource cellStyle}" ItemsSource="{Binding SearchList}" Margin="25, 15, 25, 25" SelectionChanged="DataGrid_SelectionChanged">
                     <DataGrid.Resources>
-                        <Style TargetType="ScrollBar">
-                            <Setter Property="Background" Value="Transparent"/>
-                        </Style>
+                        <Style TargetType="ScrollBar" BasedOn="{StaticResource scrollBarStyle}"/>
                     </DataGrid.Resources>
-
                     <DataGrid.Columns>
                         <DataGridTextColumn Header="Item Name" Width="auto" Binding="{Binding ItemName}"/>
                         <DataGridTextColumn Header="Sold?" Width="auto" Binding="{Binding IsSold, Converter={StaticResource BooleanToYesNo}}"/>
@@ -88,10 +61,10 @@
                     </DataGrid.Columns>
                 </DataGrid>
 
-                <Border Grid.Row="2" Background="#ffadd8e6" CornerRadius="30" Margin="280, 0">
+                <Border Grid.Row="2" Background="#ffadd8e6" CornerRadius="30" Margin="280, 0, 280, 15">
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                         <TextBox x:Name="searchBar" Height="40" Width="550" Background="Transparent" Margin="5" KeyDown="searchBar_KeyDown" BorderThickness="2"/>
-                        <TextBlock Text="Search" Height="40" Margin="-551, 4, 0, 0" Foreground="Black" Opacity="0.4"
+                        <TextBlock Style="{StaticResource placeholderText}" Text="Search" Margin="-551, 4, 0, 0" Foreground="Black"
                                    Visibility="{Binding ElementName=searchBar,Path=Text,Converter={StaticResource StringIsEmptyToVisConv}}"/>
                         <Button x:Name="refresh" Background="Transparent" Click="refresh_Click" Width="50" Height="50" Margin="5" BorderThickness="0">
                             <Icon:PackIconMaterial Kind="Magnify" Width="40" Height="40"/>
