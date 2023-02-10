@@ -50,7 +50,7 @@
                     </StackPanel>
                 </Border>
 
-                <DataGrid Grid.Row="1" Background="Transparent" x:Name="searchResults" FontSize="20" AutoGenerateColumns="False" ItemsSource="{Binding SearchList}" Margin="25, 15, 25, 25" BorderThickness="0" Foreground="LightGray" SelectionChanged="DataGrid_SelectionChanged">
+                <DataGrid Grid.Row="1" Background="Transparent" x:Name="searchResults" FontSize="20" AutoGenerateColumns="False" ItemsSource="{Binding SearchList}" Margin="25, 15, 25, 25" BorderThickness="0" Foreground="LightGray" HorizontalGridLinesBrush="DimGray" VerticalGridLinesBrush="DimGray" SelectionChanged="DataGrid_SelectionChanged">
                     <DataGrid.CellStyle>
                         <Style TargetType="DataGridCell">
                             <Setter Property="Background" Value="Transparent"/>
@@ -61,6 +61,18 @@
                             <Setter Property="Background" Value="Transparent"/>
                         </Style>
                     </DataGrid.RowStyle>
+                    <DataGrid.ColumnHeaderStyle>
+                        <Style TargetType="DataGridColumnHeader">
+                            <Setter Property="Background" Value="#ffadd8e6"/>
+                            <Setter Property="Foreground" Value="Black"/>
+                            <Setter Property="Margin" Value="0, 0, 5, 0"/>
+                        </Style>
+                    </DataGrid.ColumnHeaderStyle>
+                    <DataGrid.Resources>
+                        <Style TargetType="ScrollBar">
+                            <Setter Property="Background" Value="Transparent"/>
+                        </Style>
+                    </DataGrid.Resources>
 
                     <DataGrid.Columns>
                         <DataGridTextColumn Header="Item Name" Width="auto" Binding="{Binding ItemName}"/>

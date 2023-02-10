@@ -14,6 +14,7 @@ using System.Windows.Shapes;
 using System.Security.Cryptography;
 using System.Diagnostics;
 using Org.BouncyCastle.Crypto.Parameters;
+using System.Timers;
 
 namespace auctionApp
 {
@@ -25,6 +26,8 @@ namespace auctionApp
         private LoginModel model;
 
         public byte[] dbSalt;
+
+        private Timer _timer;
 
         private string GetHash(string password, byte[] salt)
         {
@@ -50,6 +53,16 @@ namespace auctionApp
         public LoginWindow()
         {
             InitializeComponent();
+
+            if (App.Current.Properties["updateTimerBool"] == null)
+            {
+                _timer = new Timer(30000);
+                _timer.Elapsed += OnTimedEvent;
+                _timer.AutoReset = false;
+                _timer.Enabled = true;
+                App.Current.Properties["updateTimerBool"] = false;
+            }
+
             if (App.Current.Properties["autoLoginBool"] == null)
             {
                 App.Current.Properties["autoLoginBool"] = true;
@@ -65,6 +78,21 @@ namespace auctionApp
                 password.Password = "egger";
                 login_Click(this, new RoutedEventArgs());
             }
+        }
+
+        private void OnTimedEvent(object? sender, ElapsedEventArgs e)
+        {
+            Debug.Print("Updated at {0:HH:mm:ss.fff}", e.SignalTime);
+            Application.Current.Dispatcher.Invoke(new Action(async () =>
+            {
+                try
+                {
+                    DataLayer dataLayer = new DataLayer();
+                    dataLayer.UpdateSoldStatus();
+                }
+                catch { MessageBox.Show("Error: could not update!"); }
+                _timer.Enabled = true;
+            }));
         }
 
         private void login_Click(object sender, RoutedEventArgs e)

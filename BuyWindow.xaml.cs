@@ -51,7 +51,6 @@ namespace auctionApp
                 catch { MessageBox.Show("Invalid Page Number!"); await Task.Delay(1000); }
                 _timer.Enabled = true;
             }));
-
         }
 
         private void submit_Click(object sender, RoutedEventArgs e)

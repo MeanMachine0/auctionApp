@@ -191,6 +191,18 @@ namespace auctionApp
             connection.Close();
         }
 
+        internal void UpdateSoldStatus()
+        {
+            OpenConnection();
+            string query = "UPDATE items SET sold = 1 WHERE sold = 0 AND endTime < NOW() AND numBids > 0";
+            OpenConnection();
+            using (MySqlCommand command = new MySqlCommand(query, connection))
+            {
+                command.ExecuteNonQuery();
+            }
+            connection.Close();
+        }
+
         public bool VerifyPassword(LoginModel model)
         {
             OpenConnection();
