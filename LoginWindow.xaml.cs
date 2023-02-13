@@ -84,14 +84,18 @@ namespace auctionApp
         private void OnTimedEvent(object? sender, ElapsedEventArgs e)
         {
             Debug.Print("Updated sold statuses at {0:HH:mm:ss.fff}", e.SignalTime);
-            Application.Current.Dispatcher.Invoke(new Action(async () =>
+            App.Current.Dispatcher.Invoke(new Action(async () =>
             {
                 try
                 {
                     DataLayer dataLayer = new DataLayer();
                     dataLayer.UpdateSoldStatus();
                 }
-                catch { MessageBox.Show("Error: could not update!"); }
+                catch 
+                {
+                    App.Current.Properties["dialog"] = "Error: could not update!";
+                    openDialog();
+                }
                 _timer.Enabled = true;
             }));
         }
@@ -104,13 +108,17 @@ namespace auctionApp
            DataLayer dataLayer = new DataLayer();
            if (dataLayer.VerifyPassword(model) == true)
            {
-                App.Current.Properties["accountId"] = model.AccountId;
-                App.Current.Properties["selectedId"] = "1";
-                MenuWindow menuWindow = new MenuWindow();
-                menuWindow.Show();
-                this.Close();
+               App.Current.Properties["accountId"] = model.AccountId;
+               App.Current.Properties["selectedId"] = "1";
+               MenuWindow menuWindow = new MenuWindow();
+               menuWindow.Show();
+               this.Close();
            }
-           else { MessageBox.Show("Invalid username and/or password!"); }
+           else 
+           { 
+               App.Current.Properties["dialog"] = "Invalid username and/or password!";
+               openDialog();
+           }
         }
 
         private void Window_KeyDown(object sender, KeyEventArgs e)
@@ -140,6 +148,12 @@ namespace auctionApp
         private void password_PasswordChanged(object sender, RoutedEventArgs e)
         {
             passwordPlaceholder.Visibility = string.IsNullOrEmpty(password.Password) ? Visibility.Visible : Visibility.Collapsed;
+        }
+
+        private void openDialog()
+        {
+            DialogWindow dialogWindow = new DialogWindow();
+            bool? result = dialogWindow.ShowDialog();
         }
     }
 }

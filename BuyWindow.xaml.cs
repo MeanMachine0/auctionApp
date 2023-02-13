@@ -48,13 +48,17 @@ namespace auctionApp
                 { 
                     refresh(int.Parse(pageNumber.Text)); 
                 }
-                catch { MessageBox.Show("Invalid Page Number!"); await Task.Delay(1000); }
+                catch 
+                { 
+                    Application.Current.Properties["dialog"] = "Error: Invalid Page Number!";
+                    openDialog(); 
+                    await Task.Delay(1000); 
+                }
                 _timer.Enabled = true;
             }));
         }
 
         private void submit_Click(object sender, RoutedEventArgs e)
-        
         {
             int accountId = (int)Application.Current.Properties["accountId"];
             try
@@ -63,18 +67,25 @@ namespace auctionApp
                 {
                     DataLayer dataLayer = new DataLayer();
                     dataLayer.SubmitBid(bid.Text.Replace("£", "").Replace(" ", ""), pageNumber.Text, accountId);
-                    MessageBox.Show("Bid submitted.");
+                    Application.Current.Properties["dialog"] = "Bid submitted.";
+                    openDialog();
                 }
-                else if (float.Parse(bid.Text) < (_model.CurrentPrice + _model.BidIncrement) && _model.TotalSecondsRemaining > 0)
+                else if (float.Parse(bid.Text.Replace("£", "").Replace(" ", "")) < (_model.CurrentPrice + _model.BidIncrement) && _model.TotalSecondsRemaining > 0)
                 {
-                    MessageBox.Show("Cannot submit bid: bid is less than the current price plus the bid increment.");
+                    Application.Current.Properties["dialog"] = "Cannot submit bid: bid is less than the current price plus the bid increment.";
+                    openDialog();
                 }
-                else
-                {
-                    MessageBox.Show("Listing has ended. Could not submit bid.");
+                else 
+                { 
+                    Application.Current.Properties["dialog"] = "Listing has ended - could not submit bid."; 
+                    openDialog(); 
                 }
             }
-            catch { MessageBox.Show("Invalid Bid!"); }
+            catch 
+            { 
+                Application.Current.Properties["dialog"] = "Error: invalid bid!"; 
+                openDialog(); 
+            }
         }
 
         private void pageNext_Click(object sender, RoutedEventArgs e)
@@ -188,6 +199,12 @@ namespace auctionApp
             {
                 textBox.Text = "£" + textBox.Text.Substring(1);
             }
+        }
+
+        private void openDialog()
+        {
+            DialogWindow dialogWindow = new DialogWindow();
+            bool? result = dialogWindow.ShowDialog();
         }
     }
 }

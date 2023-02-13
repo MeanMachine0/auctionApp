@@ -1,0 +1,44 @@
+﻿<Window x:Class="auctionApp.DialogWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:auctionApp"
+        xmlns:Icon="http://metro.mahapps.com/winfx/xaml/iconpacks"
+        mc:Ignorable="d"
+        Title="DialogWindow" Style="{StaticResource windowPresets}" Height="360" Width="640" 
+        WindowStartupLocation="CenterScreen">
+
+    <Border Style="{StaticResource windowBorder}" MouseDown="border_MouseDown">
+        <Border CornerRadius="20">
+            <Border.Background>
+                <LinearGradientBrush StartPoint="0, 0" EndPoint="0, 1">
+                    <GradientStop Color="DimGray" Offset="-0.125"/>
+                    <GradientStop Color="Black" Offset="1.25"/>
+                </LinearGradientBrush>
+            </Border.Background>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="auto"/>
+                </Grid.RowDefinitions>
+                
+                <Border Grid.Row="0" Background="#ffadd8e6" CornerRadius="40" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="50, 0">
+                    <TextBlock x:Name="dialog" Text="Error: this is a sample error message! Here's some more text to start a new line." TextWrapping="Wrap" HorizontalAlignment="Center" Margin="15"/>
+                </Border>
+
+                <Border Grid.Row="1" CornerRadius="30" Background="#ffadd8e6" Margin="200, 0, 200, 15">
+                    <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Center" Margin="5">
+                        <Button x:Name="dismiss" Height="50" Background="Transparent" BorderThickness="0" Click="dismiss_Click">
+                            <StackPanel Orientation="Horizontal">
+                                <Icon:PackIconMaterial Kind="closeBoxOutline" Width="40" Height="40"/>
+                                <TextBlock Text="Dismiss" Height="40" Margin="5, 0, 0, 0"/>
+                            </StackPanel>
+                        </Button>
+                    </StackPanel>
+                </Border>
+            </Grid>
+        </Border>
+    </Border>
+    
+</Window>

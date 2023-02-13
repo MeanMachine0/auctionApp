@@ -67,16 +67,41 @@ namespace auctionApp
                 {
                     DataLayer dataLayer = new DataLayer();
                     dataLayer.ListItem(_model, (int)App.Current.Properties["accountId"]);
-                    MessageBox.Show($"{_model.ItemName} Listed. You can go to 'My Listings' to view your listed item(s).");
+                    App.Current.Properties["dialog"] = $"{_model.ItemName} Listed. You can go to 'My Listings' to view your listed items.";
+                    openDialog();
                 }
-                else if (_model.EndTime <= timeNow) { MessageBox.Show("Error: the end of the listing must be set in the future!"); }
-                else if (_model.ItemName.Length > 30) { MessageBox.Show("Error: item name is too long (30 character limit)!"); }
-                else if (_model.Description.Length > 1000) { MessageBox.Show("Error: description is too long (1000 character limit)!"); }
-                else if (_model.BidIncrement <= 0) { MessageBox.Show("Error: Bid Increment must be greater than £0!"); }
-                else { MessageBox.Show("Error: one or more field(s) are empty!"); }
+                else if (_model.EndTime <= timeNow) 
+                { 
+                    App.Current.Properties["dialog"] = "Error: the end of the listing must be set in the future!";
+                    openDialog();
+                }
+                else if (_model.ItemName.Length > 30) 
+                {
+                    App.Current.Properties["dialog"] = "Error: item name is too long (30 character limit)!";
+                    openDialog();
+                }
+                else if (_model.Description.Length > 1000) 
+                {
+                    App.Current.Properties["dialog"] = "Error: description is too long (1000 character limit)!";
+                    openDialog();
+                }
+                else if (_model.BidIncrement <= 0) 
+                {
+                    App.Current.Properties["dialog"] = "Error: Bid Increment must be greater than £0!";
+                    openDialog();
+                }
+                else 
+                {
+                    App.Current.Properties["dialog"] = "Error: one or more fields are empty!";
+                    openDialog();
+                }
             }
 
-            catch { MessageBox.Show("Error: one or more field(s) have invalid input types!"); }
+            catch 
+            {
+                App.Current.Properties["dialog"] = "Error: one or more fields are invalid!";
+                openDialog();
+            }
         }
 
         private void myListings_Click(object sender, RoutedEventArgs e)
@@ -106,6 +131,12 @@ namespace auctionApp
             {
                 textBox.Text = "£" + textBox.Text.Substring(1);
             }
+        }
+
+        private void openDialog()
+        {
+            DialogWindow dialogWindow = new DialogWindow();
+            bool? result = dialogWindow.ShowDialog();
         }
     }
 }
