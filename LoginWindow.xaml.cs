@@ -54,6 +54,7 @@ namespace auctionApp
         {
             InitializeComponent();
 
+            App.Current.Properties["autoLoginBool"] = false;
             if (App.Current.Properties["updateTimerBool"] == null)
             {
                 _timer = new Timer(30000);
@@ -65,7 +66,7 @@ namespace auctionApp
 
             if (App.Current.Properties["autoLoginBool"] == null)
             {
-                App.Current.Properties["autoLoginBool"] = true;
+                App.Current.Properties["autoLoginBool"] = false;
             }
             
             dbSalt = Convert.FromBase64String("WiDyv9IM58jXJ0dle5Fwow==");
