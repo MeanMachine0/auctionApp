@@ -153,7 +153,7 @@ namespace auctionApp
         private void openDialog()
         {
             DialogWindow dialogWindow = new DialogWindow();
-            bool? result = dialogWindow.ShowDialog();
+            dialogWindow.ShowDialog();
         }
     }
 }

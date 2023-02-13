@@ -8,7 +8,7 @@
         mc:Ignorable="d"
         Title="Auction App" Style="{StaticResource windowPresets}" Height="720" Width="1280" 
         Foreground="LightGray" WindowStartupLocation="CenterScreen" KeyDown="Window_KeyDown">
-    
+
     <Border Style="{StaticResource windowBorder}" MouseDown="border_MouseDown">
         <Border CornerRadius="20">
             <Border.Background>
@@ -64,6 +64,17 @@
                     <TextBlock Text="Sold:" Margin="25, 5, 5, 5"/>
                     <TextBlock x:Name="sold" Margin="5" 
                                Text="{Binding IsSold, Converter={StaticResource BooleanToYesNo}}"/>
+                    <TextBlock Text="Sort By:" Margin="420, 5, 10, 5"/>
+                    <ComboBox x:Name="sortByMenu" Style="{StaticResource dropDownMenu}" Width="225">
+                        <ComboBoxItem>Item</ComboBoxItem>
+                        <ComboBoxItem>Current Price</ComboBoxItem>
+                        <ComboBoxItem>Time Remaining</ComboBoxItem>
+                        <ComboBoxItem>Bids</ComboBoxItem>
+                    </ComboBox>
+                    <StackPanel Orientation="Horizontal"  Margin="10,5,0,5">
+                        <RadioButton x:Name="sortByAscending" Content="Ascending" Foreground="LightGray" IsChecked="True" Margin="0, 0, 10, 0" Click="sortByAscending_Click"/>
+                        <RadioButton x:Name="sortByDescending" Content="Descending" Foreground="LightGray" Click="sortByDescending_Click"/>
+                    </StackPanel>
                 </StackPanel>
 
                 <StackPanel Grid.Row="3" Orientation="Horizontal">
@@ -78,7 +89,7 @@
                        Text="{Binding PostageCost, StringFormat=£{0:0.00}}"/>
                 </StackPanel>
 
-                <TextBlock Grid.Row="4" Text="Description:" Margin="520, 0, 5, 5"/>
+                <TextBlock Grid.Row="4" Text="Description:" Margin="520, 0, 25, 5"/>
 
                 <StackPanel Grid.Row="5" Orientation="Horizontal">
                     <TextBlock Text="Bid Increment:" Margin="25, 5, 5, 5"/>

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Diagnostics;
+using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using System.Timers;
 using System.Windows;
@@ -17,10 +18,21 @@ namespace auctionApp
         private ItemModel _model;
         private Timer _timer;
 
-        private void refresh(int pageNumber)
+        private void refresh(int pageNumber, string sortBy, bool? ascending)
         {
+            if (sortBy == "Item") { sortBy = "itemName"; }
+            else if (sortBy == "Current Price") { sortBy = "currentPrice"; }
+            else if (sortBy == "Time Remaining") { sortBy = "endTime"; }
+            else if (sortBy == "Bids") { sortBy = "numBids"; }
+            else { sortBy = "itemId"; }
+
+            string ascendingString = "";
+            if (ascending is false) { ascendingString = "DESC"; }
+            else { ascendingString = "ASC"; }
+
+
             DataLayer dataLayer = new DataLayer();
-            dataLayer.PopulateItemModel(_model, pageNumber);
+            dataLayer.PopulateItemModel(_model, pageNumber, sortBy, ascendingString);
         }
 
         public BuyWindow()
@@ -32,7 +44,7 @@ namespace auctionApp
             pageNumber.Text = App.Current.Properties["selectedId"].ToString();
             username.Text = App.Current.Properties["username"].ToString();
 
-            refresh(int.Parse(pageNumber.Text));
+            refresh(int.Parse(pageNumber.Text), sortByMenu.Text, sortByAscending.IsChecked);
             _timer = new Timer(1000);
             _timer.Elapsed += OnTimedEvent;
             _timer.AutoReset = false;
@@ -45,8 +57,8 @@ namespace auctionApp
             Application.Current.Dispatcher.Invoke(new Action(async () =>
             {
                 try 
-                { 
-                    refresh(int.Parse(pageNumber.Text)); 
+                {
+                    refresh(int.Parse(pageNumber.Text), sortByMenu.Text, sortByAscending.IsChecked);
                 }
                 catch 
                 { 
@@ -94,7 +106,7 @@ namespace auctionApp
             {
                 int pageNumberInt = int.Parse(pageNumber.Text) + 1;
                 pageNumber.Text = pageNumberInt.ToString();
-                refresh(pageNumberInt);
+                refresh(pageNumberInt, sortByMenu.Text, sortByAscending.IsChecked);
             }
             catch { }
         }
@@ -105,7 +117,7 @@ namespace auctionApp
             {
                 int pageNumberInt = int.Parse(pageNumber.Text) - 1;
                 pageNumber.Text = pageNumberInt.ToString();
-                refresh(pageNumberInt);
+                refresh(pageNumberInt, sortByMenu.Text, sortByAscending.IsChecked);
             }
             catch { }
         }
@@ -204,7 +216,19 @@ namespace auctionApp
         private void openDialog()
         {
             DialogWindow dialogWindow = new DialogWindow();
-            bool? result = dialogWindow.ShowDialog();
+            dialogWindow.ShowDialog();
+        }
+
+        private void sortByAscending_Click(object sender, RoutedEventArgs e)
+        {
+            sortByAscending.IsChecked = true;
+            sortByDescending.IsChecked = false;
+        }
+
+        private void sortByDescending_Click(object sender, RoutedEventArgs e)
+        {
+            sortByAscending.IsChecked = false;
+            sortByDescending.IsChecked = true;
         }
     }
 }

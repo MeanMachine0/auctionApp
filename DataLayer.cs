@@ -92,9 +92,9 @@ namespace auctionApp
             connection.Close();
         }
 
-        public void PopulateItemModel(ItemModel model, int pageNumber)
+        public void PopulateItemModel(ItemModel model, int pageNumber, string sortBy, string ascending)
         {
-            string query = $"SELECT * FROM items WHERE itemId = {pageNumber}";
+            string query = $"SELECT * FROM items ORDER BY {sortBy} {ascending} LIMIT 1 OFFSET {pageNumber - 1}";
             Populate(model, query);
         }
 

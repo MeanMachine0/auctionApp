@@ -48,5 +48,8 @@
             <Setter Property="AllowsTransparency" Value="True"/>
             <Setter Property="WindowStyle" Value="None"/>
         </Style>
+        <Style x:Key="dropDownMenu" TargetType="ComboBox">
+            <Setter Property="Background" Value="Transparent"/>
+        </Style>
     </Application.Resources>
 </Application>
