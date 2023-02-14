@@ -220,16 +220,9 @@ namespace auctionApp
             dialogWindow.ShowDialog();
         }
 
-        private void sortByAscending_Click(object sender, RoutedEventArgs e)
+        private void filterByMenu_Click(object sender, RoutedEventArgs e)
         {
-            sortByAscending.IsChecked = true;
-            sortByDescending.IsChecked = false;
-        }
 
-        private void sortByDescending_Click(object sender, RoutedEventArgs e)
-        {
-            sortByAscending.IsChecked = false;
-            sortByDescending.IsChecked = true;
         }
     }
 }

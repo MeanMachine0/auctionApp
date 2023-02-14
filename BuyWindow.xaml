@@ -64,20 +64,28 @@
                     <TextBlock Text="Sold:" Margin="25, 5, 5, 5"/>
                     <TextBlock x:Name="sold" Margin="5" 
                                Text="{Binding IsSold, Converter={StaticResource BooleanToYesNo}}"/>
-                    <TextBlock Text="Sort By:" Margin="420, 5, 10, 5"/>
-                    <ComboBox x:Name="sortByMenu" Style="{StaticResource dropDownMenu}" Width="225">
-                        <ComboBoxItem>Id</ComboBoxItem>
-                        <ComboBoxItem>Item</ComboBoxItem>
-                        <ComboBoxItem>Current Price</ComboBoxItem>
-                        <ComboBoxItem>Time Remaining</ComboBoxItem>
-                        <ComboBoxItem>Bids</ComboBoxItem>
-                    </ComboBox>
-                    <StackPanel Orientation="Horizontal"  Margin="10,5,0,5">
-                        <RadioButton x:Name="sortByAscending" Content="Ascending" Foreground="LightGray" IsChecked="True" Margin="0, 0, 10, 0" Click="sortByAscending_Click"/>
-                        <RadioButton x:Name="sortByDescending" Content="Descending" Foreground="LightGray" Click="sortByDescending_Click"/>
-                    </StackPanel>
                 </StackPanel>
 
+                <Border Grid.Row="2" Grid.RowSpan="2" Background="#ffadd8e6" CornerRadius="30" Height="61.6" VerticalAlignment="Top" Margin="520, 0, 25, 0">
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5">
+                        <TextBlock Text="Sort By:" Foreground="Black" Height="40" Margin="0, 0, 10, 0"/>
+                        <ComboBox x:Name="sortByMenu" Style="{StaticResource dropDownMenu}" Foreground="Black" Width="225" Height="45">
+                            <ComboBoxItem>Id</ComboBoxItem>
+                            <ComboBoxItem>Item</ComboBoxItem>
+                            <ComboBoxItem>Current Price</ComboBoxItem>
+                            <ComboBoxItem>Time Remaining</ComboBoxItem>
+                            <ComboBoxItem>Bids</ComboBoxItem>
+                        </ComboBox>
+                        <CheckBox x:Name="sortByAscending" Content="Ascending" Foreground="Black" Background="Transparent" BorderThickness="2" Height="40" Margin="10, 0" IsChecked="True"/>
+                        <Button x:Name="filterByMenu" Height="50" Background="Transparent" BorderThickness="0" Click="filterByMenu_Click">
+                            <StackPanel Orientation="Horizontal">
+                                <Icon:PackIconMaterial Kind="FilterOutline" Width="40" Height="40" Margin="5, 0"/>
+                                <TextBlock Text="Filter By"/>
+                            </StackPanel>
+                        </Button>
+                    </StackPanel>
+                </Border>
+                
                 <StackPanel Grid.Row="3" Orientation="Horizontal">
                     <TextBlock Text="Current Price:" Margin="25, 5, 5, 5"/>
                     <TextBlock x:Name="currentPrice" Margin="5" 
@@ -105,7 +113,7 @@
                 </Border>
 
                 <StackPanel Grid.Row="6" Orientation="Horizontal">
-                    <TextBlock Text="Condition:" Margin="25, 5, 5, 5"/>
+                    <TextBlock Text="Condition:" Margin="25, 5, 5, 5" Height="40"/>
                     <TextBlock x:Name="state" Margin="5"
                        Text="{Binding ItemCondition}"/>
                 </StackPanel>
