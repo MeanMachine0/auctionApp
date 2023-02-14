@@ -66,6 +66,7 @@
                                Text="{Binding IsSold, Converter={StaticResource BooleanToYesNo}}"/>
                     <TextBlock Text="Sort By:" Margin="420, 5, 10, 5"/>
                     <ComboBox x:Name="sortByMenu" Style="{StaticResource dropDownMenu}" Width="225">
+                        <ComboBoxItem>Id</ComboBoxItem>
                         <ComboBoxItem>Item</ComboBoxItem>
                         <ComboBoxItem>Current Price</ComboBoxItem>
                         <ComboBoxItem>Time Remaining</ComboBoxItem>

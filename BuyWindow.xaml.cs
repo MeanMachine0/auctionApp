@@ -43,6 +43,7 @@ namespace auctionApp
             DataContext = _model;
             pageNumber.Text = App.Current.Properties["selectedId"].ToString();
             username.Text = App.Current.Properties["username"].ToString();
+            sortByMenu.Text = "Id";
 
             refresh(int.Parse(pageNumber.Text), sortByMenu.Text, sortByAscending.IsChecked);
             _timer = new Timer(1000);
