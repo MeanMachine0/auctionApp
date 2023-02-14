@@ -72,6 +72,8 @@ namespace auctionApp
             _model.IsPartsOnly = isPartsOnly.IsChecked; App.Current.Properties["filterByIsPartsOnly"] = _model.IsPartsOnly;
             _model.AreReturnsAccepted = areReturnsAccepted.IsChecked; App.Current.Properties["filterByAreReturnsAccepted"] = _model.AreReturnsAccepted;
             _model.AreReturnsNotAccepted = areReturnsNotAccepted.IsChecked; App.Current.Properties["filterByAreReturnsNotAccepted"] = _model.AreReturnsNotAccepted;
+
+            App.Current.Properties["filtersEnabled"] = true;
         }
 
         private void border_MouseDown(object sender, MouseButtonEventArgs e)

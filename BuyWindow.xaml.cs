@@ -30,7 +30,6 @@ namespace auctionApp
             if (ascending is false) { ascendingString = "DESC"; }
             else { ascendingString = "ASC"; }
 
-
             DataLayer dataLayer = new DataLayer();
             dataLayer.PopulateItemModel(_model, pageNumber, sortBy, ascendingString);
         }
@@ -222,6 +221,7 @@ namespace auctionApp
             _timer.Stop();
             FilterByWindow filterByWindow = new FilterByWindow();
             filterByWindow.ShowDialog();
+            _timer.Start();
         }
     }
 }

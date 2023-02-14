@@ -1,5 +1,6 @@
 ﻿using MySql.Data.MySqlClient;
 using Mysqlx.Cursor;
+using MySqlX.XDevAPI.CRUD;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -94,8 +95,34 @@ namespace auctionApp
 
         public void PopulateItemModel(ItemModel model, int pageNumber, string sortBy, string ascending)
         {
-            string query = $"SELECT * FROM items ORDER BY {sortBy} {ascending} LIMIT 1 OFFSET {pageNumber - 1}";
-            Populate(model, query);
+            if (App.Current.Properties["filtersEnabled"] != null)
+            {
+                List<string> conditionsChecked = new List<string>();
+                if (bool.Parse(App.Current.Properties["filterByIsNew"].ToString()) == true) { conditionsChecked.Add("New"); }
+                if (bool.Parse(App.Current.Properties["filterByIsExcellent"].ToString()) == true) { conditionsChecked.Add("Excellent"); }
+                if (bool.Parse(App.Current.Properties["filterByIsGood"].ToString()) == true) { conditionsChecked.Add("Good"); }
+                if (bool.Parse(App.Current.Properties["filterByIsUsed"].ToString()) == true) { conditionsChecked.Add("Used"); }
+                if (bool.Parse(App.Current.Properties["filterByIsPartsOnly"].ToString()) == true) { conditionsChecked.Add("Parts Only"); }
+
+                string inStatement = "";
+                foreach (string condition in conditionsChecked) { inStatement += $"'{condition}',"; }
+                inStatement = inStatement.Substring(0, inStatement.Length - 1);
+
+                string query = $"SELECT * FROM items WHERE sold IN ('{App.Current.Properties["filterByIsSold"].ToString()}', '{(!bool.Parse(App.Current.Properties["filterByIsNotSold"].ToString())).ToString()}') AND " +
+                $"currentPrice BETWEEN {App.Current.Properties["filterByLessThan"].ToString()} AND {App.Current.Properties["filterByGreaterThan"].ToString()} AND " +
+                $"state IN ({inStatement}) AND returnsAccepted in ('{App.Current.Properties["filterByAreReturnsAccepted"].ToString()}', " +
+                $"'{(!bool.Parse(App.Current.Properties["filterByAreReturnsNotAccepted"].ToString())).ToString()}') " +
+                $"ORDER BY {sortBy} {ascending} LIMIT 1 OFFSET {pageNumber - 1}";
+                Debug.Print(query);
+                Populate(model, query);
+            }
+            else
+            {
+                string query = $"SELECT * FROM items ORDER BY {sortBy} {ascending} LIMIT 1 OFFSET {pageNumber - 1}";
+                Populate(model, query);
+            }
+                
+            
         }
 
         public void PopulateMyListings(MyListingsModel model, int accountId, string searchText)
