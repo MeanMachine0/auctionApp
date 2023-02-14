@@ -20,6 +20,17 @@ namespace auctionApp
             }
         }
 
+        private bool? isNotSold;
+        public bool? IsNotSold
+        {
+            get { return isNotSold; }
+            set
+            {
+                isNotSold = value;
+                RaisePropertyChanged("IsNotSold");
+            }
+        }
+
         private float lessThan;
         public float LessThan
         {
@@ -105,6 +116,17 @@ namespace auctionApp
             {
                 areReturnsAccepted = value;
                 RaisePropertyChanged("AreReturnsAccepted");
+            }
+        }
+
+        private bool? areReturnsNotAccepted;
+        public bool? AreReturnsNotAccepted
+        {
+            get { return areReturnsNotAccepted; }
+            set
+            {
+                areReturnsNotAccepted = value;
+                RaisePropertyChanged("AreReturnsNotAccepted");
             }
         }
 

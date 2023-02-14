@@ -24,12 +24,14 @@
                     <RowDefinition Height="auto"/>
                     <RowDefinition Height="auto"/>
                     <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="auto"/>
                 </Grid.RowDefinitions>
 
                 <StackPanel Grid.Row="0" Orientation="Horizontal" Height="40" Margin="25, 15, 25, 4">
-                    <CheckBox x:Name="isSold" Style="{StaticResource checkBoxPresets}" Content="Sold?" IsChecked="{Binding IsSold}"/>
+                    <CheckBox x:Name="isSold" Style="{StaticResource checkBoxPresets}" Content="Sold" IsChecked="{Binding IsSold}"/>
+                    <CheckBox x:Name="isNotSold" Style="{StaticResource checkBoxPresets}" Content="Not Sold" Margin="10, 0, 0, 0" IsChecked="{Binding IsNotSold}"/>
                 </StackPanel>
 
                 <StackPanel Grid.Row="1" Orientation="Horizontal" Height="40" HorizontalAlignment="Center" Margin="25, 4">
@@ -53,10 +55,15 @@
                 </StackPanel>
 
                 <StackPanel Grid.Row="4" Orientation="Horizontal" Height="40" Margin="25, 4">
-                    <CheckBox x:Name="areReturnsAccepted" Style="{StaticResource checkBoxPresets}" Content="Returns Accepted?" IsChecked="{Binding AreReturnsAccepted}"/>
+                    <CheckBox x:Name="areReturnsAccepted" Style="{StaticResource checkBoxPresets}" Content="Returns Accepted" IsChecked="{Binding AreReturnsAccepted}"/>
                 </StackPanel>
 
-                <Border Grid.Row="6" CornerRadius="30" Background="#ffadd8e6" Margin="60, 0, 60, 15">
+                <StackPanel Grid.Row="5" Orientation="Horizontal" Height="40" Margin="25, 4">
+                    <CheckBox x:Name="areReturnsNotAccepted" Style="{StaticResource checkBoxPresets}" Content="Returns Not Accepted" IsChecked="{Binding AreReturnsNotAccepted}"/>
+                </StackPanel>
+                
+
+                <Border Grid.Row="7" CornerRadius="30" Background="#ffadd8e6" Margin="60, 0, 60, 15">
                     <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Center" Margin="5">
                         <Button x:Name="apply" Height="50" Background="Transparent" BorderThickness="0" Click="apply_Click" Margin="0, 0, 10, 0">
                             <StackPanel Orientation="Horizontal">

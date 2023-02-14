@@ -31,20 +31,22 @@ namespace auctionApp
 
             if (App.Current.Properties["filterByIsSold"] is null)
             {
-                _model.IsSold = false;
+                _model.IsSold = true;
+                _model.IsNotSold = true;
                 _model.LessThan = 0;
                 _model.GreaterThan = 9999999;
-                _model.IsNew = false;
-                _model.IsExcellent = false;
-                _model.IsGood = false;
-                _model.IsUsed = false;
-                _model.IsPartsOnly = false;
-                _model.AreReturnsAccepted = false;
+                _model.IsNew = true;
+                _model.IsExcellent = true;
+                _model.IsGood = true;
+                _model.IsUsed = true;
+                _model.IsPartsOnly = true;
+                _model.AreReturnsAccepted = true;
+                _model.AreReturnsNotAccepted = true;
             }
             else
             {
-                Debug.Print(App.Current.Properties["filterByIsSold"].ToString());
                 _model.IsSold = (bool?)App.Current.Properties["filterByIsSold"];
+                _model.IsNotSold = (bool?)App.Current.Properties["filterByIsNotSold"];
                 _model.LessThan = float.Parse(App.Current.Properties["filterByLessThan"].ToString());
                 _model.GreaterThan = float.Parse(App.Current.Properties["filterByGreaterThan"].ToString());
                 _model.IsNew = (bool?)App.Current.Properties["filterByIsNew"];
@@ -53,13 +55,14 @@ namespace auctionApp
                 _model.IsUsed = (bool?)App.Current.Properties["filterByIsUsed"];
                 _model.IsPartsOnly = (bool?)App.Current.Properties["filterByIsPartsOnly"];
                 _model.AreReturnsAccepted = (bool?)App.Current.Properties["filterByAreReturnsAccepted"];
+                _model.AreReturnsNotAccepted = (bool?)App.Current.Properties["filterByAreReturnsNotAccepted"];
             }
         }
 
         private void Apply()
         {
             _model.IsSold = isSold.IsChecked; App.Current.Properties["filterByIsSold"] = _model.IsSold;
-            Debug.Print(App.Current.Properties["filterByIsSold"].ToString());
+            _model.IsNotSold = isNotSold.IsChecked; App.Current.Properties["filterByIsNotSold"] = _model.IsNotSold;
             _model.LessThan = float.Parse(lessThan.Text); App.Current.Properties["filterByLessThan"] = _model.LessThan;
             _model.GreaterThan = float.Parse(greaterThan.Text); App.Current.Properties["filterByGreaterThan"] = _model.GreaterThan;
             _model.IsNew = isNew.IsChecked; App.Current.Properties["filterByIsNew"] = _model.IsNew;
@@ -68,6 +71,7 @@ namespace auctionApp
             _model.IsUsed = isUsed.IsChecked; App.Current.Properties["filterByIsUsed"] = _model.IsUsed;
             _model.IsPartsOnly = isPartsOnly.IsChecked; App.Current.Properties["filterByIsPartsOnly"] = _model.IsPartsOnly;
             _model.AreReturnsAccepted = areReturnsAccepted.IsChecked; App.Current.Properties["filterByAreReturnsAccepted"] = _model.AreReturnsAccepted;
+            _model.AreReturnsNotAccepted = areReturnsNotAccepted.IsChecked; App.Current.Properties["filterByAreReturnsNotAccepted"] = _model.AreReturnsNotAccepted;
         }
 
         private void border_MouseDown(object sender, MouseButtonEventArgs e)
