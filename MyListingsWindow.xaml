@@ -9,7 +9,7 @@
         Title="MyListingsWindow" Style="{StaticResource windowPresets}" Height="720" Width="1280" 
         Foreground="LightGray" WindowStartupLocation="CenterScreen">
 
-    <Border Style="{StaticResource windowBorder}">
+    <Border Style="{StaticResource windowBorder}" MouseDown="border_MouseDown">
         <Border CornerRadius="20">
             <Border.Background>
                 <LinearGradientBrush StartPoint="0, 0" EndPoint="0, 1">

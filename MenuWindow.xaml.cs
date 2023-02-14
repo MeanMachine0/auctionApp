@@ -50,10 +50,7 @@ namespace auctionApp
 
         private void border_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            if (e.ChangedButton == MouseButton.Left)
-            {
-                this.DragMove();
-            }
+            if (e.ChangedButton == MouseButton.Left) { this.DragMove(); }
         }
 
         private void exitApp_Click(object sender, RoutedEventArgs e)

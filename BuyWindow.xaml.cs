@@ -194,10 +194,7 @@ namespace auctionApp
 
         private void border_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            if (e.ChangedButton == MouseButton.Left)
-            {
-                this.DragMove();
-            }
+            if (e.ChangedButton == MouseButton.Left) { this.DragMove(); }
         }
 
         private void exitApp_Click(object sender, RoutedEventArgs e)
@@ -222,7 +219,9 @@ namespace auctionApp
 
         private void filterByMenu_Click(object sender, RoutedEventArgs e)
         {
-
+            _timer.Stop();
+            FilterByWindow filterByWindow = new FilterByWindow();
+            filterByWindow.ShowDialog();
         }
     }
 }
