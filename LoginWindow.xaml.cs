@@ -57,7 +57,7 @@ namespace auctionApp
             //App.Current.Properties["autoLoginBool"] = false;
             if (App.Current.Properties["updateTimerBool"] == null)
             {
-                _timer = new Timer(30000);
+                _timer = new Timer(10000);
                 _timer.Elapsed += OnTimedEvent;
                 _timer.AutoReset = false;
                 _timer.Enabled = true;
@@ -83,7 +83,7 @@ namespace auctionApp
 
         private void OnTimedEvent(object? sender, ElapsedEventArgs e)
         {
-            Debug.Print("Updated sold statuses at {0:HH:mm:ss.fff}", e.SignalTime);
+            Debug.Print("Updated statuses at {0:HH:mm:ss.fff}", e.SignalTime);
             App.Current.Dispatcher.Invoke(new Action(async () =>
             {
                 try
