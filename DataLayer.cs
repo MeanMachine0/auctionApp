@@ -108,10 +108,10 @@ namespace auctionApp
                 foreach (string condition in conditionsChecked) { inStatement += $"'{condition}',"; }
                 inStatement = inStatement.Substring(0, inStatement.Length - 1);
 
-                string query = $"SELECT * FROM items WHERE sold IN ('{App.Current.Properties["filterByIsSold"].ToString()}', '{(!bool.Parse(App.Current.Properties["filterByIsNotSold"].ToString())).ToString()}') AND " +
+                string query = $"SELECT * FROM items WHERE sold IN ({App.Current.Properties["filterByIsSold"].ToString()}, {(!bool.Parse(App.Current.Properties["filterByIsNotSold"].ToString())).ToString()}) AND " +
                 $"currentPrice BETWEEN {App.Current.Properties["filterByLessThan"].ToString()} AND {App.Current.Properties["filterByGreaterThan"].ToString()} AND " +
-                $"state IN ({inStatement}) AND returnsAccepted in ('{App.Current.Properties["filterByAreReturnsAccepted"].ToString()}', " +
-                $"'{(!bool.Parse(App.Current.Properties["filterByAreReturnsNotAccepted"].ToString())).ToString()}') " +
+                $"state IN ({inStatement}) AND returnsAccepted in ({App.Current.Properties["filterByAreReturnsAccepted"].ToString()}, " +
+                $"{(!bool.Parse(App.Current.Properties["filterByAreReturnsNotAccepted"].ToString())).ToString()}) " +
                 $"ORDER BY {sortBy} {ascending} LIMIT 1 OFFSET {pageNumber - 1}";
                 Debug.Print(query);
                 Populate(model, query);

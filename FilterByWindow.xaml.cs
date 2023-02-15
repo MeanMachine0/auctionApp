@@ -63,8 +63,8 @@ namespace auctionApp
         {
             _model.IsSold = isSold.IsChecked; App.Current.Properties["filterByIsSold"] = _model.IsSold;
             _model.IsNotSold = isNotSold.IsChecked; App.Current.Properties["filterByIsNotSold"] = _model.IsNotSold;
-            _model.LessThan = float.Parse(lessThan.Text); App.Current.Properties["filterByLessThan"] = _model.LessThan;
-            _model.GreaterThan = float.Parse(greaterThan.Text); App.Current.Properties["filterByGreaterThan"] = _model.GreaterThan;
+            _model.LessThan = float.Parse(lessThan.Text.Replace("£", "")); App.Current.Properties["filterByLessThan"] = _model.LessThan;
+            _model.GreaterThan = float.Parse(greaterThan.Text.Replace("£", "")); App.Current.Properties["filterByGreaterThan"] = _model.GreaterThan;
             _model.IsNew = isNew.IsChecked; App.Current.Properties["filterByIsNew"] = _model.IsNew;
             _model.IsExcellent = isExcellent.IsChecked; App.Current.Properties["filterByIsExcellent"] = _model.IsExcellent;
             _model.IsGood = isGood.IsChecked; App.Current.Properties["filterByIsGood"] = _model.IsGood;
@@ -90,6 +90,26 @@ namespace auctionApp
         private void cancel_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
+        }
+
+        private void keepPound(object sender, TextChangedEventArgs e)
+        {
+            TextBox textBox = (TextBox)sender;
+            if (textBox.Text.Length > 0 && textBox.Text[0] != '£')
+            {
+                textBox.Text = "£" + textBox.Text.Substring(1);
+            }
+
+            if (textBox.SelectionStart == 0)
+            {
+                textBox.SelectionStart = 1;
+            }
+
+            if (textBox.Text.Length > 1 && !char.IsDigit(textBox.Text[1]))
+            {
+                textBox.Text = textBox.Text.Remove(1, 1);
+                textBox.SelectionStart = 1;
+            }
         }
     }
 }

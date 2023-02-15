@@ -35,11 +35,11 @@
                 </StackPanel>
 
                 <StackPanel Grid.Row="1" Orientation="Horizontal" Height="40" HorizontalAlignment="Center" Margin="25, 4">
-                    <TextBox x:Name="lessThan" Width="98" Background="Transparent" BorderThickness="2" Text="{Binding LessThan}"/>
+                    <TextBox x:Name="lessThan" Width="98" Background="Transparent" BorderThickness="2" TextChanged="keepPound" Text="{Binding LessThan, StringFormat=£{0:0.00}}"/>
                     <TextBlock Text="&lt;"/>
                     <TextBlock Text="Current Price"/>
                     <TextBlock Text="&lt;"/>
-                    <TextBox x:Name="greaterThan" Width="98" Background="Transparent" BorderThickness="2" Text="{Binding GreaterThan}"/>
+                    <TextBox x:Name="greaterThan" Width="98" Background="Transparent" BorderThickness="2" TextChanged="keepPound" Text="{Binding GreaterThan, StringFormat=£{0:0.00}}"/>
                 </StackPanel>
 
                 <StackPanel Grid.Row="2" Orientation="Horizontal" Height="40" Margin="25, 4">

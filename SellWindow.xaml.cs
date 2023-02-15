@@ -128,6 +128,17 @@ namespace auctionApp
             {
                 textBox.Text = "£" + textBox.Text.Substring(1);
             }
+            
+            if (textBox.SelectionStart == 0)
+            {
+                textBox.SelectionStart = 1;
+            }
+
+            if (textBox.Text.Length > 1 && !char.IsDigit(textBox.Text[1]))
+            {
+                textBox.Text = textBox.Text.Remove(1, 1);
+                textBox.SelectionStart = 1;
+            }
         }
 
         private void openDialog()
