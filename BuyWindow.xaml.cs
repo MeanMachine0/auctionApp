@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Diagnostics;
 using System.Runtime.CompilerServices;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Timers;
 using System.Windows;
@@ -75,11 +76,16 @@ namespace auctionApp
             int accountId = (int)Application.Current.Properties["accountId"];
             try
             {
-                if (float.Parse(bid.Text.Replace("£", "").Replace(" ", "")) >= (_model.CurrentPrice + _model.BidIncrement) && _model.TotalSecondsRemaining > 0)
+                if (float.Parse(bid.Text.Replace("£", "").Replace(" ", "")) >= (_model.CurrentPrice + _model.BidIncrement) && _model.TotalSecondsRemaining > 0 && pageNumber.Text.Trim() != "")
                 {
                     DataLayer dataLayer = new DataLayer();
                     dataLayer.SubmitBid(bid.Text.Replace("£", "").Replace(" ", ""), pageNumber.Text, accountId);
                     Application.Current.Properties["dialog"] = "Bid submitted.";
+                    openDialog();
+                }
+                else if (pageNumber.Text.Trim() == "")
+                {
+                    Application.Current.Properties["dialog"] = "Cannot Submit bid: please enter a page number to select an item.";
                     openDialog();
                 }
                 else if (float.Parse(bid.Text.Replace("£", "").Replace(" ", "")) < (_model.CurrentPrice + _model.BidIncrement) && _model.TotalSecondsRemaining > 0)
@@ -87,10 +93,10 @@ namespace auctionApp
                     Application.Current.Properties["dialog"] = "Cannot submit bid: bid is less than the current price plus the bid increment.";
                     openDialog();
                 }
-                else 
-                { 
-                    Application.Current.Properties["dialog"] = "Listing has ended - could not submit bid."; 
-                    openDialog(); 
+                else
+                {
+                    Application.Current.Properties["dialog"] = "Listing has ended - could not submit bid.";
+                    openDialog();
                 }
             }
             catch 
@@ -223,8 +229,10 @@ namespace auctionApp
 
         private void openDialog()
         {
+            _timer.Stop();
             DialogWindow dialogWindow = new DialogWindow();
             dialogWindow.ShowDialog();
+            _timer.Start();
         }
 
         private void filterByMenu_Click(object sender, RoutedEventArgs e)
@@ -245,5 +253,22 @@ namespace auctionApp
         {
             pageNumber.Text = "1";
         }
+
+        private void NumberValidationTextBox(object sender, TextCompositionEventArgs e)
+        {
+            Regex regex = new Regex("[^0-9]+");
+            e.Handled = regex.IsMatch(e.Text);
+        }
+
+        private void pageNumber_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (pageNumber.Text == "0")
+            {
+                pageNumber.Text = "1";
+            }
+            if (pageNumber.Text.Trim() == "") { _timer.Stop(); }
+            else if (_timer is null) { }
+            else { _timer.Start(); }
+        }            
     }
 }
