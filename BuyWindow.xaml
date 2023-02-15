@@ -142,27 +142,27 @@
                 </StackPanel>
 
                 <Border Grid.Row="12" CornerRadius="30" Background="#ffadd8e6" Margin="25, 0, 25, 15">
-                    <StackPanel Grid.Row="12" Orientation="Horizontal" Margin="25, 5" Height="60">
+                    <StackPanel Orientation="Horizontal" Margin="0, 5" Height="50" HorizontalAlignment="Center">
                         <Button x:Name="pagePrevious" Content="&lt;" Height="40" BorderThickness="0"
-                                Click="pagePrevious_Click" Margin="0, 5" Background="#ffadd8e6" ToolTip="Previous Page"/>
-                        <Button x:Name="pageNext" Content="&gt;" Click="pageNext_Click" Margin="5" 
+                                Click="pagePrevious_Click" Background="#ffadd8e6" ToolTip="Previous Page"/>
+                        <Button x:Name="pageNext" Content="&gt;" Click="pageNext_Click"
                                 Background="#ffadd8e6" Height="40" BorderThickness="0" ToolTip="Next Page"/>
-                        <TextBlock Text="Page:" Margin="5" Foreground="Black" Height="40"/>
-                        <TextBox x:Name="pageNumber" Text="1" Margin="5" Width="50" Height="40"
+                        <TextBlock Text="Page:" Margin="10, 0, 5, 0" Foreground="Black" Height="40"/>
+                        <TextBox x:Name="pageNumber" Text="1" Margin="5, 0" Width="50" Height="40"
                                  Background="#ffadd8e6" KeyDown="pageNumber_KeyDown" BorderThickness="2"
                                  PreviewTextInput="NumberValidationTextBox" TextChanged="pageNumber_TextChanged"/>
-                        <TextBlock Text="of" Margin="5" Foreground="Black" Height="40"/>
-                        <TextBlock x:Name="numPages" Text="" Width="50" Height="40" Margin="5" Foreground="Black"/>
-                        <TextBlock Text="Bid:" Margin="25, 5, 5, 5" Foreground="Black" Height="40"/>
-                        <TextBox x:Name="bid" Width="150" Height="40" Margin="5" TextChanged="keepPound"
+                        <TextBlock Text="of" Margin="5, 0" Foreground="Black" Height="40"/>
+                        <TextBlock x:Name="numPages" Text="" Width="50" Height="40" Margin="5, 0" Foreground="Black"/>
+                        <TextBlock Text="Bid:" Margin="22, 0, 5, 0" Foreground="Black" Height="40"/>
+                        <TextBox x:Name="bid" Width="150" Height="40" Margin="5, 0" TextChanged="keepPound"
                                  Background="#ffadd8e6" KeyDown="bid_KeyDown" BorderThickness="2" Text="£"/>
                         <Button x:Name="submit" Content="Submit Bid" Click="submit_Click"
-                                Height="40" Margin="5" Background="#ffadd8e6" BorderThickness="0"/>
-                        <TextBox x:Name="searchBar" Width="384.83" Height="40" Margin="40, 5, 5, 5"
+                                Height="40" Margin="5, 0" Background="#ffadd8e6" BorderThickness="0"/>
+                        <TextBox x:Name="searchBar" Width="384.83" Height="40" Margin="40, 0, 5, 0"
                                  Background="#ffadd8e6" KeyDown="searchBar_KeyDown" BorderThickness="2"/>
                         <TextBlock Style="{StaticResource placeholderText}" Margin="-385.83, 4, 0, 0" Foreground="Black" Text="Search" 
                                    Visibility="{Binding ElementName=searchBar,Path=Text,Converter={StaticResource StringIsEmptyToVisConv}}"/>
-                        <Button x:Name="search" Margin="5" Width="50" Height="50" Foreground="Black" 
+                        <Button x:Name="search" Margin="5, 0, 0, 0" Width="50" Height="50" Foreground="Black" 
                                 Background="#ffadd8e6" BorderThickness="0" Click="search_Click" ToolTip="Search">
                             <Icon:PackIconMaterial Kind="Magnify" Width="40" Height="40"/>
                         </Button>

@@ -62,11 +62,11 @@
                 </DataGrid>
 
                 <Border Grid.Row="2" Background="#ffadd8e6" CornerRadius="30" Margin="280, 0, 280, 15">
-                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                        <TextBox x:Name="searchBar" Height="40" Width="550" Background="Transparent" Margin="5" KeyDown="searchBar_KeyDown" BorderThickness="2"/>
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0, 5" Height="50">
+                        <TextBox x:Name="searchBar" Height="40" Width="550" Background="Transparent" Margin="5, 0" KeyDown="searchBar_KeyDown" BorderThickness="2"/>
                         <TextBlock Style="{StaticResource placeholderText}" Text="Search" Margin="-551, 4, 0, 0" Foreground="Black"
                                    Visibility="{Binding ElementName=searchBar,Path=Text,Converter={StaticResource StringIsEmptyToVisConv}}"/>
-                        <Button x:Name="refresh" Background="Transparent" Click="refresh_Click" Width="50" Height="50" Margin="5" BorderThickness="0">
+                        <Button x:Name="refresh" Background="Transparent" Click="refresh_Click" Width="50" Height="50" Margin="5, 0" BorderThickness="0">
                             <Icon:PackIconMaterial Kind="Magnify" Width="40" Height="40"/>
                         </Button>
                     </StackPanel>
