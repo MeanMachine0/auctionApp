@@ -54,7 +54,7 @@ namespace auctionApp
             connection = new MySqlConnection(connectionString);
             connection.Open();
         }
-        private void Populate(ItemModel model, string query)
+        private void Populate(ItemModel model, string query, int pageNumber)
         {
             OpenConnection();
             using (MySqlCommand command = new MySqlCommand(query, connection))
@@ -90,11 +90,22 @@ namespace auctionApp
                     command.ExecuteNonQuery();
                 }
             }
+            using (MySqlCommand command = new MySqlCommand(query.Replace("SELECT *", "SELECT COUNT(*)").Replace($" LIMIT 1 OFFSET {pageNumber - 1}", ""), connection)) 
+            { 
+                using (MySqlDataReader reader = command.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        App.Current.Properties["numPages"] = reader.GetInt32("COUNT(*)");
+                    }
+                }
+            }
             connection.Close();
         }
 
         public void PopulateItemModel(ItemModel model, int pageNumber, string sortBy, string ascending)
         {
+            App.Current.Properties["numPages"] = 0;
             if (App.Current.Properties["filtersEnabled"] != null)
             {
                 List<string> conditionsChecked = new List<string>();
@@ -114,13 +125,14 @@ namespace auctionApp
                 $"state IN ({inStatement}) AND returnsAccepted in ({App.Current.Properties["filterByAreReturnsAccepted"].ToString()}, " +
                 $"{(!bool.Parse(App.Current.Properties["filterByAreReturnsNotAccepted"].ToString())).ToString()}) " +
                 $"ORDER BY {sortBy} {ascending}, itemName ASC, itemId ASC LIMIT 1 OFFSET {pageNumber - 1}";
-                Populate(model, query);
+                Populate(model, query, pageNumber);
             }
             else
             {
                 string query = $"SELECT * FROM items ORDER BY {sortBy} {ascending} LIMIT 1 OFFSET {pageNumber - 1}";
-                Populate(model, query);
-            } 
+                Populate(model, query, pageNumber);
+            }
+            
         }
 
         public void PopulateMyListings(MyListingsModel model, int accountId, string searchText)
@@ -160,10 +172,7 @@ namespace auctionApp
                 $"VALUES ('{model.ItemName}', {model.CurrentPrice.ToString()}, {model.PostageCost.ToString()}, {model.BidIncrement.ToString()}, '{model.ItemCondition}', " +
                 $"'{FormatDateTimeDb(DateTime.Now)}', '{FormatDateTimeDb(model.EndTime)}', {model.ReturnsAccepted.ToString()}, '{model.Description}', {accountId.ToString()})";
             OpenConnection();
-            using (MySqlCommand command = new MySqlCommand(query, connection))
-            {
-                command.ExecuteNonQuery();
-            }
+            using (MySqlCommand command = new MySqlCommand(query, connection)) { command.ExecuteNonQuery(); }
             connection.Close();
         }
 

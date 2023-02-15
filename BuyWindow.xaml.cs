@@ -33,6 +33,7 @@ namespace auctionApp
 
             DataLayer dataLayer = new DataLayer();
             dataLayer.PopulateItemModel(_model, pageNumber, sortBy, ascendingString);
+            Debug.Print(App.Current.Properties["numPages"].ToString());
         }
 
         public BuyWindow()
