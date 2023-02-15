@@ -26,7 +26,7 @@ namespace auctionApp
         private void _refresh()
         {
             DataLayer dataLayer = new DataLayer();
-            if(searchBar.Text != "") { Application.Current.Properties["searchString"] = searchBar.Text; }
+            Application.Current.Properties["searchString"] = searchBar.Text;
             dataLayer.Search(searchList, Application.Current.Properties["searchString"].ToString());
         }
 
@@ -34,9 +34,9 @@ namespace auctionApp
         {
             InitializeComponent();
             DataContext = searchList;
-            _refresh();
             searchBar.Text = Application.Current.Properties["searchString"].ToString();
             username.Text = Application.Current.Properties["username"].ToString();
+            _refresh();
         }
 
         private void back_Click(object sender, RoutedEventArgs e)

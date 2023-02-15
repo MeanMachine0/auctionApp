@@ -33,7 +33,7 @@ namespace auctionApp
 
             DataLayer dataLayer = new DataLayer();
             dataLayer.PopulateItemModel(_model, pageNumber, sortBy, ascendingString);
-            Debug.Print(App.Current.Properties["numPages"].ToString());
+            numPages.Text = App.Current.Properties["numPages"].ToString();
         }
 
         public BuyWindow()
@@ -267,7 +267,11 @@ namespace auctionApp
 
             if (pageNumber.Text.Trim() == "") { _timer.Stop(); }
             else if (_timer is null) { }
-            else { _timer.Start(); }
+            else 
+            { 
+                _timer.Start();
+                if (int.Parse(pageNumber.Text) > int.Parse(numPages.Text)) { pageNumber.Text = numPages.Text; } 
+            }
         }            
     }
 }

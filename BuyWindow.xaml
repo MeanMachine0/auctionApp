@@ -151,14 +151,16 @@
                         <TextBox x:Name="pageNumber" Text="1" Margin="5" Width="50" Height="40"
                                  Background="#ffadd8e6" KeyDown="pageNumber_KeyDown" BorderThickness="2"
                                  PreviewTextInput="NumberValidationTextBox" TextChanged="pageNumber_TextChanged"/>
-                        <TextBlock Text="Bid:" Margin="5" Foreground="Black" Height="40"/>
+                        <TextBlock Text="of" Margin="5" Foreground="Black" Height="40"/>
+                        <TextBlock x:Name="numPages" Text="" Width="50" Height="40" Margin="5" Foreground="Black"/>
+                        <TextBlock Text="Bid:" Margin="25, 5, 5, 5" Foreground="Black" Height="40"/>
                         <TextBox x:Name="bid" Width="150" Height="40" Margin="5" TextChanged="keepPound"
                                  Background="#ffadd8e6" KeyDown="bid_KeyDown" BorderThickness="2" Text="£"/>
                         <Button x:Name="submit" Content="Submit Bid" Click="submit_Click"
                                 Height="40" Margin="5" Background="#ffadd8e6" BorderThickness="0"/>
-                        <TextBox x:Name="searchBar" Width="530" Height="40" Margin="5"
+                        <TextBox x:Name="searchBar" Width="384.83" Height="40" Margin="40, 5, 5, 5"
                                  Background="#ffadd8e6" KeyDown="searchBar_KeyDown" BorderThickness="2"/>
-                        <TextBlock Style="{StaticResource placeholderText}" Margin="-531, 4, 0, 0" Foreground="Black" Text="Search" 
+                        <TextBlock Style="{StaticResource placeholderText}" Margin="-385.83, 4, 0, 0" Foreground="Black" Text="Search" 
                                    Visibility="{Binding ElementName=searchBar,Path=Text,Converter={StaticResource StringIsEmptyToVisConv}}"/>
                         <Button x:Name="search" Margin="5" Width="50" Height="50" Foreground="Black" 
                                 Background="#ffadd8e6" BorderThickness="0" Click="search_Click" ToolTip="Search">
