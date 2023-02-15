@@ -99,7 +99,7 @@
 
                 <StackPanel Grid.Row="5" Orientation="Horizontal">
                     <TextBlock Text="Condition:" Height="40" Margin="25, 5, 5, 5"/>
-                    <ComboBox Style="{StaticResource dropDownMenu}" x:Name="condition" Height="45" Width="330" Margin="5, 0">
+                    <ComboBox x:Name="condition" Style="{StaticResource dropDownMenu}" ItemContainerStyle="{StaticResource dropDownMenuContainer}" Height="45" Width="330" Margin="5, 0">
                         <ComboBoxItem>New</ComboBoxItem>
                         <ComboBoxItem>Excellent</ComboBoxItem>
                         <ComboBoxItem>Good</ComboBoxItem>

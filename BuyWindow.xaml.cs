@@ -240,5 +240,10 @@ namespace auctionApp
         {
             pageNumber.Text = "1";
         }
+
+        private void sortByAscending_Click(object sender, RoutedEventArgs e)
+        {
+            pageNumber.Text = "1";
+        }
     }
 }
