@@ -270,7 +270,8 @@ namespace auctionApp
             else 
             { 
                 _timer.Start();
-                if (int.Parse(pageNumber.Text) > int.Parse(numPages.Text)) { pageNumber.Text = numPages.Text; } 
+                try { if (int.Parse(pageNumber.Text) > int.Parse(numPages.Text)) { pageNumber.Text = numPages.Text; } }
+                catch { }
             }
         }            
     }
