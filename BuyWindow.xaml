@@ -69,7 +69,7 @@
                 <Border Grid.Row="2" Grid.RowSpan="2" Background="#ffadd8e6" CornerRadius="30" Height="61.6" VerticalAlignment="Top" Margin="520, 0, 25, 0">
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5">
                         <TextBlock Text="Sort By:" Foreground="Black" Height="40" Margin="0, 0, 10, 0"/>
-                        <ComboBox x:Name="sortByMenu" Style="{StaticResource dropDownMenu}" Foreground="Black" Width="225" Height="45">
+                        <ComboBox x:Name="sortByMenu" Style="{StaticResource dropDownMenu}" Foreground="Black" Width="225" Height="45" SelectionChanged="sortByMenu_SelectionChanged">
                             <ComboBoxItem>Id</ComboBoxItem>
                             <ComboBoxItem>Item</ComboBoxItem>
                             <ComboBoxItem>Current Price</ComboBoxItem>

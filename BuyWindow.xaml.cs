@@ -232,7 +232,13 @@ namespace auctionApp
             _timer.Stop();
             FilterByWindow filterByWindow = new FilterByWindow();
             filterByWindow.ShowDialog();
+            if (App.Current.Properties["filtersEnabled"] != null) { pageNumber.Text = "1"; }
             _timer.Start();
+        }
+
+        private void sortByMenu_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            pageNumber.Text = "1";
         }
     }
 }
