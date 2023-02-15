@@ -262,10 +262,8 @@ namespace auctionApp
 
         private void pageNumber_TextChanged(object sender, TextChangedEventArgs e)
         {
-            if (pageNumber.Text == "0")
-            {
-                pageNumber.Text = "1";
-            }
+            if (pageNumber.Text == "0") { pageNumber.Text = "1"; }
+
             if (pageNumber.Text.Trim() == "") { _timer.Stop(); }
             else if (_timer is null) { }
             else { _timer.Start(); }

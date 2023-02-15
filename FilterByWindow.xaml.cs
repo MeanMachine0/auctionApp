@@ -31,6 +31,8 @@ namespace auctionApp
 
             if (App.Current.Properties["filterByIsSold"] is null)
             {
+                _model.Active = true;
+                _model.NotActive = true;
                 _model.IsSold = true;
                 _model.IsNotSold = true;
                 _model.LessThan = 0;
@@ -45,6 +47,8 @@ namespace auctionApp
             }
             else
             {
+                _model.Active = (bool?)App.Current.Properties["filterByActive"];
+                _model.NotActive = (bool?)App.Current.Properties["filterByNotActive"];
                 _model.IsSold = (bool?)App.Current.Properties["filterByIsSold"];
                 _model.IsNotSold = (bool?)App.Current.Properties["filterByIsNotSold"];
                 _model.LessThan = float.Parse(App.Current.Properties["filterByLessThan"].ToString());
@@ -61,6 +65,8 @@ namespace auctionApp
 
         private void Apply()
         {
+            _model.Active = active.IsChecked; App.Current.Properties["filterByActive"] = _model.Active;
+            _model.NotActive = notActive.IsChecked; App.Current.Properties["filterByNotActive"] = _model.NotActive;
             _model.IsSold = isSold.IsChecked; App.Current.Properties["filterByIsSold"] = _model.IsSold;
             _model.IsNotSold = isNotSold.IsChecked; App.Current.Properties["filterByIsNotSold"] = _model.IsNotSold;
             _model.LessThan = float.Parse(lessThan.Text.Replace("£", "")); App.Current.Properties["filterByLessThan"] = _model.LessThan;

@@ -89,7 +89,7 @@ namespace auctionApp
                 try
                 {
                     DataLayer dataLayer = new DataLayer();
-                    dataLayer.UpdateSoldStatus();
+                    dataLayer.UpdateStatuses();
                 }
                 catch 
                 {

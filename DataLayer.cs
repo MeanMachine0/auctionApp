@@ -109,20 +109,18 @@ namespace auctionApp
                 inStatement = inStatement.Substring(0, inStatement.Length - 1);
 
                 string query = $"SELECT * FROM items WHERE sold IN ({App.Current.Properties["filterByIsSold"].ToString()}, {(!bool.Parse(App.Current.Properties["filterByIsNotSold"].ToString())).ToString()}) AND " +
+                $"active IN ({App.Current.Properties["filterByActive"].ToString()}, {(!bool.Parse(App.Current.Properties["filterByNotActive"].ToString())).ToString()}) AND " +
                 $"currentPrice BETWEEN {App.Current.Properties["filterByLessThan"].ToString()} AND {App.Current.Properties["filterByGreaterThan"].ToString()} AND " +
                 $"state IN ({inStatement}) AND returnsAccepted in ({App.Current.Properties["filterByAreReturnsAccepted"].ToString()}, " +
                 $"{(!bool.Parse(App.Current.Properties["filterByAreReturnsNotAccepted"].ToString())).ToString()}) " +
-                $"ORDER BY {sortBy} {ascending} LIMIT 1 OFFSET {pageNumber - 1}";
-                Debug.Print(query);
+                $"ORDER BY {sortBy} {ascending}, itemName ASC, itemId ASC LIMIT 1 OFFSET {pageNumber - 1}";
                 Populate(model, query);
             }
             else
             {
                 string query = $"SELECT * FROM items ORDER BY {sortBy} {ascending} LIMIT 1 OFFSET {pageNumber - 1}";
                 Populate(model, query);
-            }
-                
-            
+            } 
         }
 
         public void PopulateMyListings(MyListingsModel model, int accountId, string searchText)
@@ -161,7 +159,6 @@ namespace auctionApp
             string query = "INSERT INTO items (itemName, currentPrice, postageCost, bidIncrement, state, timeOfListing, endTime, returnsAccepted, information, sellerId) " +
                 $"VALUES ('{model.ItemName}', {model.CurrentPrice.ToString()}, {model.PostageCost.ToString()}, {model.BidIncrement.ToString()}, '{model.ItemCondition}', " +
                 $"'{FormatDateTimeDb(DateTime.Now)}', '{FormatDateTimeDb(model.EndTime)}', {model.ReturnsAccepted.ToString()}, '{model.Description}', {accountId.ToString()})";
-            Debug.Print(query);
             OpenConnection();
             using (MySqlCommand command = new MySqlCommand(query, connection))
             {
@@ -205,23 +202,17 @@ namespace auctionApp
         {
             OpenConnection();
             string query = $"UPDATE items SET currentPrice = {bidPrice}, buyerId = {accountId.ToString()}, numBids = numBids + 1 WHERE itemId = {itemId}";
-            Debug.Print(query);
-            using (MySqlCommand command = new MySqlCommand(query, connection))
-            {
-                command.ExecuteNonQuery();
-            }
+            using (MySqlCommand command = new MySqlCommand(query, connection)) { command.ExecuteNonQuery(); }
             connection.Close();
         }
 
-        internal void UpdateSoldStatus()
+        internal void UpdateStatuses()
         {
-            OpenConnection();
             string query = "UPDATE items SET sold = 1 WHERE sold = 0 AND endTime < NOW() AND numBids > 0";
             OpenConnection();
-            using (MySqlCommand command = new MySqlCommand(query, connection))
-            {
-                command.ExecuteNonQuery();
-            }
+            using (MySqlCommand command = new MySqlCommand(query, connection)) { command.ExecuteNonQuery(); }
+            query = "UPDATE items SET active = 0 WHERE endTime < NOW()";
+            using (MySqlCommand command = new MySqlCommand(query, connection)) { command.ExecuteNonQuery(); }
             connection.Close();
         }
 

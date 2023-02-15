@@ -9,6 +9,28 @@ namespace auctionApp
 {
     public class FilterByModel : INotifyPropertyChanged
     {
+        private bool? active;
+        public bool? Active
+        {
+            get { return active; }
+            set
+            {
+                active = value;
+                RaisePropertyChanged("Active");
+            }
+        }
+
+        private bool? notActive;
+        public bool? NotActive
+        {
+            get { return notActive; }
+            set
+            {
+                notActive = value;
+                RaisePropertyChanged("NotActive");
+            }
+        }
+
         private bool? isSold;
         public bool? IsSold
         {
