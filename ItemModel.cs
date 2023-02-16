@@ -32,6 +32,18 @@ namespace auctionApp
                 RaisePropertyChanged("ItemName");
             }
         }
+
+        private bool isActive;
+        public bool IsActive
+        {
+            get { return isActive; }
+            set
+            {
+                isActive = value;
+                RaisePropertyChanged("IsActive");
+            }
+        }
+
         private bool isSold;
         public bool IsSold
         {
@@ -176,6 +188,17 @@ namespace auctionApp
             {
                 totalSecondsRemaining = value;
                 RaisePropertyChanged("TotalSecondsRemaining");
+            }
+        }
+
+        private int pageNumber;
+        public int PageNumber
+        {
+            get { return pageNumber; }
+            set
+            {
+                pageNumber = value;
+                RaisePropertyChanged("PageNumber");
             }
         }
 

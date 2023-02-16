@@ -153,7 +153,8 @@
                                  Background="#ffadd8e6" KeyDown="pageNumber_KeyDown" BorderThickness="2"
                                  PreviewTextInput="NumberValidationTextBox" TextChanged="pageNumber_TextChanged"/>
                             <TextBlock Text="of" Margin="5, 0" Foreground="Black" Height="40"/>
-                            <TextBlock x:Name="numPages" Text="" Width="50" Height="40" Margin="5, 0" Foreground="Black"/>
+                            <TextBox x:Name="numPages" Width="50" Height="40" Margin="5, 0" Foreground="Black" IsReadOnly="True"
+                                     BorderThickness="0" Background="Transparent" TextChanged="numPages_TextChanged"/>
                         </StackPanel>
                         <StackPanel Orientation="Horizontal" Margin="35, 0, 0, 0">
                             <TextBlock Text="Bid:" Margin="0, 0, 5, 0" Foreground="Black" Height="40"/>

@@ -27,7 +27,7 @@ namespace auctionApp
         MyListingsModel myListings = new MyListingsModel();
         private void _refresh()
         {
-            int accountId = (int)Application.Current.Properties["accountId"];
+            int accountId = (int)App.Current.Properties["accountId"];
             DataLayer dataLayer = new DataLayer();
             dataLayer.PopulateMyListings(myListings, accountId, searchBar.Text);
         }

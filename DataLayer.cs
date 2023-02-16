@@ -13,6 +13,7 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Controls;
+using System.Windows.Shapes;
 using System.Xml;
 using static Org.BouncyCastle.Bcpg.Attr.ImageAttrib;
 
@@ -23,6 +24,8 @@ namespace auctionApp
         private string connectionString = "server=localhost;port=3306;database=auctiondb;uid=root;password=pTHhHFGxB^U5!1UY^22#x0&n;";
         private MySqlConnection connection;
         private string dbHashedPassword;
+        public string[] querySplit;
+        public string querySplitOption;
 
         private string FormatDateTimeDb(DateTime dateTime)
         {
@@ -65,6 +68,7 @@ namespace auctionApp
                     {
                         model.ItemId = reader.GetInt32("itemId");
                         model.ItemName = reader.GetString("itemName");
+                        model.IsActive = reader.GetBoolean("active");
                         model.IsSold = reader.GetBoolean("sold");
                         model.CurrentPrice = reader.GetFloat("currentPrice");
                         model.PostageCost = reader.GetFloat("postageCost");
@@ -82,14 +86,7 @@ namespace auctionApp
                     }
                 }
             }
-            if (model.TimeRemaining == "0s" && model.NumBids > 0 && model.IsSold == false)
-            {
-                query = $"UPDATE items SET sold = 1 WHERE itemId = {model.ItemId.ToString()}";
-                using (MySqlCommand command = new MySqlCommand(query, connection))
-                {
-                    command.ExecuteNonQuery();
-                }
-            }
+            
             using (MySqlCommand command = new MySqlCommand(query.Replace("SELECT *", "SELECT COUNT(*)").Replace($" LIMIT 1 OFFSET {pageNumber - 1}", ""), connection)) 
             { 
                 using (MySqlDataReader reader = command.ExecuteReader())
@@ -119,20 +116,61 @@ namespace auctionApp
                 foreach (string condition in conditionsChecked) { inStatement += $"'{condition}',"; }
                 inStatement = inStatement.Substring(0, inStatement.Length - 1);
 
-                string query = $"SELECT * FROM items WHERE sold IN ({App.Current.Properties["filterByIsSold"].ToString()}, {(!bool.Parse(App.Current.Properties["filterByIsNotSold"].ToString())).ToString()}) AND " +
+                App.Current.Properties["query"] = $"SELECT * FROM items WHERE sold IN ({App.Current.Properties["filterByIsSold"].ToString()}, {(!bool.Parse(App.Current.Properties["filterByIsNotSold"].ToString())).ToString()}) AND " +
                 $"active IN ({App.Current.Properties["filterByActive"].ToString()}, {(!bool.Parse(App.Current.Properties["filterByNotActive"].ToString())).ToString()}) AND " +
                 $"currentPrice BETWEEN {App.Current.Properties["filterByLessThan"].ToString()} AND {App.Current.Properties["filterByGreaterThan"].ToString()} AND " +
                 $"state IN ({inStatement}) AND returnsAccepted in ({App.Current.Properties["filterByAreReturnsAccepted"].ToString()}, " +
                 $"{(!bool.Parse(App.Current.Properties["filterByAreReturnsNotAccepted"].ToString())).ToString()}) " +
                 $"ORDER BY {sortBy} {ascending}, itemName ASC, itemId ASC LIMIT 1 OFFSET {pageNumber - 1}";
-                Populate(model, query, pageNumber);
+                Populate(model, App.Current.Properties["query"].ToString(), pageNumber);
             }
             else
             {
-                string query = $"SELECT * FROM items ORDER BY {sortBy} {ascending} LIMIT 1 OFFSET {pageNumber - 1}";
-                Populate(model, query, pageNumber);
+                App.Current.Properties["query"] = $"SELECT * FROM items ORDER BY {sortBy} {ascending} LIMIT 1 OFFSET {pageNumber - 1}";
+                Populate(model, App.Current.Properties["query"].ToString(), pageNumber);
             }
             
+        }
+
+        public void Search(SearchListModel model, string searchText)
+        {
+            model.SearchList.Clear();
+            OpenConnection();
+            if (App.Current.Properties["query"].ToString().Contains("WHERE"))
+            {
+                querySplit = App.Current.Properties["query"].ToString().Split("items WHERE");
+                querySplitOption = " AND";
+            }
+            else { querySplit = App.Current.Properties["query"].ToString().Split("items"); querySplitOption = ""; }
+
+            string query = querySplit[0] + $"items WHERE itemName like '%{searchText.Trim()}%'{querySplitOption}" + querySplit[1];
+            int ind = query.LastIndexOf("C");
+            query = query.Substring(0, ind + 1);
+            using (MySqlCommand command = new MySqlCommand(query, connection))
+            {
+                using (MySqlDataReader reader = command.ExecuteReader())
+                {
+                    int count = 0;
+                    while (reader.Read())
+                    {
+                        ItemModel item = new ItemModel();
+                        item.ItemId = reader.GetInt32("itemId");
+                        item.PostageCost = reader.GetFloat("postageCost");
+                        item.ItemName = reader.GetString("itemName");
+                        item.IsSold = reader.GetBoolean("sold");
+                        item.CurrentPrice = reader.GetFloat("currentPrice");
+                        item.BidIncrement = reader.GetFloat("bidIncrement");
+                        item.ItemCondition = reader.GetString("state");
+                        item.EndTime = reader.GetDateTime("endTime");
+                        item.ReturnsAccepted = reader.GetBoolean("returnsAccepted");
+                        item.NumBids = reader.GetInt32("numBids");
+                        count += 1;
+                        item.PageNumber = count;
+                        model.SearchList.Add(item);
+                    }
+                }
+                connection.Close();
+            }
         }
 
         public void PopulateMyListings(MyListingsModel model, int accountId, string searchText)
@@ -174,37 +212,6 @@ namespace auctionApp
             OpenConnection();
             using (MySqlCommand command = new MySqlCommand(query, connection)) { command.ExecuteNonQuery(); }
             connection.Close();
-        }
-
-        public void Search(SearchListModel model, string searchText)
-        {
-            
-            model.SearchList.Clear();
-            OpenConnection();
-            string query = "SELECT itemId, information, itemName, sold, currentPrice, bidIncrement, state, timeOfListing, endTime, " + 
-               $"returnsAccepted, numBids, postageCost FROM items WHERE itemName like '%{searchText.Trim()}%' ORDER BY itemName";
-            using (MySqlCommand command = new MySqlCommand(query, connection))
-            {
-                using (MySqlDataReader reader = command.ExecuteReader())
-                {
-                    while (reader.Read())
-                    {
-                        ItemModel item = new ItemModel();
-                        item.ItemId = reader.GetInt32("itemId");
-                        item.PostageCost = reader.GetFloat("postageCost");
-                        item.ItemName = reader.GetString("itemName");
-                        item.IsSold = reader.GetBoolean("sold");
-                        item.CurrentPrice = reader.GetFloat("currentPrice");
-                        item.BidIncrement = reader.GetFloat("bidIncrement");
-                        item.ItemCondition = reader.GetString("state");
-                        item.EndTime = reader.GetDateTime("endTime");
-                        item.ReturnsAccepted = reader.GetBoolean("returnsAccepted");
-                        item.NumBids = reader.GetInt32("numBids");
-                        model.SearchList.Add(item);
-                    }
-                }
-                connection.Close();
-            }
         }
 
         internal void SubmitBid(string bidPrice, string itemId, int accountId)

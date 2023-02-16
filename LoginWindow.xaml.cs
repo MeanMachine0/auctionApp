@@ -109,7 +109,7 @@ namespace auctionApp
            if (dataLayer.VerifyPassword(model) == true)
            {
                App.Current.Properties["accountId"] = model.AccountId;
-               App.Current.Properties["selectedId"] = "1";
+               App.Current.Properties["selectedPageNuber"] = "1";
                MenuWindow menuWindow = new MenuWindow();
                menuWindow.Show();
                this.Close();

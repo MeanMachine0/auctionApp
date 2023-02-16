@@ -22,7 +22,7 @@ namespace auctionApp
         public DialogWindow()
         {
             InitializeComponent();
-            dialog.Text = Application.Current.Properties["dialog"].ToString();
+            dialog.Text = App.Current.Properties["dialog"].ToString();
         }
 
         private void border_MouseDown(object sender, MouseButtonEventArgs e)

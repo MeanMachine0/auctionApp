@@ -65,21 +65,37 @@ namespace auctionApp
 
         private void Apply()
         {
-            _model.Active = active.IsChecked; App.Current.Properties["filterByActive"] = _model.Active;
-            _model.NotActive = notActive.IsChecked; App.Current.Properties["filterByNotActive"] = _model.NotActive;
-            _model.IsSold = isSold.IsChecked; App.Current.Properties["filterByIsSold"] = _model.IsSold;
-            _model.IsNotSold = isNotSold.IsChecked; App.Current.Properties["filterByIsNotSold"] = _model.IsNotSold;
-            _model.LessThan = float.Parse(lessThan.Text.Replace("£", "")); App.Current.Properties["filterByLessThan"] = _model.LessThan;
-            _model.GreaterThan = float.Parse(greaterThan.Text.Replace("£", "")); App.Current.Properties["filterByGreaterThan"] = _model.GreaterThan;
-            _model.IsNew = isNew.IsChecked; App.Current.Properties["filterByIsNew"] = _model.IsNew;
-            _model.IsExcellent = isExcellent.IsChecked; App.Current.Properties["filterByIsExcellent"] = _model.IsExcellent;
-            _model.IsGood = isGood.IsChecked; App.Current.Properties["filterByIsGood"] = _model.IsGood;
-            _model.IsUsed = isUsed.IsChecked; App.Current.Properties["filterByIsUsed"] = _model.IsUsed;
-            _model.IsPartsOnly = isPartsOnly.IsChecked; App.Current.Properties["filterByIsPartsOnly"] = _model.IsPartsOnly;
-            _model.AreReturnsAccepted = areReturnsAccepted.IsChecked; App.Current.Properties["filterByAreReturnsAccepted"] = _model.AreReturnsAccepted;
-            _model.AreReturnsNotAccepted = areReturnsNotAccepted.IsChecked; App.Current.Properties["filterByAreReturnsNotAccepted"] = _model.AreReturnsNotAccepted;
-
-            App.Current.Properties["filtersEnabled"] = true;
+            try
+            {
+                _model.Active = active.IsChecked; App.Current.Properties["filterByActive"] = _model.Active;
+                _model.NotActive = notActive.IsChecked; App.Current.Properties["filterByNotActive"] = _model.NotActive;
+                _model.IsSold = isSold.IsChecked; App.Current.Properties["filterByIsSold"] = _model.IsSold;
+                _model.IsNotSold = isNotSold.IsChecked; App.Current.Properties["filterByIsNotSold"] = _model.IsNotSold;
+                _model.IsNew = isNew.IsChecked; App.Current.Properties["filterByIsNew"] = _model.IsNew;
+                _model.IsExcellent = isExcellent.IsChecked; App.Current.Properties["filterByIsExcellent"] = _model.IsExcellent;
+                _model.IsGood = isGood.IsChecked; App.Current.Properties["filterByIsGood"] = _model.IsGood;
+                _model.IsUsed = isUsed.IsChecked; App.Current.Properties["filterByIsUsed"] = _model.IsUsed;
+                _model.IsPartsOnly = isPartsOnly.IsChecked; App.Current.Properties["filterByIsPartsOnly"] = _model.IsPartsOnly;
+                _model.AreReturnsAccepted = areReturnsAccepted.IsChecked; App.Current.Properties["filterByAreReturnsAccepted"] = _model.AreReturnsAccepted;
+                _model.AreReturnsNotAccepted = areReturnsNotAccepted.IsChecked; App.Current.Properties["filterByAreReturnsNotAccepted"] = _model.AreReturnsNotAccepted;
+                if (float.Parse(greaterThan.Text.Replace("£", "")) >= (float.Parse(lessThan.Text.Replace("£", ""))))
+                {
+                    _model.LessThan = float.Parse(lessThan.Text.Replace("£", "")); App.Current.Properties["filterByLessThan"] = _model.LessThan;
+                    _model.GreaterThan = float.Parse(greaterThan.Text.Replace("£", "")); App.Current.Properties["filterByGreaterThan"] = _model.GreaterThan;
+                    App.Current.Properties["filtersEnabled"] = true;
+                    this.Close();
+                }
+                else
+                {
+                    App.Current.Properties["dialog"] = "Error: the less than current price value is greater than the greater than current price value!";
+                    openDialog();
+                }
+            }
+            catch
+            {
+                App.Current.Properties["dialog"] = "Error: one or more fields are invalid!";
+                openDialog();
+            }
         }
 
         private void border_MouseDown(object sender, MouseButtonEventArgs e)
@@ -90,7 +106,6 @@ namespace auctionApp
         private void apply_Click(object sender, RoutedEventArgs e)
         {
             Apply();
-            this.Close();
         }
 
         private void cancel_Click(object sender, RoutedEventArgs e)
@@ -116,6 +131,12 @@ namespace auctionApp
                 textBox.Text = textBox.Text.Remove(1, 1);
                 textBox.SelectionStart = 1;
             }
+        }
+
+        private void openDialog()
+        {
+            DialogWindow dialogWindow = new DialogWindow();
+            dialogWindow.ShowDialog();
         }
     }
 }

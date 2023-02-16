@@ -18,6 +18,7 @@ namespace auctionApp
     {
         private ItemModel _model;
         private Timer _timer;
+        public bool timerBool;
 
         private void refresh(int pageNumber, string sortBy, bool? ascending)
         {
@@ -42,9 +43,14 @@ namespace auctionApp
 
             _model = new ItemModel();
             DataContext = _model;
-            pageNumber.Text = App.Current.Properties["selectedId"].ToString();
             username.Text = App.Current.Properties["username"].ToString();
-            sortByMenu.Text = "Id";
+            if (App.Current.Properties["sortBy"] is null) { sortByMenu.Text = "Id"; }
+            else { sortByMenu.Text = App.Current.Properties["sortBy"].ToString(); }
+
+            if (App.Current.Properties["ascendingBool"] is null) { sortByAscending.IsChecked = true; }
+            else { sortByAscending.IsChecked = bool.Parse(App.Current.Properties["ascendingBool"].ToString()); }
+
+            pageNumber.Text = App.Current.Properties["selectedPageNuber"].ToString();
 
             refresh(int.Parse(pageNumber.Text), sortByMenu.Text, sortByAscending.IsChecked);
             _timer = new Timer(1000);
@@ -56,7 +62,7 @@ namespace auctionApp
         private void OnTimedEvent(object? sender, ElapsedEventArgs e)
         {
             Debug.Print("Refreshed at {0:HH:mm:ss.fff}", e.SignalTime);
-            Application.Current.Dispatcher.Invoke(new Action(async () =>
+            App.Current.Dispatcher.Invoke(new Action(async () =>
             {
                 try 
                 {
@@ -64,45 +70,45 @@ namespace auctionApp
                 }
                 catch 
                 { 
-                    Application.Current.Properties["dialog"] = "Error: Invalid Page Number!";
+                    App.Current.Properties["dialog"] = "Error: Invalid Page Number!";
                     openDialog(); 
-                    await Task.Delay(1000); 
+                    await Task.Delay(1000);
                 }
-                _timer.Enabled = true;
+                if (timerBool is true) { _timer.Enabled = true; }
             }));
         }
 
         private void submit_Click(object sender, RoutedEventArgs e)
         {
-            int accountId = (int)Application.Current.Properties["accountId"];
+            int accountId = (int)App.Current.Properties["accountId"];
             try
             {
                 if (float.Parse(bid.Text.Replace("£", "").Replace(" ", "")) >= (_model.CurrentPrice + _model.BidIncrement) && _model.TotalSecondsRemaining > 0 && pageNumber.Text.Trim() != "")
                 {
                     DataLayer dataLayer = new DataLayer();
-                    dataLayer.SubmitBid(bid.Text.Replace("£", "").Replace(" ", ""), pageNumber.Text, accountId);
-                    Application.Current.Properties["dialog"] = "Bid submitted.";
+                    dataLayer.SubmitBid(bid.Text.Replace("£", "").Replace(" ", ""), _model.ItemId.ToString(), accountId);
+                    App.Current.Properties["dialog"] = "Bid submitted.";
                     openDialog();
                 }
                 else if (pageNumber.Text.Trim() == "")
                 {
-                    Application.Current.Properties["dialog"] = "Cannot Submit bid: please enter a page number to select an item.";
+                    App.Current.Properties["dialog"] = "Cannot Submit bid: please enter a page number to select an item.";
                     openDialog();
                 }
                 else if (float.Parse(bid.Text.Replace("£", "").Replace(" ", "")) < (_model.CurrentPrice + _model.BidIncrement) && _model.TotalSecondsRemaining > 0)
                 {
-                    Application.Current.Properties["dialog"] = "Cannot submit bid: bid is less than the current price plus the bid increment.";
+                    App.Current.Properties["dialog"] = "Cannot submit bid: bid is less than the current price plus the bid increment.";
                     openDialog();
                 }
                 else
                 {
-                    Application.Current.Properties["dialog"] = "Listing has ended - could not submit bid.";
+                    App.Current.Properties["dialog"] = "Listing has ended - could not submit bid.";
                     openDialog();
                 }
             }
             catch 
             { 
-                Application.Current.Properties["dialog"] = "Error: invalid bid!"; 
+                App.Current.Properties["dialog"] = "Error: invalid bid!"; 
                 openDialog(); 
             }
         }
@@ -166,8 +172,9 @@ namespace auctionApp
 
         private void search_Click(object sender, RoutedEventArgs e)
         {
+            App.Current.Properties["sortBy"] = sortByMenu.Text;
+            App.Current.Properties["ascendingBool"] = sortByAscending.IsChecked;
             _timer.Stop();
-            Debug.Print($"Performing search for {searchBar.Text}.");
             App.Current.Properties["searchString"] = searchBar.Text;
             SearchWindow searchWindow = new SearchWindow();
             searchWindow.Show();
@@ -184,6 +191,8 @@ namespace auctionApp
 
         private void menu_Click(object sender, RoutedEventArgs e)
         {
+            App.Current.Properties["sortBy"] = sortByMenu.Text;
+            App.Current.Properties["ascendingBool"] = sortByAscending.IsChecked;
             _timer.Stop();
             MenuWindow menuWindow = new MenuWindow();
             menuWindow.Show();
@@ -192,6 +201,8 @@ namespace auctionApp
 
         private void logout_Click(object sender, RoutedEventArgs e)
         {
+            App.Current.Properties["sortBy"] = sortByMenu.Text;
+            App.Current.Properties["ascendingBool"] = sortByAscending.IsChecked;
             _timer.Stop();
             LoginWindow loginWindow = new LoginWindow();
             loginWindow.Show();
@@ -273,6 +284,18 @@ namespace auctionApp
                 try { if (int.Parse(pageNumber.Text) > int.Parse(numPages.Text)) { pageNumber.Text = numPages.Text; } }
                 catch { }
             }
-        }            
+        }
+
+        private void numPages_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (int.Parse(numPages.Text) == 0)
+            {
+                timerBool = false;
+                App.Current.Properties["dialog"] = "No items exist under the filter criteria.";
+                openDialog();
+                _timer.Stop();
+            }
+            else { timerBool = true; }
+        }
     }
 }
