@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Diagnostics;
+using System.Linq.Expressions;
 using System.Runtime.CompilerServices;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
@@ -71,8 +72,8 @@ namespace auctionApp
                 catch 
                 { 
                     App.Current.Properties["dialog"] = "Error: Invalid Page Number!";
-                    openDialog(); 
-                    await Task.Delay(1000);
+                    openDialog();
+                    timerBool = false;
                 }
                 if (timerBool is true) { _timer.Enabled = true; }
             }));
@@ -94,6 +95,8 @@ namespace auctionApp
                 {
                     App.Current.Properties["dialog"] = "Cannot Submit bid: please enter a page number to select an item.";
                     openDialog();
+                    pageNumber.Text = "1";
+                    pageNumber.Text = "";
                 }
                 else if (float.Parse(bid.Text.Replace("£", "").Replace(" ", "")) < (_model.CurrentPrice + _model.BidIncrement) && _model.TotalSecondsRemaining > 0)
                 {
@@ -117,9 +120,18 @@ namespace auctionApp
         {
             try
             {
-                int pageNumberInt = int.Parse(pageNumber.Text) + 1;
-                pageNumber.Text = pageNumberInt.ToString();
-                refresh(pageNumberInt, sortByMenu.Text, sortByAscending.IsChecked);
+                if (numPages.Text == "0")
+                {
+                    App.Current.Properties["dialog"] = "No items exist under the current filters.";
+                    openDialog();
+                    _timer.Stop();
+                }
+                else
+                {
+                    int pageNumberInt = int.Parse(pageNumber.Text) + 1;
+                    pageNumber.Text = pageNumberInt.ToString();
+                    refresh(pageNumberInt, sortByMenu.Text, sortByAscending.IsChecked);
+                }
             }
             catch { }
         }
@@ -128,9 +140,18 @@ namespace auctionApp
         {
             try
             {
-                int pageNumberInt = int.Parse(pageNumber.Text) - 1;
-                pageNumber.Text = pageNumberInt.ToString();
-                refresh(pageNumberInt, sortByMenu.Text, sortByAscending.IsChecked);
+                if (numPages.Text == "0")
+                {
+                    App.Current.Properties["dialog"] = "No items exist under the current filters.";
+                    openDialog();
+                    _timer.Stop();
+                }
+                else
+                {
+                    int pageNumberInt = int.Parse(pageNumber.Text) - 1;
+                    pageNumber.Text = pageNumberInt.ToString();
+                    refresh(pageNumberInt, sortByMenu.Text, sortByAscending.IsChecked);
+                }
             }
             catch { }
         }
@@ -172,13 +193,22 @@ namespace auctionApp
 
         private void search_Click(object sender, RoutedEventArgs e)
         {
-            App.Current.Properties["sortBy"] = sortByMenu.Text;
-            App.Current.Properties["ascendingBool"] = sortByAscending.IsChecked;
-            _timer.Stop();
-            App.Current.Properties["searchString"] = searchBar.Text;
-            SearchWindow searchWindow = new SearchWindow();
-            searchWindow.Show();
-            this.Close();
+            if (numPages.Text == "0") 
+            {
+                App.Current.Properties["dialog"] = "There are no search results to be shown, as no items exist under the current filters.";
+                openDialog();
+                _timer.Stop();
+            }
+            else
+            {
+                App.Current.Properties["sortBy"] = sortByMenu.Text;
+                App.Current.Properties["ascendingBool"] = sortByAscending.IsChecked;
+                _timer.Stop();
+                App.Current.Properties["searchString"] = searchBar.Text;
+                SearchWindow searchWindow = new SearchWindow();
+                searchWindow.Show();
+                this.Close();
+            }
         }
 
         private void searchBar_KeyDown(object sender, KeyEventArgs e)
@@ -253,17 +283,20 @@ namespace auctionApp
             FilterByWindow filterByWindow = new FilterByWindow();
             filterByWindow.ShowDialog();
             if (App.Current.Properties["filtersEnabled"] != null) { pageNumber.Text = "1"; }
+            refresh(int.Parse(pageNumber.Text), sortByMenu.Text, sortByAscending.IsChecked); ;
             _timer.Start();
         }
 
         private void sortByMenu_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             pageNumber.Text = "1";
+            refresh(int.Parse(pageNumber.Text), sortByMenu.Text, sortByAscending.IsChecked);
         }
 
         private void sortByAscending_Click(object sender, RoutedEventArgs e)
         {
             pageNumber.Text = "1";
+            refresh(int.Parse(pageNumber.Text), sortByMenu.Text, sortByAscending.IsChecked);
         }
 
         private void NumberValidationTextBox(object sender, TextCompositionEventArgs e)
@@ -276,11 +309,22 @@ namespace auctionApp
         {
             if (pageNumber.Text == "0") { pageNumber.Text = "1"; }
 
-            if (pageNumber.Text.Trim() == "") { _timer.Stop(); }
+            if (numPages is not null) 
+            {
+                if (numPages.Text == "0")
+                {
+                    pageNumber.Text = "1";
+                    App.Current.Properties["dialog"] = "No items exist under the current filters.";
+                    openDialog();
+                    _timer.Stop();
+                }
+            } 
+
+            if (pageNumber.Text.Trim() == "") { _timer.Stop(); timerBool = false; }
             else if (_timer is null) { }
             else 
             { 
-                _timer.Start();
+                _timer.Start(); timerBool = true;
                 try { if (int.Parse(pageNumber.Text) > int.Parse(numPages.Text)) { pageNumber.Text = numPages.Text; } }
                 catch { }
             }
