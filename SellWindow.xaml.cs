@@ -5,6 +5,7 @@ using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -52,11 +53,14 @@ namespace auctionApp
         {
             try
             {
+                DateOnly.Parse(endDate.Text);
+                TimeOnly.Parse(endTime.Text);
                 _model.ItemName = itemName.Text;
-                _model.CurrentPrice = float.Parse(startingPrice.Text.Replace("£", "").Replace(" ", ""));
-                _model.PostageCost = float.Parse(postageCost.Text.Replace("£", "").Replace(" ", ""));
-                _model.BidIncrement = float.Parse(bidIncrement.Text.Replace("£", "").Replace(" ", ""));
+                _model.CurrentPrice = float.Parse(startingPrice.Text.Substring(1).Trim());
+                _model.PostageCost = float.Parse(postageCost.Text.Substring(1).Trim());
+                _model.BidIncrement = float.Parse(bidIncrement.Text.Substring(1).Trim());
                 _model.ItemCondition = condition.Text;
+                
                 _model.EndTime = DateTime.Parse(endDate.Text + " " + endTime.Text);
                 _model.ReturnsAccepted = returnsAccepted.IsChecked.Value;
                 _model.Description = description.Text;
@@ -145,6 +149,12 @@ namespace auctionApp
         {
             DialogWindow dialogWindow = new DialogWindow();
             dialogWindow.ShowDialog();
+        }
+
+        private void restrictToMoney(object sender, TextCompositionEventArgs e)
+        {
+            Regex regex = new Regex("[^0-9£.]+");
+            e.Handled = regex.IsMatch(e.Text);
         }
     }
 }

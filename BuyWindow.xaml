@@ -159,7 +159,7 @@
                         <StackPanel Orientation="Horizontal" Margin="35, 0, 0, 0">
                             <TextBlock Text="Bid:" Margin="0, 0, 5, 0" Foreground="Black" Height="40"/>
                             <TextBox x:Name="bid" Width="150" Height="40" Margin="5, 0" TextChanged="keepPound"
-                                 Background="#ffadd8e6" KeyDown="bid_KeyDown" BorderThickness="2" Text="£"/>
+                                 Background="#ffadd8e6" KeyDown="bid_KeyDown" BorderThickness="2" Text="£" PreviewTextInput="restrictToMoney"/>
                             <Button x:Name="submit" Content="Submit Bid" Click="submit_Click"
                                 Height="40" Margin="5, 0, 0, 0" Background="#ffadd8e6" BorderThickness="0"/>
                         </StackPanel>

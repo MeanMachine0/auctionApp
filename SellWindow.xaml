@@ -74,7 +74,7 @@
                     <TextBlock Text="Starting Price:" Margin="25, 5, 5, 5"/>
                     <TextBox x:Name="startingPrice" Height="40" Width="288" Margin="5" 
                              Background="Transparent" Foreground="LightGray"
-                             BorderThickness="2" Text="£" TextChanged="keepPound"/>
+                             BorderThickness="2" Text="£" TextChanged="keepPound" PreviewTextInput="restrictToMoney"/>
                 </StackPanel>
 
                 <Border Grid.Row="2" Grid.RowSpan="6" CornerRadius="50" Background="#ffadd8e6" Margin="520, 0, 25, 50">
@@ -87,14 +87,14 @@
                     <TextBlock Text="P&amp;P:" Margin="25, 5, 5, 5"/>
                     <TextBox x:Name="postageCost" Height="40" Width="398" Margin="5" 
                              Background="Transparent" Foreground="LightGray"
-                             BorderThickness="2" Text="£" TextChanged="keepPound"/>
+                             BorderThickness="2" Text="£" TextChanged="keepPound" PreviewTextInput="restrictToMoney"/>
                 </StackPanel>
 
                 <StackPanel Grid.Row="4" Orientation="Horizontal">
                     <TextBlock Text="Bid Increment:" Margin="25, 5, 5, 5"/>
                     <TextBox x:Name="bidIncrement" Height="40" Width="280" Margin="5" 
                              Background="Transparent" Foreground="LightGray"
-                             BorderThickness="2" Text="£" TextChanged="keepPound"/>
+                             BorderThickness="2" Text="£" TextChanged="keepPound" PreviewTextInput="restrictToMoney"/>
                 </StackPanel>
 
                 <StackPanel Grid.Row="5" Orientation="Horizontal">

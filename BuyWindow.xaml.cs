@@ -84,10 +84,10 @@ namespace auctionApp
             int accountId = (int)App.Current.Properties["accountId"];
             try
             {
-                if (float.Parse(bid.Text.Replace("£", "").Replace(" ", "")) >= (_model.CurrentPrice + _model.BidIncrement) && _model.TotalSecondsRemaining > 0 && pageNumber.Text.Trim() != "")
+                if (float.Parse(bid.Text.Substring(1).Trim()) >= (_model.CurrentPrice + _model.BidIncrement) && _model.TotalSecondsRemaining > 0 && pageNumber.Text.Trim() != "" && bid.Text.Replace(" ", "").Split(".")[1].Length <= 2)
                 {
                     DataLayer dataLayer = new DataLayer();
-                    dataLayer.SubmitBid(bid.Text.Replace("£", "").Replace(" ", ""), _model.ItemId.ToString(), accountId);
+                    dataLayer.SubmitBid(bid.Text.Substring(1).Trim(), _model.ItemId.ToString(), accountId);
                     App.Current.Properties["dialog"] = "Bid submitted.";
                     openDialog();
                 }
@@ -98,7 +98,12 @@ namespace auctionApp
                     pageNumber.Text = "1";
                     pageNumber.Text = "";
                 }
-                else if (float.Parse(bid.Text.Replace("£", "").Replace(" ", "")) < (_model.CurrentPrice + _model.BidIncrement) && _model.TotalSecondsRemaining > 0)
+                else if (bid.Text.Substring(1).Trim().Split(".")[1].Length > 2)
+                {
+                    App.Current.Properties["dialog"] = "Error: bid has been specified to more than two decimal places!";
+                    openDialog();
+                }
+                else if (float.Parse(bid.Text.Substring(1).Trim()) < (_model.CurrentPrice + _model.BidIncrement) && _model.TotalSecondsRemaining > 0)
                 {
                     App.Current.Properties["dialog"] = "Cannot submit bid: bid is less than the current price plus the bid increment.";
                     openDialog();
@@ -340,6 +345,12 @@ namespace auctionApp
                 _timer.Stop();
             }
             else { timerBool = true; }
+        }
+
+        private void restrictToMoney(object sender, TextCompositionEventArgs e)
+        {
+            Regex regex = new Regex("[^0-9£.]+");
+            e.Handled = regex.IsMatch(e.Text);
         }
     }
 }
