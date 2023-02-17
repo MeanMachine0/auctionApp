@@ -132,7 +132,7 @@ namespace auctionApp
             
         }
 
-        public void Search(SearchListModel model, string searchText)
+        public void Search(SearchListModel model)
         {
             model.SearchList.Clear();
             OpenConnection();
@@ -143,14 +143,15 @@ namespace auctionApp
             }
             else { querySplit = App.Current.Properties["query"].ToString().Split("items"); querySplitOption = ""; }
 
-            string query = querySplit[0] + $"items WHERE itemName like '%{searchText.Trim()}%'{querySplitOption}" + querySplit[1];
+            string query = querySplit[0] + $"items WHERE itemName LIKE '%{App.Current.Properties["searchString"].ToString().Trim()}%'{querySplitOption}" + querySplit[1];
             int ind = query.LastIndexOf("C");
             query = query.Substring(0, ind + 1);
+            App.Current.Properties["searchQuery"] = query;
+
             using (MySqlCommand command = new MySqlCommand(query, connection))
             {
                 using (MySqlDataReader reader = command.ExecuteReader())
                 {
-                    int count = 0;
                     while (reader.Read())
                     {
                         ItemModel item = new ItemModel();
@@ -164,12 +165,31 @@ namespace auctionApp
                         item.EndTime = reader.GetDateTime("endTime");
                         item.ReturnsAccepted = reader.GetBoolean("returnsAccepted");
                         item.NumBids = reader.GetInt32("numBids");
-                        count += 1;
-                        item.PageNumber = count;
                         model.SearchList.Add(item);
                     }
                 }
-                connection.Close();
+            }
+            connection.Close();
+        }
+
+        public string GetPageNumber(string itemId)
+        {
+            string query = App.Current.Properties["searchQuery"].ToString();
+            query = query.Replace($"LIKE '%{App.Current.Properties["searchString"].ToString().Trim()}%'", "LIKE '%%'");
+            OpenConnection();
+            using (MySqlCommand command = new MySqlCommand(query, connection))
+            {
+                using (MySqlDataReader reader = command.ExecuteReader())
+                {
+                    int pageNumber = 0;
+                    while (reader.Read())
+                    {
+                        pageNumber += 1;
+                        if (itemId == reader.GetString("itemId")) { break; }
+                    }
+                    connection.Close();
+                    return pageNumber.ToString();
+                }
             }
         }
 

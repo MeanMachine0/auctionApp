@@ -191,17 +191,6 @@ namespace auctionApp
             }
         }
 
-        private int pageNumber;
-        public int PageNumber
-        {
-            get { return pageNumber; }
-            set
-            {
-                pageNumber = value;
-                RaisePropertyChanged("PageNumber");
-            }
-        }
-
         public event PropertyChangedEventHandler? PropertyChanged;
 
         protected void RaisePropertyChanged(string propertyName)

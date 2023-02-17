@@ -48,7 +48,6 @@
                         <Style TargetType="ScrollBar" BasedOn="{StaticResource scrollBarStyle}"/>
                     </DataGrid.Resources>
                     <DataGrid.Columns>
-                        <DataGridTextColumn Header="Page" Width="auto" Binding="{Binding PageNumber}"/>
                         <DataGridTextColumn Header="Item Name" Width="auto" Binding="{Binding ItemName}"/>
                         <DataGridTextColumn Header="Sold?" Width="auto" Binding="{Binding IsSold, Converter={StaticResource BooleanToYesNo}}"/>
                         <DataGridTextColumn Header="Crnt Price" Width="auto" Binding="{Binding CurrentPrice, StringFormat=£{0:0.00}}"/>

@@ -27,7 +27,7 @@ namespace auctionApp
         {
             DataLayer dataLayer = new DataLayer();
             App.Current.Properties["searchString"] = searchBar.Text;
-            dataLayer.Search(searchList, Application.Current.Properties["searchString"].ToString());
+            dataLayer.Search(searchList);
         }
 
         public SearchWindow()
@@ -76,8 +76,9 @@ namespace auctionApp
             {
                 DataGrid dataGrid = sender as DataGrid;
                 DataGridRow row = (DataGridRow)dataGrid.ItemContainerGenerator.ContainerFromIndex(dataGrid.SelectedIndex);
-                DataGridCell rowColumn = dataGrid.Columns[0].GetCellContent(row).Parent as DataGridCell;
-                App.Current.Properties["selectedPageNuber"] = ((TextBlock)rowColumn.Content).Text;
+                DataGridCell rowColumn = dataGrid.Columns[9].GetCellContent(row).Parent as DataGridCell;
+                DataLayer dataLayer = new DataLayer();
+                App.Current.Properties["selectedPageNuber"] = dataLayer.GetPageNumber(((TextBlock)rowColumn.Content).Text);
                 back_Click(this, new RoutedEventArgs());
             }
             catch { }
