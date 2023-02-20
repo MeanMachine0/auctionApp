@@ -116,8 +116,8 @@ namespace auctionApp
                 foreach (string condition in conditionsChecked) { inStatement += $"'{condition}',"; }
                 inStatement = inStatement.Substring(0, inStatement.Length - 1);
 
-                App.Current.Properties["query"] = $"SELECT * FROM items WHERE sold IN ({App.Current.Properties["filterByIsSold"].ToString()}, {(!bool.Parse(App.Current.Properties["filterByIsNotSold"].ToString())).ToString()}) AND " +
-                $"active IN ({App.Current.Properties["filterByActive"].ToString()}, {(!bool.Parse(App.Current.Properties["filterByNotActive"].ToString())).ToString()}) AND " +
+                App.Current.Properties["query"] = $"SELECT * FROM items WHERE (sold IN ({App.Current.Properties["filterByIsSold"].ToString()}, {(!bool.Parse(App.Current.Properties["filterByIsNotSold"].ToString())).ToString()}) OR " +
+                $"active IN ({App.Current.Properties["filterByActive"].ToString()}, {(!bool.Parse(App.Current.Properties["filterByNotActive"].ToString())).ToString()})) AND " +
                 $"currentPrice BETWEEN {App.Current.Properties["filterByLessThan"].ToString()} AND {App.Current.Properties["filterByGreaterThan"].ToString()} AND " +
                 $"state IN ({inStatement}) AND returnsAccepted in ({App.Current.Properties["filterByAreReturnsAccepted"].ToString()}, " +
                 $"{(!bool.Parse(App.Current.Properties["filterByAreReturnsNotAccepted"].ToString())).ToString()}) " +
