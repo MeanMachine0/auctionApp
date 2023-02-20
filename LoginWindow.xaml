@@ -41,16 +41,22 @@
                     </StackPanel>
                 </Border>
 
-                <Border Background="#ffadd8e6" CornerRadius="30" Margin="220, 45, 220, 15" Grid.Row="1">
+                <Border Background="#ffadd8e6" CornerRadius="30" Margin="130, 45, 130, 15" Grid.Row="1">
                     <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center">
                         <Button x:Name="login" Background="#ffadd8e6" Click="login_Click" 
-                                BorderThickness="0" Margin="0, 0, 5, 0" Width="50" Height="50" ToolTip="Login">
-                            <Icon:PackIconMaterial Kind="Login" Width="40" Height="40"/>
+                                BorderThickness="0" Height="50">
+                            <StackPanel Orientation="Horizontal">
+                                <Icon:PackIconMaterial Kind="Login" Width="40" Height="40"/>
+                                <TextBlock Text="Login" Margin="10, 0, 0, 0"/>
+                            </StackPanel>
                         </Button>
 
                         <Button x:Name="exitApp" Background="#ffadd8e6" Click="exitApp_Click" 
-                                BorderThickness="0" Margin="5, 0, 0, 0" Width="50" Height="50" ToolTip="Exit App">
-                            <Icon:PackIconMaterial Kind="CloseBoxOutline" Width="40" Height="40"/>
+                                BorderThickness="0" Margin="15, 0, 0, 0"  Height="50">
+                            <StackPanel Orientation="Horizontal">
+                                <Icon:PackIconMaterial Kind="CloseBoxOutline" Width="40" Height="40"/>
+                                <TextBlock Text="Exit App" Margin="10, 0, 0, 0"/>
+                            </StackPanel>
                         </Button>
                     </StackPanel>
                 </Border>
