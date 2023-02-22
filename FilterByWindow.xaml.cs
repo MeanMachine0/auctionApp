@@ -32,7 +32,7 @@ namespace auctionApp
                 App.Current.Properties["filterByIsSold"] = true;
                 App.Current.Properties["filterByIsNotSold"] = true;
                 App.Current.Properties["filterByLessThan"] = "0";
-                App.Current.Properties["filterByGreaterThan"] = "9999999";
+                App.Current.Properties["filterByGreaterThan"] = "9999999999";
                 App.Current.Properties["filterByIsNew"] = true;
                 App.Current.Properties["filterByIsExcellent"] = true;
                 App.Current.Properties["filterByIsGood"] = true;

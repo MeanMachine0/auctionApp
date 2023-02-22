@@ -24,7 +24,7 @@
                 </Grid.RowDefinitions>
 
                 <Border Grid.Row="0" Background="#ffadd8e6" CornerRadius="40" HorizontalAlignment="Center" VerticalAlignment="Center" MinHeight="100" Margin="50, 0">
-                    <TextBlock x:Name="dialog" Text="Error: this is a sample error message! Here's some more text to start a new line." TextWrapping="Wrap" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="15"/>
+                    <TextBlock x:Name="dialog" Text="Error: this is a sample error message! (Some more text to start a new line.)" TextWrapping="Wrap" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="15"/>
                 </Border>
 
                 <Border Grid.Row="1" CornerRadius="30" Background="#ffadd8e6" Margin="200, 0, 200, 15">
