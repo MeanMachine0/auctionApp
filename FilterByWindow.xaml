@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:auctionApp"
         xmlns:Icon="http://metro.mahapps.com/winfx/xaml/iconpacks"
         mc:Ignorable="d"
-        Title="FilterByWindow" Style="{StaticResource windowPresets}" Height="350" Width="1000" 
+        Title="FilterByWindow" Style="{StaticResource windowPresets}" Height="350" Width="950" 
         Foreground="LightGray" WindowStartupLocation="CenterScreen">
 
     <Border Style="{StaticResource windowBorder}" MouseDown="border_MouseDown">
@@ -29,10 +29,10 @@
 
                 <StackPanel Grid.Row="0" Orientation="Horizontal" Height="40" Margin="0, 15, 0, 7" HorizontalAlignment="Center">
                     <TextBlock Text="Listing Statuses:"/>
-                    <CheckBox x:Name="active" Template="{StaticResource customCheckBoxOne}" Content="Active" Foreground="LightGray" Margin="10, 0, 0, 0"/>
-                    <CheckBox x:Name="notActive" Template="{StaticResource customCheckBoxTwo}" Content="Not Active" Foreground="LightGray" Margin="10, 0, 0, 0"/>
-                    <CheckBox x:Name="isSold" Template="{StaticResource customCheckBoxThree}" Content="Sold" Foreground="LightGray" Margin="10, 0, 0, 0"/>
-                    <CheckBox x:Name="isNotSold" Template="{StaticResource customCheckBoxFour}" Content="Not Sold" Foreground="LightGray" Margin="10, 0, 0, 0"/>
+                    <CheckBox x:Name="active" Template="{StaticResource customCheckBoxOne}" Content="Active" Foreground="LightGray" Margin="10, 0, 0, 0" Click="active_Click"/>
+                    <CheckBox x:Name="notActive" Template="{StaticResource customCheckBoxTwo}" Content="Not Active" Foreground="LightGray" Margin="10, 0, 0, 0" Click="notActive_Click"/>
+                    <CheckBox x:Name="isSold" Template="{StaticResource customCheckBoxThree}" Content="Sold" Foreground="LightGray" Margin="10, 0, 0, 0" Click="isSold_Click"/>
+                    <CheckBox x:Name="isNotSold" Template="{StaticResource customCheckBoxFour}" Content="Not Sold" Foreground="LightGray" Margin="10, 0, 0, 0" Click="isNotSold_Click"/>
                 </StackPanel>
 
                 <StackPanel Grid.Row="1" Orientation="Horizontal" Height="40" Margin="0, 7" HorizontalAlignment="Center">
@@ -54,11 +54,11 @@
 
                 <StackPanel Grid.Row="3" Orientation="Horizontal" Height="40" Margin="0, 7" HorizontalAlignment="Center">
                     <TextBlock Text="Returns:"/>
-                    <CheckBox x:Name="areReturnsAccepted" Template="{StaticResource customCheckBoxTen}" Content="Returns Accepted" Foreground="LightGray" Margin="10, 0, 0, 0" />
-                    <CheckBox x:Name="areReturnsNotAccepted" Template="{StaticResource customCheckBoxEleven}" Content="Returns Not Accepted" Foreground="LightGray" Margin="10, 0, 0, 0"/>
+                    <CheckBox x:Name="areReturnsAccepted" Template="{StaticResource customCheckBoxTen}" Content="Returns Accepted" Foreground="LightGray" Margin="10, 0, 0, 0" Click="areReturnsAccepted_Click" />
+                    <CheckBox x:Name="areReturnsNotAccepted" Template="{StaticResource customCheckBoxEleven}" Content="Returns Not Accepted" Foreground="LightGray" Margin="10, 0, 0, 0" Click="areReturnsNotAccepted_Click"/>
                 </StackPanel>
 
-                <Border Grid.Row="5" CornerRadius="30" Background="#ffadd8e6" Margin="310, 0, 310, 15">
+                <Border Grid.Row="5" CornerRadius="30" Background="#ffadd8e6" Margin="290, 0, 290, 15">
                     <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Center" Margin="5">
                         <Button x:Name="apply" Height="50" Background="Transparent" BorderThickness="0" Click="apply_Click" Margin="0, 0, 10, 0">
                             <StackPanel Orientation="Horizontal">

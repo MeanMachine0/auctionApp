@@ -138,5 +138,35 @@ namespace auctionApp
             Regex regex = new Regex("[^0-9£.]+");
             e.Handled = regex.IsMatch(e.Text);
         }
+
+        private void active_Click(object sender, RoutedEventArgs e)
+        {
+            if (active.IsChecked is false) { notActive.IsChecked = true; }
+        }
+
+        private void notActive_Click(object sender, RoutedEventArgs e)
+        {
+            if (notActive.IsChecked is false) { active.IsChecked = true; }
+        }
+
+        private void isSold_Click(object sender, RoutedEventArgs e)
+        {
+            if (isSold.IsChecked is false) { isNotSold.IsChecked = true; }
+        }
+
+        private void isNotSold_Click(object sender, RoutedEventArgs e)
+        {
+            if (isNotSold.IsChecked is false) { isSold.IsChecked = true; }
+        }
+
+        private void areReturnsAccepted_Click(object sender, RoutedEventArgs e)
+        {
+            if (areReturnsAccepted.IsChecked is false) { areReturnsNotAccepted.IsChecked = true; }
+        }
+
+        private void areReturnsNotAccepted_Click(object sender, RoutedEventArgs e)
+        {
+            if (areReturnsNotAccepted.IsChecked is false) { areReturnsAccepted.IsChecked = true; }
+        }
     }
 }
