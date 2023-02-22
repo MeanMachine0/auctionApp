@@ -1,7 +1,8 @@
 ﻿<Application x:Class="auctionApp.App"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:local="clr-namespace:auctionApp"
+             xmlns:local="clr-namespace:auctionApp" 
+             xmlns:IconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
              StartupUri="LoginWindow.xaml">
     <Application.Resources>
         <local:BooleanToYesNoConverter x:Key="BooleanToYesNo"/>
@@ -61,10 +62,329 @@
             <Setter Property="BorderBrush" Value="LightGray"/>
             <Setter Property="Foreground" Value="Black"/>
         </Style>
-        <Style x:Key="checkBoxPresets" TargetType="CheckBox">
-            <Setter Property="Background" Value="Transparent"/>
-            <Setter Property="Foreground" Value="LightGray"/>
-            <Setter Property="BorderThickness" Value="2"/>
-        </Style>
+        <ControlTemplate x:Key="customCheckBox" TargetType="{x:Type CheckBox}">
+            <Border BorderThickness="0" Background="Transparent">
+                <StackPanel Orientation="Horizontal" Height="40">
+                    <ContentPresenter x:Name="CheckBoxContent" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                    <TextBlock Text="{TemplateBinding Content}" Margin="10, 0, 0, 0"/>
+                </StackPanel>
+            </Border>
+            <ControlTemplate.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Opacity" Value="0.7"/>
+                </Trigger>
+                <Trigger Property="IsChecked" Value="True">
+                    <Setter TargetName="CheckBoxContent" Property="Content">
+                        <Setter.Value>
+                            <IconPacks:PackIconMaterial Kind="CheckBoxOutline" Width="40" Height="40"/>
+                        </Setter.Value>
+                    </Setter>
+                </Trigger>
+                <Trigger Property="IsChecked" Value="False">
+                    <Setter TargetName="CheckBoxContent" Property="Content">
+                        <Setter.Value>
+                            <IconPacks:PackIconMaterial Kind="CheckBoxBlankOutline" Width="40" Height="40"/>
+                        </Setter.Value>
+                    </Setter>
+                </Trigger>
+            </ControlTemplate.Triggers>
+        </ControlTemplate>
+        <ControlTemplate x:Key="customCheckBoxOne" TargetType="{x:Type CheckBox}">
+            <Border BorderThickness="0" Background="Transparent">
+                <StackPanel Orientation="Horizontal" Height="40">
+                    <ContentPresenter x:Name="CheckBoxContent" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                    <TextBlock Text="{TemplateBinding Content}" Margin="10, 0, 0, 0"/>
+                </StackPanel>
+            </Border>
+            <ControlTemplate.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Opacity" Value="0.7"/>
+                </Trigger>
+                <Trigger Property="IsChecked" Value="True">
+                    <Setter TargetName="CheckBoxContent" Property="Content">
+                        <Setter.Value>
+                            <IconPacks:PackIconMaterial Kind="CheckBoxOutline" Width="40" Height="40"/>
+                        </Setter.Value>
+                    </Setter>
+                </Trigger>
+                <Trigger Property="IsChecked" Value="False">
+                    <Setter TargetName="CheckBoxContent" Property="Content">
+                        <Setter.Value>
+                            <IconPacks:PackIconMaterial Kind="CheckBoxBlankOutline" Width="40" Height="40"/>
+                        </Setter.Value>
+                    </Setter>
+                </Trigger>
+            </ControlTemplate.Triggers>
+        </ControlTemplate>
+        <ControlTemplate x:Key="customCheckBoxTwo" TargetType="{x:Type CheckBox}">
+            <Border BorderThickness="0" Background="Transparent">
+                <StackPanel Orientation="Horizontal" Height="40">
+                    <ContentPresenter x:Name="CheckBoxContent" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                    <TextBlock Text="{TemplateBinding Content}" Margin="10, 0, 0, 0"/>
+                </StackPanel>
+            </Border>
+            <ControlTemplate.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Opacity" Value="0.7"/>
+                </Trigger>
+                <Trigger Property="IsChecked" Value="True">
+                    <Setter TargetName="CheckBoxContent" Property="Content">
+                        <Setter.Value>
+                            <IconPacks:PackIconMaterial Kind="CheckBoxOutline" Width="40" Height="40"/>
+                        </Setter.Value>
+                    </Setter>
+                </Trigger>
+                <Trigger Property="IsChecked" Value="False">
+                    <Setter TargetName="CheckBoxContent" Property="Content">
+                        <Setter.Value>
+                            <IconPacks:PackIconMaterial Kind="CheckBoxBlankOutline" Width="40" Height="40"/>
+                        </Setter.Value>
+                    </Setter>
+                </Trigger>
+            </ControlTemplate.Triggers>
+        </ControlTemplate>
+        <ControlTemplate x:Key="customCheckBoxThree" TargetType="{x:Type CheckBox}">
+            <Border BorderThickness="0" Background="Transparent">
+                <StackPanel Orientation="Horizontal" Height="40">
+                    <ContentPresenter x:Name="CheckBoxContent" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                    <TextBlock Text="{TemplateBinding Content}" Margin="10, 0, 0, 0"/>
+                </StackPanel>
+            </Border>
+            <ControlTemplate.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Opacity" Value="0.7"/>
+                </Trigger>
+                <Trigger Property="IsChecked" Value="True">
+                    <Setter TargetName="CheckBoxContent" Property="Content">
+                        <Setter.Value>
+                            <IconPacks:PackIconMaterial Kind="CheckBoxOutline" Width="40" Height="40"/>
+                        </Setter.Value>
+                    </Setter>
+                </Trigger>
+                <Trigger Property="IsChecked" Value="False">
+                    <Setter TargetName="CheckBoxContent" Property="Content">
+                        <Setter.Value>
+                            <IconPacks:PackIconMaterial Kind="CheckBoxBlankOutline" Width="40" Height="40"/>
+                        </Setter.Value>
+                    </Setter>
+                </Trigger>
+            </ControlTemplate.Triggers>
+        </ControlTemplate>
+        <ControlTemplate x:Key="customCheckBoxFour" TargetType="{x:Type CheckBox}">
+            <Border BorderThickness="0" Background="Transparent">
+                <StackPanel Orientation="Horizontal" Height="40">
+                    <ContentPresenter x:Name="CheckBoxContent" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                    <TextBlock Text="{TemplateBinding Content}" Margin="10, 0, 0, 0"/>
+                </StackPanel>
+            </Border>
+            <ControlTemplate.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Opacity" Value="0.7"/>
+                </Trigger>
+                <Trigger Property="IsChecked" Value="True">
+                    <Setter TargetName="CheckBoxContent" Property="Content">
+                        <Setter.Value>
+                            <IconPacks:PackIconMaterial Kind="CheckBoxOutline" Width="40" Height="40"/>
+                        </Setter.Value>
+                    </Setter>
+                </Trigger>
+                <Trigger Property="IsChecked" Value="False">
+                    <Setter TargetName="CheckBoxContent" Property="Content">
+                        <Setter.Value>
+                            <IconPacks:PackIconMaterial Kind="CheckBoxBlankOutline" Width="40" Height="40"/>
+                        </Setter.Value>
+                    </Setter>
+                </Trigger>
+            </ControlTemplate.Triggers>
+        </ControlTemplate>
+        <ControlTemplate x:Key="customCheckBoxFive" TargetType="{x:Type CheckBox}">
+            <Border BorderThickness="0" Background="Transparent">
+                <StackPanel Orientation="Horizontal" Height="40">
+                    <ContentPresenter x:Name="CheckBoxContent" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                    <TextBlock Text="{TemplateBinding Content}" Margin="10, 0, 0, 0"/>
+                </StackPanel>
+            </Border>
+            <ControlTemplate.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Opacity" Value="0.7"/>
+                </Trigger>
+                <Trigger Property="IsChecked" Value="True">
+                    <Setter TargetName="CheckBoxContent" Property="Content">
+                        <Setter.Value>
+                            <IconPacks:PackIconMaterial Kind="CheckBoxOutline" Width="40" Height="40"/>
+                        </Setter.Value>
+                    </Setter>
+                </Trigger>
+                <Trigger Property="IsChecked" Value="False">
+                    <Setter TargetName="CheckBoxContent" Property="Content">
+                        <Setter.Value>
+                            <IconPacks:PackIconMaterial Kind="CheckBoxBlankOutline" Width="40" Height="40"/>
+                        </Setter.Value>
+                    </Setter>
+                </Trigger>
+            </ControlTemplate.Triggers>
+        </ControlTemplate>
+        <ControlTemplate x:Key="customCheckBoxSix" TargetType="{x:Type CheckBox}">
+            <Border BorderThickness="0" Background="Transparent">
+                <StackPanel Orientation="Horizontal" Height="40">
+                    <ContentPresenter x:Name="CheckBoxContent" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                    <TextBlock Text="{TemplateBinding Content}" Margin="10, 0, 0, 0"/>
+                </StackPanel>
+            </Border>
+            <ControlTemplate.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Opacity" Value="0.7"/>
+                </Trigger>
+                <Trigger Property="IsChecked" Value="True">
+                    <Setter TargetName="CheckBoxContent" Property="Content">
+                        <Setter.Value>
+                            <IconPacks:PackIconMaterial Kind="CheckBoxOutline" Width="40" Height="40"/>
+                        </Setter.Value>
+                    </Setter>
+                </Trigger>
+                <Trigger Property="IsChecked" Value="False">
+                    <Setter TargetName="CheckBoxContent" Property="Content">
+                        <Setter.Value>
+                            <IconPacks:PackIconMaterial Kind="CheckBoxBlankOutline" Width="40" Height="40"/>
+                        </Setter.Value>
+                    </Setter>
+                </Trigger>
+            </ControlTemplate.Triggers>
+        </ControlTemplate>
+        <ControlTemplate x:Key="customCheckBoxSeven" TargetType="{x:Type CheckBox}">
+            <Border BorderThickness="0" Background="Transparent">
+                <StackPanel Orientation="Horizontal" Height="40">
+                    <ContentPresenter x:Name="CheckBoxContent" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                    <TextBlock Text="{TemplateBinding Content}" Margin="10, 0, 0, 0"/>
+                </StackPanel>
+            </Border>
+            <ControlTemplate.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Opacity" Value="0.7"/>
+                </Trigger>
+                <Trigger Property="IsChecked" Value="True">
+                    <Setter TargetName="CheckBoxContent" Property="Content">
+                        <Setter.Value>
+                            <IconPacks:PackIconMaterial Kind="CheckBoxOutline" Width="40" Height="40"/>
+                        </Setter.Value>
+                    </Setter>
+                </Trigger>
+                <Trigger Property="IsChecked" Value="False">
+                    <Setter TargetName="CheckBoxContent" Property="Content">
+                        <Setter.Value>
+                            <IconPacks:PackIconMaterial Kind="CheckBoxBlankOutline" Width="40" Height="40"/>
+                        </Setter.Value>
+                    </Setter>
+                </Trigger>
+            </ControlTemplate.Triggers>
+        </ControlTemplate>
+        <ControlTemplate x:Key="customCheckBoxEight" TargetType="{x:Type CheckBox}">
+            <Border BorderThickness="0" Background="Transparent">
+                <StackPanel Orientation="Horizontal" Height="40">
+                    <ContentPresenter x:Name="CheckBoxContent" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                    <TextBlock Text="{TemplateBinding Content}" Margin="10, 0, 0, 0"/>
+                </StackPanel>
+            </Border>
+            <ControlTemplate.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Opacity" Value="0.7"/>
+                </Trigger>
+                <Trigger Property="IsChecked" Value="True">
+                    <Setter TargetName="CheckBoxContent" Property="Content">
+                        <Setter.Value>
+                            <IconPacks:PackIconMaterial Kind="CheckBoxOutline" Width="40" Height="40"/>
+                        </Setter.Value>
+                    </Setter>
+                </Trigger>
+                <Trigger Property="IsChecked" Value="False">
+                    <Setter TargetName="CheckBoxContent" Property="Content">
+                        <Setter.Value>
+                            <IconPacks:PackIconMaterial Kind="CheckBoxBlankOutline" Width="40" Height="40"/>
+                        </Setter.Value>
+                    </Setter>
+                </Trigger>
+            </ControlTemplate.Triggers>
+        </ControlTemplate>
+        <ControlTemplate x:Key="customCheckBoxNine" TargetType="{x:Type CheckBox}">
+            <Border BorderThickness="0" Background="Transparent">
+                <StackPanel Orientation="Horizontal" Height="40">
+                    <ContentPresenter x:Name="CheckBoxContent" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                    <TextBlock Text="{TemplateBinding Content}" Margin="10, 0, 0, 0"/>
+                </StackPanel>
+            </Border>
+            <ControlTemplate.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Opacity" Value="0.7"/>
+                </Trigger>
+                <Trigger Property="IsChecked" Value="True">
+                    <Setter TargetName="CheckBoxContent" Property="Content">
+                        <Setter.Value>
+                            <IconPacks:PackIconMaterial Kind="CheckBoxOutline" Width="40" Height="40"/>
+                        </Setter.Value>
+                    </Setter>
+                </Trigger>
+                <Trigger Property="IsChecked" Value="False">
+                    <Setter TargetName="CheckBoxContent" Property="Content">
+                        <Setter.Value>
+                            <IconPacks:PackIconMaterial Kind="CheckBoxBlankOutline" Width="40" Height="40"/>
+                        </Setter.Value>
+                    </Setter>
+                </Trigger>
+            </ControlTemplate.Triggers>
+        </ControlTemplate>
+        <ControlTemplate x:Key="customCheckBoxTen" TargetType="{x:Type CheckBox}">
+            <Border BorderThickness="0" Background="Transparent">
+                <StackPanel Orientation="Horizontal" Height="40">
+                    <ContentPresenter x:Name="CheckBoxContent" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                    <TextBlock Text="{TemplateBinding Content}" Margin="10, 0, 0, 0"/>
+                </StackPanel>
+            </Border>
+            <ControlTemplate.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Opacity" Value="0.7"/>
+                </Trigger>
+                <Trigger Property="IsChecked" Value="True">
+                    <Setter TargetName="CheckBoxContent" Property="Content">
+                        <Setter.Value>
+                            <IconPacks:PackIconMaterial Kind="CheckBoxOutline" Width="40" Height="40"/>
+                        </Setter.Value>
+                    </Setter>
+                </Trigger>
+                <Trigger Property="IsChecked" Value="False">
+                    <Setter TargetName="CheckBoxContent" Property="Content">
+                        <Setter.Value>
+                            <IconPacks:PackIconMaterial Kind="CheckBoxBlankOutline" Width="40" Height="40"/>
+                        </Setter.Value>
+                    </Setter>
+                </Trigger>
+            </ControlTemplate.Triggers>
+        </ControlTemplate>
+        <ControlTemplate x:Key="customCheckBoxEleven" TargetType="{x:Type CheckBox}">
+            <Border BorderThickness="0" Background="Transparent">
+                <StackPanel Orientation="Horizontal" Height="40">
+                    <ContentPresenter x:Name="CheckBoxContent" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                    <TextBlock Text="{TemplateBinding Content}" Margin="10, 0, 0, 0"/>
+                </StackPanel>
+            </Border>
+            <ControlTemplate.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Opacity" Value="0.7"/>
+                </Trigger>
+                <Trigger Property="IsChecked" Value="True">
+                    <Setter TargetName="CheckBoxContent" Property="Content">
+                        <Setter.Value>
+                            <IconPacks:PackIconMaterial Kind="CheckBoxOutline" Width="40" Height="40"/>
+                        </Setter.Value>
+                    </Setter>
+                </Trigger>
+                <Trigger Property="IsChecked" Value="False">
+                    <Setter TargetName="CheckBoxContent" Property="Content">
+                        <Setter.Value>
+                            <IconPacks:PackIconMaterial Kind="CheckBoxBlankOutline" Width="40" Height="40"/>
+                        </Setter.Value>
+                    </Setter>
+                </Trigger>
+            </ControlTemplate.Triggers>
+        </ControlTemplate>
     </Application.Resources>
 </Application>

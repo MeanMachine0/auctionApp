@@ -21,68 +21,61 @@ namespace auctionApp
     /// </summary>
     public partial class FilterByWindow : Window
     {
-        private FilterByModel _model;
-
         public FilterByWindow()
         {
             InitializeComponent();
             
-            _model = new FilterByModel();
-            DataContext = _model;
+            if (App.Current.Properties["filterByActive"] is null)
+            {
+                App.Current.Properties["filterByActive"] = true;
+                App.Current.Properties["filterByNotActive"] = true;
+                App.Current.Properties["filterByIsSold"] = true;
+                App.Current.Properties["filterByIsNotSold"] = true;
+                App.Current.Properties["filterByLessThan"] = "0";
+                App.Current.Properties["filterByGreaterThan"] = "9999999";
+                App.Current.Properties["filterByIsNew"] = true;
+                App.Current.Properties["filterByIsExcellent"] = true;
+                App.Current.Properties["filterByIsGood"] = true;
+                App.Current.Properties["filterByIsUsed"] = true;
+                App.Current.Properties["filterByIsPartsOnly"] = true;
+                App.Current.Properties["filterByAreReturnsAccepted"] = true;
+                App.Current.Properties["filterByAreReturnsNotAccepted"] = true;
+            }
 
-            if (App.Current.Properties["filterByIsSold"] is null)
-            {
-                _model.Active = true;
-                _model.NotActive = true;
-                _model.IsSold = true;
-                _model.IsNotSold = true;
-                _model.LessThan = 0;
-                _model.GreaterThan = 9999999;
-                _model.IsNew = true;
-                _model.IsExcellent = true;
-                _model.IsGood = true;
-                _model.IsUsed = true;
-                _model.IsPartsOnly = true;
-                _model.AreReturnsAccepted = true;
-                _model.AreReturnsNotAccepted = true;
-            }
-            else
-            {
-                _model.Active = (bool?)App.Current.Properties["filterByActive"];
-                _model.NotActive = (bool?)App.Current.Properties["filterByNotActive"];
-                _model.IsSold = (bool?)App.Current.Properties["filterByIsSold"];
-                _model.IsNotSold = (bool?)App.Current.Properties["filterByIsNotSold"];
-                _model.LessThan = float.Parse(App.Current.Properties["filterByLessThan"].ToString());
-                _model.GreaterThan = float.Parse(App.Current.Properties["filterByGreaterThan"].ToString());
-                _model.IsNew = (bool?)App.Current.Properties["filterByIsNew"];
-                _model.IsExcellent = (bool?)App.Current.Properties["filterByIsExcellent"];
-                _model.IsGood = (bool?)App.Current.Properties["filterByIsGood"];
-                _model.IsUsed = (bool?)App.Current.Properties["filterByIsUsed"];
-                _model.IsPartsOnly = (bool?)App.Current.Properties["filterByIsPartsOnly"];
-                _model.AreReturnsAccepted = (bool?)App.Current.Properties["filterByAreReturnsAccepted"];
-                _model.AreReturnsNotAccepted = (bool?)App.Current.Properties["filterByAreReturnsNotAccepted"];
-            }
+            active.IsChecked = (bool)App.Current.Properties["filterByActive"];
+            notActive.IsChecked = (bool)App.Current.Properties["filterByNotActive"];
+            isSold.IsChecked = (bool)App.Current.Properties["filterByIsSold"];
+            isNotSold.IsChecked = (bool)App.Current.Properties["filterByIsNotSold"];
+            lessThan.Text = "£" + App.Current.Properties["filterByLessThan"].ToString(); 
+            greaterThan.Text = "£" + App.Current.Properties["filterByGreaterThan"].ToString();
+            isNew.IsChecked = (bool)App.Current.Properties["filterByIsNew"];
+            isExcellent.IsChecked = (bool)App.Current.Properties["filterByIsExcellent"];
+            isGood.IsChecked = (bool)App.Current.Properties["filterByIsGood"];
+            isUsed.IsChecked = (bool)App.Current.Properties["filterByIsUsed"];
+            isPartsOnly.IsChecked = (bool)App.Current.Properties["filterByIsPartsOnly"];
+            areReturnsAccepted.IsChecked = (bool)App.Current.Properties["filterByAreReturnsAccepted"];
+            areReturnsNotAccepted.IsChecked = (bool)App.Current.Properties["filterByAreReturnsNotAccepted"];
         }
 
         private void Apply()
         {
             try
             {
-                _model.Active = active.IsChecked; App.Current.Properties["filterByActive"] = _model.Active;
-                _model.NotActive = notActive.IsChecked; App.Current.Properties["filterByNotActive"] = _model.NotActive;
-                _model.IsSold = isSold.IsChecked; App.Current.Properties["filterByIsSold"] = _model.IsSold;
-                _model.IsNotSold = isNotSold.IsChecked; App.Current.Properties["filterByIsNotSold"] = _model.IsNotSold;
-                _model.IsNew = isNew.IsChecked; App.Current.Properties["filterByIsNew"] = _model.IsNew;
-                _model.IsExcellent = isExcellent.IsChecked; App.Current.Properties["filterByIsExcellent"] = _model.IsExcellent;
-                _model.IsGood = isGood.IsChecked; App.Current.Properties["filterByIsGood"] = _model.IsGood;
-                _model.IsUsed = isUsed.IsChecked; App.Current.Properties["filterByIsUsed"] = _model.IsUsed;
-                _model.IsPartsOnly = isPartsOnly.IsChecked; App.Current.Properties["filterByIsPartsOnly"] = _model.IsPartsOnly;
-                _model.AreReturnsAccepted = areReturnsAccepted.IsChecked; App.Current.Properties["filterByAreReturnsAccepted"] = _model.AreReturnsAccepted;
-                _model.AreReturnsNotAccepted = areReturnsNotAccepted.IsChecked; App.Current.Properties["filterByAreReturnsNotAccepted"] = _model.AreReturnsNotAccepted;
+                App.Current.Properties["filterByActive"] = active.IsChecked;
+                App.Current.Properties["filterByNotActive"] = notActive.IsChecked;
+                App.Current.Properties["filterByIsSold"] = isSold.IsChecked;
+                App.Current.Properties["filterByIsNotSold"] = isNotSold.IsChecked;
+                App.Current.Properties["filterByIsNew"] = isNew.IsChecked;
+                App.Current.Properties["filterByIsExcellent"] = isExcellent.IsChecked;
+                App.Current.Properties["filterByIsGood"] = isGood.IsChecked;
+                App.Current.Properties["filterByIsUsed"] = isUsed.IsChecked;
+                App.Current.Properties["filterByIsPartsOnly"] = isPartsOnly.IsChecked;
+                App.Current.Properties["filterByAreReturnsAccepted"] = areReturnsAccepted.IsChecked;
+                App.Current.Properties["filterByAreReturnsNotAccepted"] = areReturnsNotAccepted.IsChecked;
                 if (float.Parse(greaterThan.Text.Replace("£", "")) >= (float.Parse(lessThan.Text.Replace("£", ""))))
                 {
-                    _model.LessThan = float.Parse(lessThan.Text.Replace("£", "")); App.Current.Properties["filterByLessThan"] = _model.LessThan;
-                    _model.GreaterThan = float.Parse(greaterThan.Text.Replace("£", "")); App.Current.Properties["filterByGreaterThan"] = _model.GreaterThan;
+                    App.Current.Properties["filterByLessThan"] = lessThan.Text.Replace("£", "");
+                    App.Current.Properties["filterByGreaterThan"] = greaterThan.Text.Replace("£", "");
                     App.Current.Properties["filtersEnabled"] = true;
                     this.Close();
                 }

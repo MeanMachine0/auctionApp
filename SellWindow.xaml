@@ -144,8 +144,8 @@
                 </StackPanel>
 
                 <StackPanel Grid.Row="7" Orientation="Horizontal">
-                    <CheckBox Style="{StaticResource checkBoxPresets}" x:Name="returnsAccepted" 
-                              Content="Accept Returns" Height="40" Margin="25, 0, 0, 0" />
+                    <CheckBox x:Name="returnsAccepted" Template="{StaticResource customCheckBox}"
+                              Content="Accept Returns" Foreground="LightGray" Margin="25, 0, 0, 0" />
                 </StackPanel>
 
                 <Border Grid.Row="12" CornerRadius="30" Background="#ffadd8e6" Margin="510, 15">

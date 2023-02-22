@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:auctionApp"
         xmlns:Icon="http://metro.mahapps.com/winfx/xaml/iconpacks"
         mc:Ignorable="d"
-        Title="FilterByWindow" Style="{StaticResource windowPresets}" Height="350" Width="800" 
+        Title="FilterByWindow" Style="{StaticResource windowPresets}" Height="350" Width="1000" 
         Foreground="LightGray" WindowStartupLocation="CenterScreen">
 
     <Border Style="{StaticResource windowBorder}" MouseDown="border_MouseDown">
@@ -29,36 +29,36 @@
 
                 <StackPanel Grid.Row="0" Orientation="Horizontal" Height="40" Margin="0, 15, 0, 7" HorizontalAlignment="Center">
                     <TextBlock Text="Listing Statuses:"/>
-                    <CheckBox x:Name="active" Style="{StaticResource checkBoxPresets}" Content="Active" Margin="10, 0, 0, 0" IsChecked="{Binding Active}"/>
-                    <CheckBox x:Name="notActive" Style="{StaticResource checkBoxPresets}" Content="Not Active" Margin="10, 0, 0, 0" IsChecked="{Binding NotActive}"/>
-                    <CheckBox x:Name="isSold" Style="{StaticResource checkBoxPresets}" Content="Sold" Margin="10, 0, 0, 0" IsChecked="{Binding IsSold}"/>
-                    <CheckBox x:Name="isNotSold" Style="{StaticResource checkBoxPresets}" Content="Not Sold" Margin="10, 0, 0, 0" IsChecked="{Binding IsNotSold}"/>
+                    <CheckBox x:Name="active" Template="{StaticResource customCheckBoxOne}" Content="Active" Foreground="LightGray" Margin="10, 0, 0, 0"/>
+                    <CheckBox x:Name="notActive" Template="{StaticResource customCheckBoxTwo}" Content="Not Active" Foreground="LightGray" Margin="10, 0, 0, 0"/>
+                    <CheckBox x:Name="isSold" Template="{StaticResource customCheckBoxThree}" Content="Sold" Foreground="LightGray" Margin="10, 0, 0, 0"/>
+                    <CheckBox x:Name="isNotSold" Template="{StaticResource customCheckBoxFour}" Content="Not Sold" Foreground="LightGray" Margin="10, 0, 0, 0"/>
                 </StackPanel>
 
                 <StackPanel Grid.Row="1" Orientation="Horizontal" Height="40" Margin="0, 7" HorizontalAlignment="Center">
-                    <TextBox x:Name="lessThan" Width="175" Background="Transparent" Foreground="LightGray" BorderThickness="2" TextChanged="keepPound" Text="{Binding LessThan, StringFormat=£{0:0.00}}" Validation.ErrorTemplate="{x:Null}" PreviewTextInput="restrictToMoney"/>
+                    <TextBox x:Name="lessThan" Width="175" Background="Transparent" Foreground="LightGray" BorderThickness="2" TextChanged="keepPound" PreviewTextInput="restrictToMoney"/>
                     <TextBlock Text="&lt;" Margin="10, 0"/>
                     <TextBlock Text="Current Price"/>
                     <TextBlock Text="&lt;" Margin="10, 0"/>
-                    <TextBox x:Name="greaterThan" Width="175" Background="Transparent" Foreground="LightGray" BorderThickness="2" TextChanged="keepPound" Text="{Binding GreaterThan, StringFormat=£{0:0.00}}" Validation.ErrorTemplate="{x:Null}" PreviewTextInput="restrictToMoney"/>
+                    <TextBox x:Name="greaterThan" Width="175" Background="Transparent" Foreground="LightGray" BorderThickness="2" TextChanged="keepPound" PreviewTextInput="restrictToMoney"/>
                 </StackPanel>
 
                 <StackPanel Grid.Row="2" Orientation="Horizontal" Height="40" Margin="0, 7" HorizontalAlignment="Center">
                     <TextBlock Text="Condition:"/>
-                    <CheckBox x:Name="isNew" Style="{StaticResource checkBoxPresets}" Content="New" IsChecked="{Binding IsNew}" Margin="10, 0, 0, 0"/>
-                    <CheckBox x:Name="isExcellent" Style="{StaticResource checkBoxPresets}" Content="Excellent" IsChecked="{Binding IsExcellent}" Margin="10, 0, 10, 0"/>
-                    <CheckBox x:Name="isGood" Style="{StaticResource checkBoxPresets}" Content="Good" IsChecked="{Binding IsGood}"/>
-                    <CheckBox x:Name="isUsed" Style="{StaticResource checkBoxPresets}" Content="Used" IsChecked="{Binding IsUsed}" Margin="10, 0, 0, 0"/>
-                    <CheckBox x:Name="isPartsOnly" Style="{StaticResource checkBoxPresets}" Content="Parts Only" IsChecked="{Binding IsPartsOnly}" Margin="10, 0, 0, 0"/>
+                    <CheckBox x:Name="isNew" Template="{StaticResource customCheckBoxFive}" Content="New" Foreground="LightGray" Margin="10, 0, 0, 0"/>
+                    <CheckBox x:Name="isExcellent" Template="{StaticResource customCheckBoxSix}" Content="Excellent" Foreground="LightGray"  Margin="10, 0, 10, 0"/>
+                    <CheckBox x:Name="isGood" Template="{StaticResource customCheckBoxSeven}" Content="Good" Foreground="LightGray"/>
+                    <CheckBox x:Name="isUsed" Template="{StaticResource customCheckBoxEight}" Content="Used" Foreground="LightGray" Margin="10, 0, 0, 0"/>
+                    <CheckBox x:Name="isPartsOnly" Template="{StaticResource customCheckBoxNine}" Content="Parts Only" Foreground="LightGray" Margin="10, 0, 0, 0"/>
                 </StackPanel>
 
                 <StackPanel Grid.Row="3" Orientation="Horizontal" Height="40" Margin="0, 7" HorizontalAlignment="Center">
                     <TextBlock Text="Returns:"/>
-                    <CheckBox x:Name="areReturnsAccepted" Style="{StaticResource checkBoxPresets}" Content="Returns Accepted" Margin="10, 0, 0, 0" IsChecked="{Binding AreReturnsAccepted}"/>
-                    <CheckBox x:Name="areReturnsNotAccepted" Style="{StaticResource checkBoxPresets}" Content="Returns Not Accepted" Margin="10, 0, 0, 0" IsChecked="{Binding AreReturnsNotAccepted}"/>
+                    <CheckBox x:Name="areReturnsAccepted" Template="{StaticResource customCheckBoxTen}" Content="Returns Accepted" Foreground="LightGray" Margin="10, 0, 0, 0" />
+                    <CheckBox x:Name="areReturnsNotAccepted" Template="{StaticResource customCheckBoxEleven}" Content="Returns Not Accepted" Foreground="LightGray" Margin="10, 0, 0, 0"/>
                 </StackPanel>
 
-                <Border Grid.Row="5" CornerRadius="30" Background="#ffadd8e6" Margin="220, 0, 220, 15">
+                <Border Grid.Row="5" CornerRadius="30" Background="#ffadd8e6" Margin="310, 0, 310, 15">
                     <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Center" Margin="5">
                         <Button x:Name="apply" Height="50" Background="Transparent" BorderThickness="0" Click="apply_Click" Margin="0, 0, 10, 0">
                             <StackPanel Orientation="Horizontal">
