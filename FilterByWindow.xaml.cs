@@ -72,7 +72,12 @@ namespace auctionApp
                 App.Current.Properties["filterByIsPartsOnly"] = isPartsOnly.IsChecked;
                 App.Current.Properties["filterByAreReturnsAccepted"] = areReturnsAccepted.IsChecked;
                 App.Current.Properties["filterByAreReturnsNotAccepted"] = areReturnsNotAccepted.IsChecked;
-                if (float.Parse(greaterThan.Text.Replace("£", "")) >= (float.Parse(lessThan.Text.Replace("£", ""))))
+                if (isNew.IsChecked is false && isExcellent.IsChecked is false && isGood.IsChecked is false && isUsed.IsChecked is false && isPartsOnly.IsChecked is false)
+                {
+                    App.Current.Properties["dialog"] = "Please select at least one condition.";
+                    openDialog();
+                }
+                else if (float.Parse(greaterThan.Text.Replace("£", "")) >= (float.Parse(lessThan.Text.Replace("£", ""))))
                 {
                     App.Current.Properties["filterByLessThan"] = lessThan.Text.Replace("£", "");
                     App.Current.Properties["filterByGreaterThan"] = greaterThan.Text.Replace("£", "");

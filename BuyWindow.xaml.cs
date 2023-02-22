@@ -38,6 +38,35 @@ namespace auctionApp
             numPages.Text = App.Current.Properties["numPages"].ToString();
         }
 
+        private void numPagesCheck()
+        {
+            if (int.Parse(numPages.Text) == 0)
+            {
+                pagePrevious.IsEnabled = false;
+                pageNext.IsEnabled = false;
+                pageNumber.IsEnabled = false;
+                bid.IsEnabled = false;
+                submit.IsEnabled = false;
+                searchBar.IsEnabled = false;
+                search.IsEnabled = false;
+                timerBool = false;
+                App.Current.Properties["dialog"] = "No items exist under the filter criteria.";
+                openDialog();
+                filterByMenu_Click(this, new RoutedEventArgs());
+            }
+            else
+            {
+                pagePrevious.IsEnabled = true;
+                pageNext.IsEnabled = true;
+                pageNumber.IsEnabled = true;
+                bid.IsEnabled = true;
+                submit.IsEnabled = true;
+                searchBar.IsEnabled = true;
+                search.IsEnabled = true;
+                timerBool = true;
+            }
+        }
+
         public BuyWindow()
         {
             InitializeComponent();
@@ -67,6 +96,7 @@ namespace auctionApp
             {
                 try 
                 {
+                    numPagesCheck();
                     refresh(int.Parse(pageNumber.Text), sortByMenu.Text, sortByAscending.IsChecked);
                 }
                 catch 
@@ -127,12 +157,14 @@ namespace auctionApp
             {
                 if (numPages.Text == "0")
                 {
+                    submit.IsEnabled = false;
                     App.Current.Properties["dialog"] = "No items exist under the current filters.";
                     openDialog();
-                    _timer.Stop();
+                    filterByMenu_Click(this, new RoutedEventArgs());
                 }
                 else
                 {
+                    submit.IsEnabled = true;
                     int pageNumberInt = int.Parse(pageNumber.Text) + 1;
                     pageNumber.Text = pageNumberInt.ToString();
                     refresh(pageNumberInt, sortByMenu.Text, sortByAscending.IsChecked);
@@ -147,12 +179,14 @@ namespace auctionApp
             {
                 if (numPages.Text == "0")
                 {
+                    submit.IsEnabled = false;
                     App.Current.Properties["dialog"] = "No items exist under the current filters.";
                     openDialog();
-                    _timer.Stop();
+                    filterByMenu_Click(this, new RoutedEventArgs());
                 }
                 else
                 {
+                    submit.IsEnabled = true;
                     int pageNumberInt = int.Parse(pageNumber.Text) - 1;
                     pageNumber.Text = pageNumberInt.ToString();
                     refresh(pageNumberInt, sortByMenu.Text, sortByAscending.IsChecked);
@@ -337,14 +371,7 @@ namespace auctionApp
 
         private void numPages_TextChanged(object sender, TextChangedEventArgs e)
         {
-            if (int.Parse(numPages.Text) == 0)
-            {
-                timerBool = false;
-                App.Current.Properties["dialog"] = "No items exist under the filter criteria.";
-                openDialog();
-                _timer.Stop();
-            }
-            else { timerBool = true; }
+            numPagesCheck();
         }
 
         private void restrictToMoney(object sender, TextCompositionEventArgs e)
