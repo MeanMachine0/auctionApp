@@ -54,7 +54,7 @@ namespace auctionApp
         {
             InitializeComponent();
 
-            App.Current.Properties["autoLoginBool"] = false;
+            //App.Current.Properties["autoLoginBool"] = false;
             if (App.Current.Properties["updateTimerBool"] == null)
             {
                 _timer = new Timer(10000);

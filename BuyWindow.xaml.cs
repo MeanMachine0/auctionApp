@@ -114,7 +114,10 @@ namespace auctionApp
             int accountId = (int)App.Current.Properties["accountId"];
             try
             {
-                if (float.Parse(bid.Text.Substring(1).Trim()) >= (_model.CurrentPrice + _model.BidIncrement) && _model.TotalSecondsRemaining > 0 && pageNumber.Text.Trim() != "" && bid.Text.Replace(" ", "").Split(".")[1].Length <= 2)
+                if (float.Parse(bid.Text.Replace(" ", "").Substring(1).Trim()) >= (_model.CurrentPrice + _model.BidIncrement) && 
+                    _model.TotalSecondsRemaining > 0 && 
+                    pageNumber.Text.Trim() != "" && 
+                    bid.Text.Replace(" ", "").Split(".")[1].Length <= 2)
                 {
                     DataLayer dataLayer = new DataLayer();
                     dataLayer.SubmitBid(bid.Text.Substring(1).Trim(), _model.ItemId.ToString(), accountId);
@@ -144,9 +147,9 @@ namespace auctionApp
                     openDialog();
                 }
             }
-            catch 
+            catch (Exception Ex)
             { 
-                App.Current.Properties["dialog"] = "Error: invalid bid!"; 
+                App.Current.Properties["dialog"] = "Error: invalid bid!" + Ex.Message; 
                 openDialog(); 
             }
         }
